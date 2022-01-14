@@ -39,7 +39,7 @@ public class loginView implements Initializable {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/homeView.fxml")));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 1020, 475);
-            stage.setTitle("Scheduler v1.0");
+            stage.setTitle("Scheduler v1.0 Appointments");
             stage.setScene(scene);
             stage.show();
         } else {

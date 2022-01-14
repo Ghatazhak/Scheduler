@@ -73,7 +73,14 @@ public class homeView implements Initializable {
     public void deleteAppointmentMenuClicked(ActionEvent actionEvent) {
     }
     /** This is an event handler for customer management. */
-    public void customerManagementMenuClicked(ActionEvent actionEvent) {
+    public void customerManagementMenuClicked(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerManagementHomeView.fxml")));
+        // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
+        Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
+        Scene scene = new Scene(root, 1130, 855);
+        stage.setTitle("Scheduler v1.0 Customer Management");
+        stage.setScene(scene);
+        stage.show();
     }
     /** This is an event handler for type by month report. */
     public void typeByMonthReportMenuClicked(ActionEvent actionEvent) {

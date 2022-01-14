@@ -24,5 +24,6 @@
       <Label fx:id="errorMessageLabel" layoutX="199.0" layoutY="219.0" textFill="#fd0000" />
       <Button focusTraversable="false" layoutX="199.0" layoutY="187.0" mnemonicParsing="false" onAction="#exitButtonPressed" prefHeight="25.0" prefWidth="149.0" text="Exit" />
       <PasswordField fx:id="passwordTextField" layoutX="199.0" layoutY="124.0" onAction="#loginButtonPressed" promptText="enter password" />
+      <Label fx:id="userLocation" layoutX="8.0" layoutY="279.0" prefHeight="17.0" prefWidth="105.0" text="United States" />
    </children>
 </AnchorPane>
