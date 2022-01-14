@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="476.0" prefWidth="1017.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView layoutX="6.0" layoutY="28.0" prefHeight="442.0" prefWidth="1004.0">
+        <columns>
+          <TableColumn prefWidth="99.33331298828125" text="Appointment ID" />
+          <TableColumn prefWidth="72.00006103515625" text="Title" />
+            <TableColumn prefWidth="158.0" text="Description" />
+            <TableColumn prefWidth="90.666748046875" text="Location" />
+            <TableColumn prefWidth="80.66650390625" text="Contact" />
+            <TableColumn prefWidth="68.666748046875" text="Type" />
+            <TableColumn prefWidth="145.3333740234375" text="Start Date/Time" />
+            <TableColumn prefWidth="114.0" text="End Date/Time" />
+            <TableColumn prefWidth="96.6666259765625" text="Customer ID" />
+            <TableColumn prefWidth="87.99995930989587" text="User ID" />
+        </columns>
+      </TableView>
+      <MenuBar prefHeight="25.0" prefWidth="1017.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="logoff" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="View">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Default" />
+                  <MenuItem mnemonicParsing="false" text="By Week" />
+                  <MenuItem mnemonicParsing="false" text="By Month" />
+               </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Schedule">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Add Appointment" />
+                  <MenuItem mnemonicParsing="false" text="Edit Appointments" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Customers">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Add Customer" />
+                  <MenuItem mnemonicParsing="false" text="Edit Customers" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Reports">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Type By Month Report" />
+                  <MenuItem mnemonicParsing="false" text="Contact Report" />
+                  <MenuItem mnemonicParsing="false" text="Custom Report" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>
