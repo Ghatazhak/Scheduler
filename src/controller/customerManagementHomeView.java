@@ -38,7 +38,14 @@ public class customerManagementHomeView implements Initializable {
 
     }
     /** This event handler is for the add button. */
-    public void addButtonClicked(ActionEvent actionEvent) {
+    public void addButtonClicked(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/addCustomerView.fxml")));
+        // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
+        Stage stage = (Stage) allCustomersTableView.getScene().getWindow();
+        Scene scene = new Scene(root, 370, 390);
+        stage.setTitle("Scheduler v1.0 Add New Customer");
+        stage.setScene(scene);
+        stage.show();
     }
     /** This event handler is for the edit button. */
     public void editButtonClicked(ActionEvent actionEvent) {
