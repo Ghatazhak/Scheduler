@@ -1,19 +1,45 @@
 package controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
-/** The controller that loginView uses. */
-public class loginView {
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+/** The controller for loginView. */
+public class loginView implements Initializable {
+    @FXML
     public TextField usernameTextField;
+    @FXML
     public Label errorMessageLabel;
+    @FXML
     public TextField passwordTextField;
 
-/** Event handler for login button.
- * @param actionEvent */
-    public void loginButtonPressed(ActionEvent actionEvent) {
-        // event handling for login button.
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+/** Event handler for login button. */
+    public void loginButtonPressed(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/homeView.fxml"));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 1020, 475);
+        stage.setTitle("Scheduler v1.0");
+        stage.setScene(scene);
+        stage.show();
+    }
+/** Event handler for the exit button. */
+    public void exitButtonPressed(ActionEvent actionEvent) {
+        Platform.exit();
     }
 }

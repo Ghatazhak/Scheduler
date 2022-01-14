@@ -22,5 +22,6 @@
       <TextField fx:id="passwordTextField" layoutX="199.0" layoutY="124.0" promptText="enter password" />
       <Button focusTraversable="false" layoutX="199.0" layoutY="158.0" mnemonicParsing="false" onAction="#loginButtonPressed" prefHeight="25.0" prefWidth="149.0" text="Login" />
       <Label fx:id="errorMessageLabel" layoutX="199.0" layoutY="192.0" textFill="#fd0000" />
+      <Button focusTraversable="false" layoutX="199.0" layoutY="188.0" mnemonicParsing="false" onAction="#exitButtonPressed" prefHeight="25.0" prefWidth="149.0" text="Exit" />
    </children>
 </AnchorPane>
