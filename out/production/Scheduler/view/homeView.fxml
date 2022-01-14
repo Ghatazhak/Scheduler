@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.homeView">
    <children>
-      <TableView fx:id="allAppointmentsTableView" layoutX="6.0" layoutY="28.0" prefHeight="442.0" prefWidth="1018.0">
+      <TableView fx:id="allAppointmentsTableView" layoutX="6.0" layoutY="28.0" prefHeight="442.0" prefWidth="1004.0">
         <columns>
           <TableColumn fx:id="appointmentIdCol" prefWidth="99.33331298828125" text="Appointment ID" />
           <TableColumn fx:id="titleCol" prefWidth="72.00006103515625" text="Title" />
@@ -23,7 +23,7 @@
             <TableColumn fx:id="userIdCol" prefWidth="87.99995930989587" text="User ID" />
         </columns>
       </TableView>
-      <MenuBar prefHeight="25.0" prefWidth="1024.0">
+      <MenuBar prefHeight="25.0" prefWidth="1020.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>

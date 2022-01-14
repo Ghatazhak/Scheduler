@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 /** The controller for loginView. */
@@ -24,6 +25,8 @@ public class loginView implements Initializable {
     public Label errorMessageLabel;
     @FXML
     public TextField passwordTextField;
+    @FXML
+    public Label userLocation;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -31,12 +34,21 @@ public class loginView implements Initializable {
     }
 /** Event handler for login button. */
     public void loginButtonPressed(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/homeView.fxml"));
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 1020, 475);
-        stage.setTitle("Scheduler v1.0");
-        stage.setScene(scene);
-        stage.show();
+
+        if(Objects.equals(usernameTextField.getText(), "admin") && Objects.equals(passwordTextField.getText(), "admin")){
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/homeView.fxml")));
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 1020, 475);
+            stage.setTitle("Scheduler v1.0");
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            errorMessageLabel.setText("--Invalid login credentials--");
+        }
+
+
+
+
     }
 /** Event handler for the exit button. */
     public void exitButtonPressed(ActionEvent actionEvent) {

@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class homeView implements Initializable {
@@ -39,7 +40,7 @@ public class homeView implements Initializable {
     public TableColumn userIdCol;
 /** This is an event handler for log off. */
     public void logOffMenuClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/loginView.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/loginView.fxml")));
         // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
         Scene scene = new Scene(root, 500, 300);
@@ -68,11 +69,11 @@ public class homeView implements Initializable {
     /** This is an event handler for editing appointments. */
     public void editAppointmentMenuClicked(ActionEvent actionEvent) {
     }
-    /** This is an event handler for adding a customer. */
-    public void addCustomerMenuClicked(ActionEvent actionEvent) {
+    /** This is an event handler for deleting appointments. */
+    public void deleteAppointmentMenuClicked(ActionEvent actionEvent) {
     }
-    /** This is an event handler for editing customers. */
-    public void editCustomersMenuClicked(ActionEvent actionEvent) {
+    /** This is an event handler for customer management. */
+    public void customerManagementMenuClicked(ActionEvent actionEvent) {
     }
     /** This is an event handler for type by month report. */
     public void typeByMonthReportMenuClicked(ActionEvent actionEvent) {
@@ -83,4 +84,7 @@ public class homeView implements Initializable {
     /** This is an event handler for custom report. */
     public void customReportMenuClicked(ActionEvent actionEvent) {
     }
+
+
+
 }
