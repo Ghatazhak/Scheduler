@@ -77,7 +77,7 @@ public class homeView implements Initializable {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerManagementHomeView.fxml")));
         // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
-        Scene scene = new Scene(root, 1315, 855);
+        Scene scene = new Scene(root, 920, 600);
         stage.setTitle("Customer Management");
         stage.setScene(scene);
         stage.show();

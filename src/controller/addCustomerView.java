@@ -48,7 +48,7 @@ public class addCustomerView implements Initializable {
     public void CancelButtonClicked(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerManagementHomeView.fxml")));
         Stage stage = (Stage) customerIdTextField.getScene().getWindow();
-        Scene scene = new Scene(root, 1315, 855);
+        Scene scene = new Scene(root, 920, 600);
         stage.setTitle("Scheduler v1.0 Customer Management");
         stage.setScene(scene);
         stage.show();
