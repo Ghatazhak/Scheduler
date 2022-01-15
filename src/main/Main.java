@@ -13,10 +13,6 @@ import java.util.ResourceBundle;
 
 public class Main extends Application {
     public static void main(String[] args) {
-        ResourceBundle rb = ResourceBundle.getBundle("language_files/rb",Locale.getDefault());
-        if(Locale.getDefault().getLanguage().equals(rb)){
-            System.out.println(rb.getString("login" + " "+ rb.getString("exit")));
-        }
         JDBC.openConnection();
         launch(args);
         JDBC.closeConnection();

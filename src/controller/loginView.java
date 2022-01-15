@@ -40,8 +40,8 @@ public class loginView implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-       // Locale french = new Locale("fr","France");
-       // Locale.setDefault(french);
+       //Locale french = new Locale("fr","France");
+       //Locale.setDefault(french);
         ResourceBundle rb = ResourceBundle.getBundle("language_files/rb",Locale.getDefault());
         userLocation.setText((Locale.getDefault().getCountry()));
         userNameLabel.setText(rb.getString("Username"));
@@ -50,6 +50,9 @@ public class loginView implements Initializable {
         passwordLabel.setText(rb.getString("Password"));
         loginButtonText.setText(rb.getString("Login"));
         exitButtonText.setText(rb.getString("Exit"));
+
+
+
 
 
     }
