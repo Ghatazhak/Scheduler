@@ -64,17 +64,31 @@ public class homeView implements Initializable {
     public void byMonthScheduleMenuClicked(ActionEvent actionEvent) {
     }
     /** This is an event handler for adding an appointment. */
-    public void addAppointmentMenuClicked(ActionEvent actionEvent) {
+    public void addAppointmentMenuClicked(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/addAppointmentView.fxml")));
+        // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
+        Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
+        Scene scene = new Scene(root, 333, 429);
+        stage.setTitle("Add Appointment");
+        stage.setScene(scene);
+        stage.show();
     }
     /** This is an event handler for editing appointments. */
-    public void editAppointmentMenuClicked(ActionEvent actionEvent) {
+    public void editAppointmentMenuClicked(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/editAppointmentView.fxml")));
+        // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
+        Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
+        Scene scene = new Scene(root, 333, 429);
+        stage.setTitle("Edit Appointment");
+        stage.setScene(scene);
+        stage.show();
     }
     /** This is an event handler for deleting appointments. */
     public void deleteAppointmentMenuClicked(ActionEvent actionEvent) {
     }
     /** This is an event handler for customer management. */
     public void customerManagementMenuClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerManagementHomeView.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerManagementView.fxml")));
         // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
         Scene scene = new Scene(root, 920, 600);

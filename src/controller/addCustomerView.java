@@ -42,11 +42,17 @@ public class addCustomerView implements Initializable {
     public void stateProvinceComboBoxClicked(ActionEvent actionEvent) {
     }
     /** This is the event handler for save button on add customer. */
-    public void saveButtonClicked(ActionEvent actionEvent) {
+    public void saveButtonClicked(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerManagementView.fxml")));
+        Stage stage = (Stage) customerIdTextField.getScene().getWindow();
+        Scene scene = new Scene(root, 920, 600);
+        stage.setTitle("Scheduler v1.0 Customer Management");
+        stage.setScene(scene);
+        stage.show();
     }
     /** This is the even handler for cancel button on add customer. */
     public void CancelButtonClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerManagementHomeView.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerManagementView.fxml")));
         Stage stage = (Stage) customerIdTextField.getScene().getWindow();
         Scene scene = new Scene(root, 920, 600);
         stage.setTitle("Scheduler v1.0 Customer Management");
