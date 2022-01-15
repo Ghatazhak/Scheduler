@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -105,7 +106,13 @@ public class homeView implements Initializable {
     /** This is an event handler for custom report. */
     public void customReportMenuClicked(ActionEvent actionEvent) {
     }
-
-
-
+    /** This is an event handler for the tab filter for month. */
+    public void monthTabClicked(Event event) {
+    }
+    /** This is an event handler for the tab filter for all. */
+    public void allTabClicked(Event event) {
+    }
+    /** This is an event handler for filter by week. */
+    public void weekTabClicked(Event event) {
+    }
 }
