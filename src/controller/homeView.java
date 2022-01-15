@@ -54,7 +54,6 @@ public class homeView implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
-
     /** This is an event handler for default schedule view. */
     public void defaultScheduleMenuClicked(ActionEvent actionEvent) {
     }
