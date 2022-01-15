@@ -32,6 +32,8 @@ public class customerManagementHomeView implements Initializable {
     public TableColumn createdDateCol;
     @FXML
     public TableColumn createdByCol;
+    @FXML
+    public TableColumn phoneNumberCol;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

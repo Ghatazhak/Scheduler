@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="855.0" prefWidth="1314.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.customerManagementHomeView">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="855.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.customerManagementHomeView">
    <children>
       <TableView fx:id="allCustomersTableView" prefHeight="799.0" prefWidth="1308.0">
         <columns>
@@ -13,7 +13,7 @@
           <TableColumn fx:id="nameCol" prefWidth="200.0" text="Name" />
             <TableColumn fx:id="addressCol" prefWidth="249.0" text="Address" />
             <TableColumn fx:id="postalCodeCol" prefWidth="88.0" text="Postal Code" />
-            <TableColumn fx:id="postalCodeCol1" prefWidth="145.0" text="Phone" />
+            <TableColumn fx:id="phoneNumberCol" prefWidth="145.0" text="Phone" />
             <TableColumn fx:id="firstLevelDivisionCol" prefWidth="185.0" text="First Level Division" />
             <TableColumn fx:id="createdDateCol" prefWidth="189.0" text="Created Date" />
             <TableColumn fx:id="createdByCol" prefWidth="197.0" text="Created By" />

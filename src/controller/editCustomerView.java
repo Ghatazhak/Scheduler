@@ -9,12 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class addCustomerView implements Initializable {
+public class editCustomerView implements Initializable {
     @FXML
     public TextField customerIdTextField;
     @FXML
@@ -26,15 +27,15 @@ public class addCustomerView implements Initializable {
     @FXML
     public TextField phoneNumberTextField;
     @FXML
-    public ComboBox countryComboBox;
+    public ComboBox<String> countryComboBox;
     @FXML
-    public ComboBox stateProvinceComboBox;
+    public ComboBox<String> stateProvinceComboBox;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
-  /** This is the event handler for country combo box */
+    /** This is the event handler for country combo box */
     public void countryComboBoxClicked(ActionEvent actionEvent) {
     }
     /**  This is the event handler for State/Province combo box */
