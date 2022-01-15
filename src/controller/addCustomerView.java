@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -26,9 +27,9 @@ public class addCustomerView implements Initializable {
     @FXML
     public TextField phoneNumberTextField;
     @FXML
-    public ComboBox countryComboBox;
+    public ComboBox<String> countryComboBox;
     @FXML
-    public ComboBox stateProvinceComboBox;
+    public ComboBox<String> stateProvinceComboBox;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,7 +48,7 @@ public class addCustomerView implements Initializable {
     public void CancelButtonClicked(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerManagementHomeView.fxml")));
         Stage stage = (Stage) customerIdTextField.getScene().getWindow();
-        Scene scene = new Scene(root, 1020, 475);
+        Scene scene = new Scene(root, 1315, 855);
         stage.setTitle("Scheduler v1.0 Customer Management");
         stage.setScene(scene);
         stage.show();

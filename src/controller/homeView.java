@@ -78,7 +78,7 @@ public class homeView implements Initializable {
         // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
         Scene scene = new Scene(root, 1315, 855);
-        stage.setTitle("Scheduler v1.0 Customer Management");
+        stage.setTitle("Customer Management");
         stage.setScene(scene);
         stage.show();
     }

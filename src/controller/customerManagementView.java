@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class customerManagementHomeView implements Initializable {
+public class customerManagementView implements Initializable {
     @FXML
     public TableView allCustomersTableView;
     @FXML
@@ -42,15 +42,22 @@ public class customerManagementHomeView implements Initializable {
     /** This event handler is for the add button. */
     public void addButtonClicked(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/addCustomerView.fxml")));
-        // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
         Stage stage = (Stage) allCustomersTableView.getScene().getWindow();
         Scene scene = new Scene(root, 370, 390);
-        stage.setTitle("Scheduler v1.0 Add New Customer");
+        stage.setAlwaysOnTop(true);
+        stage.setTitle("Add New Customer");
         stage.setScene(scene);
         stage.show();
     }
     /** This event handler is for the edit button. */
-    public void editButtonClicked(ActionEvent actionEvent) {
+    public void editButtonClicked(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/editCustomerView.fxml")));
+        // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
+        Stage stage = (Stage) allCustomersTableView.getScene().getWindow();
+        Scene scene = new Scene(root, 370, 390);
+        stage.setTitle("Edit Customer");
+        stage.setScene(scene);
+        stage.show();
     }
     /** This event handler is for the delete button. */
     public void deleteButtonClicked(ActionEvent actionEvent) {
