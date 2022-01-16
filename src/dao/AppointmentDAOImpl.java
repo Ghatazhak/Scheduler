@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class AppointmentDAOImpl implements AppointmentDAO {
    private ObservableList<Appointment> appointmentsList = FXCollections.observableArrayList();
@@ -25,7 +26,7 @@ public class AppointmentDAOImpl implements AppointmentDAO {
         ResultSet resultSet = preparedStatement.getResultSet();
 
         while(resultSet.next()){
-            appointmentsList.add(new Appointment(resultSet.getInt("Appointment_ID"),resultSet.getString("Title"),resultSet.getString("Description"),resultSet.getString("Location"),resultSet.getString("Type"),resultSet.getString("Start"),resultSet.getString("End"),resultSet.getInt("Customer_ID"),resultSet.getInt("User_ID"),resultSet.getInt("Contact_ID")));
+            appointmentsList.add(new Appointment(resultSet.getInt("Appointment_ID"),resultSet.getString("Title"),resultSet.getString("Description"),resultSet.getString("Location"),resultSet.getString("Type"),(resultSet.getTimestamp("Start").toLocalDateTime()),(resultSet.getTimestamp("End").toLocalDateTime()),resultSet.getInt("Customer_ID"),resultSet.getInt("User_ID"),resultSet.getInt("Contact_ID")));
         }
         return appointmentsList;
     }

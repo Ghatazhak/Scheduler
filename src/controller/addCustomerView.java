@@ -35,6 +35,16 @@ public class addCustomerView implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
+    public void returnToCustomerManagementView() throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerManagementView.fxml")));
+        Stage stage = (Stage) customerIdTextField.getScene().getWindow();
+        Scene scene = new Scene(root, 750, 600);
+        stage.setTitle("Scheduler v1.0 Customer Management");
+        stage.setScene(scene);
+        stage.show();
+    }
+
   /** This is the event handler for country combo box */
     public void countryComboBoxClicked(ActionEvent actionEvent) {
     }
@@ -43,20 +53,10 @@ public class addCustomerView implements Initializable {
     }
     /** This is the event handler for save button on add customer. */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerManagementView.fxml")));
-        Stage stage = (Stage) customerIdTextField.getScene().getWindow();
-        Scene scene = new Scene(root, 750, 600);
-        stage.setTitle("Scheduler v1.0 Customer Management");
-        stage.setScene(scene);
-        stage.show();
+        returnToCustomerManagementView();
     }
     /** This is the even handler for cancel button on add customer. */
     public void CancelButtonClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerManagementView.fxml")));
-        Stage stage = (Stage) customerIdTextField.getScene().getWindow();
-        Scene scene = new Scene(root, 750, 600);
-        stage.setTitle("Scheduler v1.0 Customer Management");
-        stage.setScene(scene);
-        stage.show();
+        returnToCustomerManagementView();
     }
 }
