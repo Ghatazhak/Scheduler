@@ -10,7 +10,7 @@ public class AppointmentDAOImpl implements AppointmentDAO {
     }
 
     @Override
-    public Appointment findById() {
+    public Appointment findById(int id) {
         return null;
     }
 

@@ -5,7 +5,7 @@ import model.Contact;
 
 public interface ContactDAO {
     ObservableList<Contact> findAll();
-    Contact findById();
+    Contact findById(int id);
     Boolean create();
     Boolean update();
     Boolean delete();

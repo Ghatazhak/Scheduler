@@ -5,7 +5,7 @@ import model.Country;
 
 public interface CountryDAO {
     ObservableList<Country> findAll();
-    Country findById();
+    Country findById(int id);
     Boolean create();
     Boolean update();
     Boolean delete();

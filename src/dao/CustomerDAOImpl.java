@@ -10,7 +10,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public Customer findById() {
+    public Customer findById(int id) {
         return null;
     }
 

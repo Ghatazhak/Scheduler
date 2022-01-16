@@ -10,7 +10,7 @@ public class ContactDAOImpl implements ContactDAO {
     }
 
     @Override
-    public Contact findById() {
+    public Contact findById(int id) {
         return null;
     }
 

@@ -10,7 +10,7 @@ public class CountryDAOImpl implements CountryDAO {
     }
 
     @Override
-    public Country findById() {
+    public Country findById(int id) {
         return null;
     }
 

@@ -1,7 +1,6 @@
 package controller;
 
-import Util.DBQuery;
-import Util.JDBC;
+import dao.UserDAOImpl;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,12 +13,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.User;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Objects;
@@ -62,19 +59,13 @@ public class loginView implements Initializable {
     }
 /** Event handler for login button. */
     public void loginButtonPressed(ActionEvent actionEvent) throws IOException, SQLException {
-        String selectStatement = "SELECT * FROM users";
-        Connection connection = JDBC.connection;
-        DBQuery.setPreparedStatement(connection,selectStatement);
-        PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
-        //preparedStatement.setString(1,usernameTextField.getText());
-        preparedStatement.execute();
-        ResultSet resultSet = preparedStatement.getResultSet();
 
-        while(resultSet.next()){
-            String retrievedUserName = resultSet.getString("User_Name");
-            if(retrievedUserName.equals(usernameTextField.getText())){
-                retrievedPassword = resultSet.getString("Password");
-            }
+        try{
+            UserDAOImpl userDAO = new UserDAOImpl();
+            User user;  user = userDAO.findByUsername(usernameTextField.getText());
+            retrievedPassword = user.getPassword();
+        } catch (Exception e){
+           System.out.println(e.getMessage());
         }
 
         if(passwordTextField.getText().equals(retrievedPassword)){
@@ -84,8 +75,7 @@ public class loginView implements Initializable {
             stage.setTitle("Scheduler v1.0 Appointments");
             stage.setScene(scene);
             stage.show();
-        } else {
-
+        }
             ResourceBundle rb = ResourceBundle.getBundle("language_files/rb",Locale.getDefault());
             if(Locale.getDefault().getLanguage().equals("fr")){
                 errorMessageLabel.setText(rb.getString("Invalid") + " " + rb.getString("Login"));
@@ -93,7 +83,7 @@ public class loginView implements Initializable {
                 errorMessageLabel.setText(rb.getString("Invalid") + " " + rb.getString("Login"));
             }
         }
-    }
+
 /** Event handler for the exit button. */
     public void exitButtonPressed(ActionEvent actionEvent) {
         Platform.exit();

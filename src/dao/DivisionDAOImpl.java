@@ -10,7 +10,7 @@ public class DivisionDAOImpl implements DivisionDAO {
     }
 
     @Override
-    public Division findById() {
+    public Division findById(int id) {
         return null;
     }
 

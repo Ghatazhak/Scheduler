@@ -2,13 +2,13 @@ package model;
 
 public class User {
     private int userId;
-    private String userName;
-    private String passWord;
+    private String username;
+    private String password;
 
-    public User(int userId, String userName, String passWord) {
+    public User(int userId, String username, String password) {
         this.userId = userId;
-        this.userName = userName;
-        this.passWord = passWord;
+        this.username = username;
+        this.password = password;
     }
 
     public int getUserId() {
@@ -19,19 +19,19 @@ public class User {
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String userName) {
+        this.username = userName;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
