@@ -12,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
@@ -52,12 +51,6 @@ public class loginView implements Initializable {
             loginButtonText.setText(rb.getString("Login"));
             exitButtonText.setText(rb.getString("Exit"));
         }
-
-
-
-
-
-
     }
 /** Event handler for login button. */
     public void loginButtonPressed(ActionEvent actionEvent) throws IOException {
@@ -76,10 +69,6 @@ public class loginView implements Initializable {
                 errorMessageLabel.setText(rb.getString("Invalid") + " " + rb.getString("Login"));
             }
         }
-
-
-
-
     }
 /** Event handler for the exit button. */
     public void exitButtonPressed(ActionEvent actionEvent) {

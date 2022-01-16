@@ -1,20 +1,27 @@
 package main;
 
-import dao.JDBC;
+import Util.DBQuery;
+import Util.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.util.Locale;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
 public class Main extends Application {
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws SQLException {
         JDBC.openConnection();
+        //DBQuery.setStatement(JDBC.connection);
+        //Statement statement = DBQuery.getStatement();
+
         launch(args);
         JDBC.closeConnection();
     }

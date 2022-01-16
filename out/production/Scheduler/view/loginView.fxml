@@ -21,7 +21,7 @@
       </Label>
       <TextField fx:id="usernameTextField" layoutX="199.0" layoutY="91.0" promptText="Enter Username" />
       <Button fx:id="loginButtonText" focusTraversable="false" layoutX="199.0" layoutY="158.0" mnemonicParsing="false" onAction="#loginButtonPressed" prefHeight="25.0" prefWidth="149.0" text="Login" />
-      <Label fx:id="errorMessageLabel" layoutX="239.0" layoutY="219.0" textFill="#fd0000" />
+      <Label fx:id="errorMessageLabel" layoutX="206.0" layoutY="219.0" textFill="#fd0000" />
       <Button fx:id="exitButtonText" focusTraversable="false" layoutX="199.0" layoutY="187.0" mnemonicParsing="false" onAction="#exitButtonPressed" prefHeight="25.0" prefWidth="149.0" text="Exit" />
       <PasswordField fx:id="passwordTextField" layoutX="199.0" layoutY="124.0" onAction="#loginButtonPressed" promptText="Enter Password" />
       <Label fx:id="userLocation" layoutX="8.0" layoutY="279.0" prefHeight="17.0" prefWidth="105.0" />
