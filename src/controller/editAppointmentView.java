@@ -10,6 +10,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.Appointment;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,6 +41,19 @@ public class editAppointmentView implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Appointment appointment = homeView.tempAppointment;
+        appointmentIdTextField.setText(String.valueOf(appointment.getAppointmentId()));
+        titleTextField.setText(appointment.getTitle());
+        descriptionTextField.setText(appointment.getDescription());
+        locationTextField.setText(appointment.getLocation());
+        //contactComboBox
+        //typeComboBox
+        //startDateTimeDp
+        //endDateTimeDp
+        customerIdTextField.setText(String.valueOf(appointment.getCustomerId()));
+        userIdTextField.setText(String.valueOf(appointment.getUserId()));
+
+
 
     }
 /** This is the event handler for the save button. */

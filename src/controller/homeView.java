@@ -3,7 +3,6 @@ package controller;
 import dao.AppointmentDAOImpl;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,6 +20,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class homeView implements Initializable {
+    public static Appointment tempAppointment;
     @FXML
     public TableView<Appointment> allAppointmentsTableView;
     @FXML
@@ -91,6 +91,7 @@ public class homeView implements Initializable {
     }
     /** This is an event handler for adding an appointment. */
     public void addAppointmentMenuClicked(ActionEvent actionEvent) throws IOException {
+
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/addAppointmentView.fxml")));
         // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
@@ -101,6 +102,13 @@ public class homeView implements Initializable {
     }
     /** This is an event handler for editing appointments. */
     public void editAppointmentMenuClicked(ActionEvent actionEvent) throws IOException {
+
+        tempAppointment = allAppointmentsTableView.getSelectionModel().getSelectedItem();
+
+        if(tempAppointment == null){
+            return;
+        }
+
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/editAppointmentView.fxml")));
         // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
@@ -130,14 +138,5 @@ public class homeView implements Initializable {
     }
     /** This is an event handler for custom report. */
     public void customReportMenuClicked(ActionEvent actionEvent) {
-    }
-    /** This is an event handler for the tab filter for month. */
-    public void monthTabClicked(Event event) {
-    }
-    /** This is an event handler for the tab filter for all. */
-    public void allTabClicked(Event event) {
-    }
-    /** This is an event handler for filter by week. */
-    public void weekTabClicked(Event event) {
     }
 }
