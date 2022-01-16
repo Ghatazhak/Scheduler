@@ -4,13 +4,23 @@ public class Customer {
     private int customerId;
     private String customerName;
     private String address;
+    private String phone;
     private String postalCode;
     private int divisionId;
 
-    public Customer(int customerId, String customerName, String address, String postalCode, int divisionId) {
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Customer(int customerId, String customerName, String address, String phone, String postalCode, int divisionId) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.address = address;
+        this.phone = phone;
         this.postalCode = postalCode;
         this.divisionId = divisionId;
     }

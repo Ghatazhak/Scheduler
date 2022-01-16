@@ -45,7 +45,7 @@ public class editCustomerView implements Initializable {
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerManagementView.fxml")));
         Stage stage = (Stage) customerIdTextField.getScene().getWindow();
-        Scene scene = new Scene(root, 920, 600);
+        Scene scene = new Scene(root, 750, 600);
         stage.setTitle("Scheduler v1.0 Customer Management");
         stage.setScene(scene);
         stage.show();
@@ -54,7 +54,7 @@ public class editCustomerView implements Initializable {
     public void CancelButtonClicked(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerManagementView.fxml")));
         Stage stage = (Stage) customerIdTextField.getScene().getWindow();
-        Scene scene = new Scene(root, 920, 600);
+        Scene scene = new Scene(root, 750, 600);
         stage.setTitle("Scheduler v1.0 Customer Management");
         stage.setScene(scene);
         stage.show();

@@ -62,7 +62,7 @@ public class loginView implements Initializable {
 
         try{
             UserDAOImpl userDAO = new UserDAOImpl();
-            User user;  user = userDAO.findByUsername(usernameTextField.getText());
+            User user = userDAO.findByUsername(usernameTextField.getText());
             retrievedPassword = user.getPassword();
         } catch (Exception e){
            System.out.println(e.getMessage());

@@ -26,7 +26,6 @@ public class UserDAOImpl implements UserDAO {
         preparedStatement.setString(1,username);
         preparedStatement.execute();
         ResultSet resultSet = preparedStatement.getResultSet();
-        //if(resultSet.equals(null)) return null;
 
         while(resultSet.next()){
             User user = new User(resultSet.getInt("User_ID"),resultSet.getString("User_Name"),resultSet.getString("Password"));

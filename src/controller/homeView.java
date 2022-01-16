@@ -1,5 +1,7 @@
 package controller;
 
+import dao.AppointmentDAOImpl;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -9,7 +11,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Appointment;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,27 +22,53 @@ import java.util.ResourceBundle;
 
 public class homeView implements Initializable {
     @FXML
-    public TableView allAppointmentsTableView;
+    public TableView<Appointment> allAppointmentsTableView;
     @FXML
-    public TableColumn appointmentIdCol;
+    public TableColumn<Appointment, Integer> appointmentIdCol;
     @FXML
-    public TableColumn titleCol;
+    public TableColumn<Appointment, String> titleCol;
     @FXML
-    public TableColumn descriptionCol;
+    public TableColumn<Appointment, String> descriptionCol;
     @FXML
-    public TableColumn locationCol;
+    public TableColumn<Appointment, String> locationCol;
     @FXML
-    public TableColumn contactCol;
+    public TableColumn<Appointment, String> contactCol;
     @FXML
-    public TableColumn typeCol;
+    public TableColumn<Appointment, String> typeCol;
     @FXML
-    public TableColumn startDateTimeCol;
+    public TableColumn<Appointment, String> startDateTimeCol;
     @FXML
-    public TableColumn endDateTimeCol;
+    public TableColumn<Appointment, String> endDateTimeCol;
     @FXML
-    public TableColumn customerIDCol;
+    public TableColumn<Appointment, String> customerIDCol;
     @FXML
-    public TableColumn userIdCol;
+    public TableColumn<Appointment, String> userIdCol;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        try{
+            AppointmentDAOImpl appointmentDAO = new AppointmentDAOImpl();
+            ObservableList<Appointment> list = appointmentDAO.findAll();
+            allAppointmentsTableView.setItems(list);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        System.out.println("test");
+
+        appointmentIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+        titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        startDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("startDateTime"));
+        endDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
+        customerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        userIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        contactCol.setCellValueFactory(new PropertyValueFactory<>("ContactId"));
+
+    }
+
 /** This is an event handler for log off. */
     public void logOffMenuClicked(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/loginView.fxml")));
@@ -50,10 +80,6 @@ public class homeView implements Initializable {
         stage.show();
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
     /** This is an event handler for default schedule view. */
     public void defaultScheduleMenuClicked(ActionEvent actionEvent) {
     }
@@ -91,7 +117,7 @@ public class homeView implements Initializable {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerManagementView.fxml")));
         // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
-        Scene scene = new Scene(root, 920, 600);
+        Scene scene = new Scene(root, 750, 600);
         stage.setTitle("Customer Management");
         stage.setScene(scene);
         stage.show();
