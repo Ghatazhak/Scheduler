@@ -5,7 +5,7 @@ import model.User;
 
 public interface UserDAO {
     ObservableList<User> findAll();
-    User findById();
+    User findByUsername();
     Boolean create();
     Boolean update();
     Boolean delete();

@@ -40,16 +40,19 @@ public class loginView implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-       //Locale french = new Locale("fr","France");
-       //Locale.setDefault(french);
-        ResourceBundle rb = ResourceBundle.getBundle("language_files/rb",Locale.getDefault());
+        /* Locale french = new Locale("fr","France");
+        Locale.setDefault(french); */
         userLocation.setText((Locale.getDefault().getCountry()));
-        userNameLabel.setText(rb.getString("Username"));
-        usernameTextField.setPromptText(rb.getString("Username"));
-        passwordTextField.setPromptText(rb.getString("Password"));
-        passwordLabel.setText(rb.getString("Password"));
-        loginButtonText.setText(rb.getString("Login"));
-        exitButtonText.setText(rb.getString("Exit"));
+        ResourceBundle rb = ResourceBundle.getBundle("language_files/rb",Locale.getDefault());
+        if(Locale.getDefault().getLanguage().equals("fr")){
+            userNameLabel.setText(rb.getString("Username"));
+            usernameTextField.setPromptText(rb.getString("Username"));
+            passwordTextField.setPromptText(rb.getString("Password"));
+            passwordLabel.setText(rb.getString("Password"));
+            loginButtonText.setText(rb.getString("Login"));
+            exitButtonText.setText(rb.getString("Exit"));
+        }
+
 
 
 
@@ -67,10 +70,11 @@ public class loginView implements Initializable {
             stage.setScene(scene);
             stage.show();
         } else {
-            //Locale french = new Locale("fr");
-            //Locale.setDefault(french);
+
             ResourceBundle rb = ResourceBundle.getBundle("language_files/rb",Locale.getDefault());
-            errorMessageLabel.setText(rb.getString("Invalid") + " " + rb.getString("Login"));
+            if(Locale.getDefault().getLanguage().equals("fr")){
+                errorMessageLabel.setText(rb.getString("Invalid") + " " + rb.getString("Login"));
+            }
         }
 
 
