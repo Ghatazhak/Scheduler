@@ -1,5 +1,7 @@
 package controller;
 
+import Util.DBQuery;
+import Util.JDBC;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,14 +14,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 /** The controller for loginView. */
 public class loginView implements Initializable {
+    String retrievedPassword;
     @FXML
     public TextField usernameTextField;
     @FXML
@@ -53,9 +61,23 @@ public class loginView implements Initializable {
         }
     }
 /** Event handler for login button. */
-    public void loginButtonPressed(ActionEvent actionEvent) throws IOException {
+    public void loginButtonPressed(ActionEvent actionEvent) throws IOException, SQLException {
+        String selectStatement = "SELECT * FROM users";
+        Connection connection = JDBC.connection;
+        DBQuery.setPreparedStatement(connection,selectStatement);
+        PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
+        //preparedStatement.setString(1,usernameTextField.getText());
+        preparedStatement.execute();
+        ResultSet resultSet = preparedStatement.getResultSet();
 
-        if(Objects.equals(usernameTextField.getText(), "admin") && Objects.equals(passwordTextField.getText(), "admin")){
+        while(resultSet.next()){
+            String retrievedUserName = resultSet.getString("User_Name");
+            if(retrievedUserName.equals(usernameTextField.getText())){
+                retrievedPassword = resultSet.getString("Password");
+            }
+        }
+
+        if(passwordTextField.getText().equals(retrievedPassword)){
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/homeView.fxml")));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 1020, 475);
@@ -66,6 +88,8 @@ public class loginView implements Initializable {
 
             ResourceBundle rb = ResourceBundle.getBundle("language_files/rb",Locale.getDefault());
             if(Locale.getDefault().getLanguage().equals("fr")){
+                errorMessageLabel.setText(rb.getString("Invalid") + " " + rb.getString("Login"));
+            } else {
                 errorMessageLabel.setText(rb.getString("Invalid") + " " + rb.getString("Login"));
             }
         }

@@ -8,9 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -19,9 +17,6 @@ import java.util.Objects;
 public class Main extends Application {
     public static void main(String[] args) throws SQLException {
         JDBC.openConnection();
-        //DBQuery.setStatement(JDBC.connection);
-        //Statement statement = DBQuery.getStatement();
-
         launch(args);
         JDBC.closeConnection();
     }
