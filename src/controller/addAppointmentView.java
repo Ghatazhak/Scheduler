@@ -30,13 +30,17 @@ public class addAppointmentView implements Initializable {
     @FXML
     public ComboBox<String> typeComboBox;
     @FXML
-    public DatePicker startDateTimeDp;
-    @FXML
-    public DatePicker endDateTimeDp;
-    @FXML
     public TextField customerIdTextField;
     @FXML
     public TextField userIdTextField;
+    @FXML
+    public TextField startTimeTextField;
+    @FXML
+    public TextField endTimeTextField;
+    @FXML
+    public DatePicker endDateDp;
+    @FXML
+    public DatePicker startDateDp;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

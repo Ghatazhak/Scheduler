@@ -68,11 +68,13 @@
       <TextField fx:id="locationTextField" layoutX="139.0" layoutY="122.0" prefHeight="25.0" prefWidth="171.0" promptText="Enter Location" />
       <ComboBox fx:id="contactComboBox" layoutX="140.0" layoutY="157.0" prefHeight="25.0" prefWidth="171.0" />
       <ComboBox fx:id="typeComboBox" layoutX="140.0" layoutY="192.0" prefHeight="25.0" prefWidth="171.0" />
-      <DatePicker fx:id="startDateTimeDp" layoutX="137.0" layoutY="227.0" />
-      <DatePicker fx:id="endDateTimeDp" layoutX="137.0" layoutY="262.0" />
+      <DatePicker fx:id="startDateDp" layoutX="137.0" layoutY="227.0" prefHeight="25.0" prefWidth="117.0" />
+      <DatePicker fx:id="endDateDp" layoutX="137.0" layoutY="262.0" prefHeight="25.0" prefWidth="117.0" />
       <TextField fx:id="customerIdTextField" layoutX="139.0" layoutY="297.0" prefHeight="25.0" prefWidth="171.0" />
       <TextField fx:id="userIdTextField" layoutX="139.0" layoutY="332.0" prefHeight="25.0" prefWidth="171.0" />
       <Button focusTraversable="false" layoutX="140.0" layoutY="369.0" mnemonicParsing="false" onAction="#saveButtonClicked" prefHeight="35.0" prefWidth="68.0" text="Save" />
       <Button focusTraversable="false" layoutX="239.0" layoutY="369.0" mnemonicParsing="false" onAction="#cancelButtonClicked" prefHeight="35.0" prefWidth="68.0" text="Cancel" />
+      <TextField fx:id="startTimeTextField" layoutX="261.0" layoutY="227.0" prefHeight="25.0" prefWidth="46.0" />
+      <TextField fx:id="endTimeTextField" layoutX="261.0" layoutY="262.0" prefHeight="25.0" prefWidth="46.0" />
    </children>
 </AnchorPane>

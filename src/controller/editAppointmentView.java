@@ -31,13 +31,17 @@ public class editAppointmentView implements Initializable {
     @FXML
     public ComboBox<String> typeComboBox;
     @FXML
-    public DatePicker startDateTimeDp;
-    @FXML
-    public DatePicker endDateTimeDp;
-    @FXML
     public TextField customerIdTextField;
     @FXML
     public TextField userIdTextField;
+    @FXML
+    public DatePicker startDateDP;
+    @FXML
+    public DatePicker endDateDP;
+    @FXML
+    public TextField startTimeTextField;
+    @FXML
+    public TextField endTimeTextField;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -48,8 +52,10 @@ public class editAppointmentView implements Initializable {
         locationTextField.setText(appointment.getLocation());
         //contactComboBox
         //typeComboBox
-        //startDateTimeDp
-        //endDateTimeDp
+        startDateDP.setValue(appointment.getStartDateTime().toLocalDate());
+        endDateDP.setValue(appointment.getStartDateTime().toLocalDate());
+        startTimeTextField.setText(appointment.getStartDateTime().toLocalTime().toString());
+        endTimeTextField.setText(appointment.getStartDateTime().toLocalTime().toString());
         customerIdTextField.setText(String.valueOf(appointment.getCustomerId()));
         userIdTextField.setText(String.valueOf(appointment.getUserId()));
     }

@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 
 public class AppointmentDAOImpl implements AppointmentDAO {
    private ObservableList<Appointment> appointmentsList = FXCollections.observableArrayList();
