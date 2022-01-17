@@ -1,5 +1,8 @@
 package controller;
 
+import dao.CountryDAOImpl;
+import dao.DivisionDAOImpl;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -33,6 +37,23 @@ public class addCustomerView implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        try {
+            CountryDAOImpl countryDAO = new CountryDAOImpl();
+            ObservableList allCountries = countryDAO.findAll();
+            countryComboBox.setItems(allCountries);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            DivisionDAOImpl divisionDAO = new DivisionDAOImpl();
+            ObservableList allDivisions = divisionDAO.findAll();
+            stateProvinceComboBox.setItems(allDivisions);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
     }
 

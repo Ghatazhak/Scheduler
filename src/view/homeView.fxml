@@ -3,13 +3,15 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.homeView">
    <children>
-      <MenuBar prefHeight="25.0" prefWidth="1024.0">
+      <MenuBar prefHeight="25.0" prefWidth="289.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -51,5 +53,12 @@
             <TableColumn fx:id="userIdCol" prefWidth="87.99995930989587" text="User ID" />
          </columns>
       </TableView>
+      <RadioButton layoutX="332.0" layoutY="4.0" mnemonicParsing="false" onAction="#onAllRadioButton" selected="true" text="All">
+         <toggleGroup>
+            <ToggleGroup fx:id="timePeriodFilterRadioGroup" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton layoutX="377.0" layoutY="4.0" mnemonicParsing="false" onAction="#onMonthRadioButton" text="Month" toggleGroup="$timePeriodFilterRadioGroup" />
+      <RadioButton layoutX="444.0" layoutY="4.0" mnemonicParsing="false" onAction="#onWeeklyRadioButton" text="Week" toggleGroup="$timePeriodFilterRadioGroup" />
    </children>
 </AnchorPane>

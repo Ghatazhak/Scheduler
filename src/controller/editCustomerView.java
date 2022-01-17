@@ -1,5 +1,8 @@
 package controller;
 
+import dao.CountryDAOImpl;
+import dao.DivisionDAOImpl;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,9 +12,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.Country;
+import model.Customer;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -27,19 +33,47 @@ public class editCustomerView implements Initializable {
     @FXML
     public TextField phoneNumberTextField;
     @FXML
-    public ComboBox<String> countryComboBox;
+    public ComboBox<Country> countryComboBox;
     @FXML
     public ComboBox<String> stateProvinceComboBox;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Customer customer = customerManagementView.tempCustomer;
+        customerIdTextField.setText(String.valueOf(customer.getCustomerId()));
+        nameTextField.setText(customer.getCustomerName());
+        addressTextField.setText(customer.getAddress());
+        postalCodeTextField.setText(customer.getPostalCode());
+        phoneNumberTextField.setText(String.valueOf(customer.getPhone()));
 
 
+        try {
+            CountryDAOImpl countryDAO = new CountryDAOImpl();
+            ObservableList allCountries = countryDAO.findAll();
+            countryComboBox.setItems(allCountries);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-
-
+        try {
+            DivisionDAOImpl divisionDAO = new DivisionDAOImpl();
+            ObservableList allDivisions = divisionDAO.findAll();
+            stateProvinceComboBox.setItems(allDivisions);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
+
+    public void returnToCustomerManagementView() throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerManagementView.fxml")));
+        Stage stage = (Stage) customerIdTextField.getScene().getWindow();
+        Scene scene = new Scene(root, 540, 400);
+        stage.setTitle("Customer Management");
+        stage.setScene(scene);
+        stage.show();
+    }
+
     /** This is the event handler for country combo box */
     public void countryComboBoxClicked(ActionEvent actionEvent) {
     }
@@ -48,20 +82,10 @@ public class editCustomerView implements Initializable {
     }
     /** This is the event handler for save button on add customer. */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerManagementView.fxml")));
-        Stage stage = (Stage) customerIdTextField.getScene().getWindow();
-        Scene scene = new Scene(root, 540, 400);
-        stage.setTitle("Customer Management");
-        stage.setScene(scene);
-        stage.show();
+        returnToCustomerManagementView();
     }
     /** This is the even handler for cancel button on add customer. */
     public void CancelButtonClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerManagementView.fxml")));
-        Stage stage = (Stage) customerIdTextField.getScene().getWindow();
-        Scene scene = new Scene(root, 540, 400);
-        stage.setTitle("Customer Management");
-        stage.setScene(scene);
-        stage.show();
+        returnToCustomerManagementView();
     }
 }

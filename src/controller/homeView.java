@@ -139,4 +139,13 @@ public class homeView implements Initializable {
     /** This is an event handler for custom report. */
     public void customReportMenuClicked(ActionEvent actionEvent) {
     }
+
+    public void onWeeklyRadioButton(ActionEvent actionEvent) {
+    }
+
+    public void onMonthRadioButton(ActionEvent actionEvent) {
+    }
+
+    public void onAllRadioButton(ActionEvent actionEvent) {
+    }
 }

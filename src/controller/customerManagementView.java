@@ -20,6 +20,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class customerManagementView implements Initializable {
+    public static Customer tempCustomer;
     @FXML
     public TableView<Customer> allCustomersTableView;
     @FXML
@@ -68,6 +69,12 @@ public class customerManagementView implements Initializable {
     }
     /** This event handler is for the edit button. */
     public void editButtonClicked(ActionEvent actionEvent) throws IOException {
+        tempCustomer = allCustomersTableView.getSelectionModel().getSelectedItem();
+
+        if(tempCustomer == null){
+            return;
+        }
+
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/editCustomerView.fxml")));
         // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
         Stage stage = (Stage) allCustomersTableView.getScene().getWindow();
