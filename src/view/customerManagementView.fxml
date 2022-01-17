@@ -5,21 +5,21 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.customerManagementView">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.customerManagementView">
    <children>
-      <TableView fx:id="allCustomersTableView" prefHeight="531.0" prefWidth="744.0">
+      <TableView fx:id="allCustomersTableView" layoutX="10.0" layoutY="63.0" prefHeight="330.0" prefWidth="525.0">
         <columns>
-          <TableColumn fx:id="iDCol" prefWidth="39.333311676979065" text="ID" />
-          <TableColumn fx:id="nameCol" prefWidth="139.33337020874023" text="Name" />
-            <TableColumn fx:id="addressCol" prefWidth="183.9999542236328" text="Address" />
-            <TableColumn fx:id="postalCodeCol" prefWidth="82.00006103515625" text="Postal Code" />
-            <TableColumn fx:id="phoneNumberCol" prefWidth="135.99996948242188" text="Phone" />
-            <TableColumn fx:id="firstLevelDivisionCol" prefWidth="157.333251953125" text="Country &amp; State/Province" />
+          <TableColumn fx:id="iDCol" prefWidth="40.666656494140625" text="ID" />
+          <TableColumn fx:id="nameCol" prefWidth="113.33331298828125" text="Name" />
+            <TableColumn fx:id="addressCol" prefWidth="113.33331298828125" text="Address" />
+            <TableColumn fx:id="phoneCol" prefWidth="113.33331298828125" text="Phone" />
+            <TableColumn fx:id="postalCodeCol" prefWidth="74.0" text="Postal Code" />
+            <TableColumn fx:id="divisionIdCol" prefWidth="67.33328247070312" text="Division ID" />
         </columns>
       </TableView>
-      <Button layoutX="45.0" layoutY="550.0" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="34.0" prefWidth="94.0" text="Add" />
-      <Button layoutX="144.0" layoutY="550.0" mnemonicParsing="false" onAction="#editButtonClicked" prefHeight="34.0" prefWidth="94.0" text="Edit" />
-      <Button layoutX="640.0" layoutY="550.0" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="34.0" prefWidth="94.0" text="Delete" textFill="#da1010" />
-      <Button layoutX="243.0" layoutY="550.0" mnemonicParsing="false" onAction="#cancelButtonClicked" prefHeight="34.0" prefWidth="94.0" text="Cancel" />
+      <Button layoutX="10.0" layoutY="20.0" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="30.0" prefWidth="60.0" text="Add" />
+      <Button layoutX="77.0" layoutY="20.0" mnemonicParsing="false" onAction="#editButtonClicked" prefHeight="30.0" prefWidth="60.0" text="Edit" />
+      <Button layoutX="472.0" layoutY="20.0" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="30.0" prefWidth="60.0" text="Delete" textFill="#da1010" />
+      <Button layoutX="144.0" layoutY="20.0" mnemonicParsing="false" onAction="#cancelButtonClicked" prefHeight="30.0" prefWidth="60.0" text="Cancel" />
    </children>
 </AnchorPane>

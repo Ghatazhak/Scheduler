@@ -17,6 +17,7 @@ public class AppointmentDAOImpl implements AppointmentDAO {
     public ObservableList<Appointment> findAll() throws SQLException {
 
 
+        //String selectStatement = SELECT appointments.Appointment_ID, appointments.Title, appointments.Description, appointments.Location, appointments.Type, appointments.Start, appointments.End, customers.Customer_Name FROM appointments INNER JOIN customers ON appointments.Customer_ID = customers.Customer_ID;
         String selectStatement = "SELECT * FROM appointments";
         Connection connection = JDBC.connection;
         DBQuery.setPreparedStatement(connection,selectStatement);

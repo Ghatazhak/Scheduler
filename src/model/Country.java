@@ -4,6 +4,14 @@ public class Country {
    private int countryId;
    private String country;
 
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
     public Country(int countryId, String country) {
         this.countryId = countryId;
         this.country = country;

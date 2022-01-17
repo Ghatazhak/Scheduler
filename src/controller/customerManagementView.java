@@ -29,11 +29,11 @@ public class customerManagementView implements Initializable {
     @FXML
     public TableColumn<Customer, String> addressCol;
     @FXML
+    public TableColumn<Customer, String> phoneCol;
+    @FXML
     public TableColumn<Customer, String> postalCodeCol;
     @FXML
-    public TableColumn<Customer, String> firstLevelDivisionCol;
-    @FXML
-    public TableColumn<Customer, String> phoneNumberCol;
+    public TableColumn<Customer, String> divisionIdCol;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -46,13 +46,13 @@ public class customerManagementView implements Initializable {
             System.out.println(e.getMessage());
         }
 
-
         iDCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         nameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
+        phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
         postalCodeCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
-        firstLevelDivisionCol.setCellValueFactory(new PropertyValueFactory<>("divisionId"));
-        phoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        divisionIdCol.setCellValueFactory(new PropertyValueFactory<>("divisionId"));
+
 
 
     }
