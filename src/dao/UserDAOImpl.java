@@ -2,6 +2,7 @@ package dao;
 
 import Util.DBQuery;
 import Util.JDBC;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.User;
 
@@ -11,9 +12,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDAOImpl implements UserDAO {
+    ObservableList<User> allUsers = FXCollections.observableArrayList();
+
     @Override
-    public ObservableList<User> findAll() {
-        return null;
+    public ObservableList<User> findAll() throws SQLException {
+        String selectStatement = "SELECT * FROM users";
+        Connection connection = JDBC.connection;
+        DBQuery.setPreparedStatement(connection, selectStatement);
+        PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
+        preparedStatement.execute();
+        ResultSet resultSet = preparedStatement.getResultSet();
+
+        while (resultSet.next()) {
+            allUsers.add(new User(resultSet.getInt("User_ID"), resultSet.getString("User_Name"), resultSet.getString("Password")));
+        }
+        return allUsers;
     }
 
     @Override

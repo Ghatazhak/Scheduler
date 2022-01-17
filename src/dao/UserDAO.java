@@ -6,7 +6,7 @@ import model.User;
 import java.sql.SQLException;
 
 public interface UserDAO {
-    ObservableList<User> findAll();
+    ObservableList<User> findAll() throws SQLException;
     User findByUsername(String username) throws SQLException;
     Boolean create();
     Boolean update();
