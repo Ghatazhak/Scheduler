@@ -58,15 +58,29 @@ public class AppointmentMSQL {
 //            return appointmentsList;
         }
 
-
-
-
         public static Boolean update() {
             return null;
         }
 
 
-        public static Boolean delete() {
+        public static Boolean delete(Appointment appointment) {
+            System.out.println("1");
+            String sqlStatement = "DELETE FROM appointments WHERE Appointment_ID = (?) ;";
+            Connection connection = JDBC.connection;
+            try {
+                DBQuery.setPreparedStatement(connection,sqlStatement);
+                PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
+                preparedStatement.setInt(1,appointment.getAppointmentId());
+                preparedStatement.execute();
+
+                if(preparedStatement.getUpdateCount() > 0){
+                    System.out.println("2");
+                    return true;
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             return null;
         }
     }

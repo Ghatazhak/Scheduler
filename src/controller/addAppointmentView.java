@@ -36,10 +36,9 @@ public class addAppointmentView implements Initializable {
     ObservableList<String> endHours = FXCollections.observableArrayList();
     ObservableList<String> endMinutes = FXCollections.observableArrayList();
     ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
-    //ObservableList<Integer> allCustomerId = FXCollections.observableArrayList();
     ObservableList<String> allTypes = FXCollections.observableArrayList();
     ObservableList<Contact> allContacts = FXCollections.observableArrayList();
-    //ObservableList<String> allContactsName = FXCollections.observableArrayList();
+
 
     @FXML
     public TextField appointmentIdTextField;
@@ -99,7 +98,7 @@ public class addAppointmentView implements Initializable {
     }
 
    public void returnToHomeView() throws IOException {
-       Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/appoinmentView.fxml")));
+       Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/appointmentView.fxml")));
        // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
        Stage stage = (Stage) appointmentIdTextField.getScene().getWindow();
        Scene scene = new Scene(root, 1020, 475);
@@ -111,7 +110,7 @@ public class addAppointmentView implements Initializable {
 /** This is the event handler for the save button. */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException, SQLException {
 
-        if(titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactComboBox.getValue() == null || typeComboBox.getValue() == null || startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || startDateDp.getValue() == null || endDateDp.getValue() == null || userIdTextField.getText().isEmpty()){
+        if(titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactComboBox.getValue() == null || typeComboBox.getValue() == null || startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || startDateDp.getValue() == null || endDateDp.getValue() == null || userIdTextField.getText().isEmpty() || contactComboBox.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Missing Data!");

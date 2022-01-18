@@ -118,6 +118,15 @@ public class appointmentView implements Initializable {
     }
     /** This is an event handler for deleting appointments. */
     public void deleteAppointmentMenuClicked(ActionEvent actionEvent) {
+        Appointment appointment = allAppointmentsTableView.getSelectionModel().getSelectedItem();
+        AppointmentMSQL.delete(appointment);
+        try{
+            ObservableList<Appointment> allAppointments = AppointmentMSQL.findAll();
+            allAppointmentsTableView.setItems(allAppointments);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
     /** This is an event handler for customer management. */
     public void customerEditclicked(ActionEvent actionEvent) throws IOException {

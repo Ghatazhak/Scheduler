@@ -74,7 +74,7 @@ public class editAppointmentView implements Initializable {
     }
 
     public void returnToHomeView() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/appoinmentView.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/appointmentView.fxml")));
         // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
         Stage stage = (Stage) appointmentIdTextField.getScene().getWindow();
         Scene scene = new Scene(root, 1020, 475);

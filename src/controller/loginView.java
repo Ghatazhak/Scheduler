@@ -68,7 +68,7 @@ public class loginView implements Initializable {
         }
 
         if(passwordTextField.getText().equals(retrievedPassword)){
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/appoinmentView.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/appointmentView.fxml")));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 1020, 475);
             stage.setTitle("Scheduler v1.0 Appointments");

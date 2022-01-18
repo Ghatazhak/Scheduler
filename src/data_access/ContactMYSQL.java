@@ -12,7 +12,6 @@ import java.sql.SQLException;
 public class ContactMYSQL {
     private static ObservableList<Contact> allContacts = FXCollections.observableArrayList();
 
-
     public static ObservableList<Contact> findAll()  {
         allContacts.clear();
         String selectStatement = "SELECT * FROM contacts";
