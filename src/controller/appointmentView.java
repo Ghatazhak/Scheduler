@@ -46,12 +46,12 @@ public class appointmentView implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ObservableList<Appointment> list;
+
         try{
-            list = AppointmentMSQL.findAll();
-            allAppointmentsTableView.setItems(list);
+            ObservableList<Appointment> allAppointments = AppointmentMSQL.findAll();
+            allAppointmentsTableView.setItems(allAppointments);
         } catch (Exception e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
         appointmentIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));

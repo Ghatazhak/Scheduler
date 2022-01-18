@@ -61,7 +61,6 @@ public class loginView implements Initializable {
     public void loginButtonPressed(ActionEvent actionEvent) throws IOException, SQLException {
         String retrievedPassword = null;
         try{
-
             User user = UserMYSQL.findByUsername(usernameTextField.getText());
             retrievedPassword = user.getPassword();
         } catch (Exception e){
