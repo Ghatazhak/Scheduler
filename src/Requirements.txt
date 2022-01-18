@@ -54,17 +54,16 @@ Note: The address text field should not include first-level division and country
 
 3.  Add scheduling functionalities to the GUI-based application by doing the following:
 
-a.  Write code that enables the user to add, update, and delete appointments. The code should also include the following functionalities:
+a.  Write code that enables the user to, update. The code should also include the following functionalities:
 
-•  A contact name is assigned to an appointment using a drop-down menu or combo box.
+
 
 •  A custom message is displayed in the user interface with the Appointment_ID and type of appointment canceled.
 
-•  The Appointment_ID is auto-generated and disabled throughout the application.
 
 •  When adding and updating an appointment, record the following data: Appointment_ID, title, description, location, contact, type, start date and time, end date and time, Customer_ID, and User_ID.
 
-•  All of the original appointment information is displayed on the update form in local time zone.
+
 
 •  All of the appointment fields can be updated except Appointment_ID, which must be disabled.
 
@@ -108,7 +107,7 @@ d.  Write code to implement input validation and logical error checks to prevent
 
 •  scheduling overlapping appointments for customers
 
-•  entering an incorrect username and password
+
 
 
 
@@ -168,9 +167,4 @@ E.  Create a README.txt file that includes the following information:
 
 
 
-F.  Demonstrate professional communication in the content and presentation of your submission.
 
-File Restrictions
-File name may contain only letters, numbers, spaces, and these symbols: ! - _ . * ' ( )
-File size limit: 200 MB
-File types allowed: doc, docx, rtf, xls, xlsx, ppt, pptx, odt, pdf, txt, qt, mov, mpg, avi, mp3, wav, mp4, wma, flv, asf, mpeg, wmv, m4v, svg, tif, tiff, jpeg, jpg, gif, png, zip, rar, tar, 7z
