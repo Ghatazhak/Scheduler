@@ -1,6 +1,6 @@
 package controller;
 
-import dao.AppointmentDAOImpl;
+import data_access.AppointmentMSQL;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +19,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class homeView implements Initializable {
+public class appointmentView implements Initializable {
     public static Appointment tempAppointment;
     @FXML
     public TableView<Appointment> allAppointmentsTableView;
@@ -46,15 +46,13 @@ public class homeView implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        ObservableList<Appointment> list;
         try{
-            AppointmentDAOImpl appointmentDAO = new AppointmentDAOImpl();
-            ObservableList<Appointment> list = appointmentDAO.findAll();
+            list = AppointmentMSQL.findAll();
             allAppointmentsTableView.setItems(list);
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
-        System.out.println("test");
 
         appointmentIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -122,7 +120,7 @@ public class homeView implements Initializable {
     }
     /** This is an event handler for customer management. */
     public void customerManagementMenuClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerManagementView.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerView.fxml")));
         // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
         Scene scene = new Scene(root, 540, 400);

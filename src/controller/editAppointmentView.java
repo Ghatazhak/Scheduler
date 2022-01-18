@@ -45,7 +45,7 @@ public class editAppointmentView implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Appointment appointment = homeView.tempAppointment;
+        Appointment appointment = appointmentView.tempAppointment;
         appointmentIdTextField.setText(String.valueOf(appointment.getAppointmentId()));
         titleTextField.setText(appointment.getTitle());
         descriptionTextField.setText(appointment.getDescription());
@@ -61,7 +61,7 @@ public class editAppointmentView implements Initializable {
     }
 
     public void returnToHomeView() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/homeView.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/appoinmentView.fxml")));
         // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
         Stage stage = (Stage) appointmentIdTextField.getScene().getWindow();
         Scene scene = new Scene(root, 1020, 475);

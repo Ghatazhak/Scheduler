@@ -1,7 +1,5 @@
-package dao;
+package data_access;
 
-import Util.DBQuery;
-import Util.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.User;
@@ -11,11 +9,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserDAOImpl implements UserDAO {
-    ObservableList<User> allUsers = FXCollections.observableArrayList();
+public class UserMYSQL {
+    private static ObservableList<User> allUsers = FXCollections.observableArrayList();
 
-    @Override
-    public ObservableList<User> findAll() throws SQLException {
+
+    public static ObservableList<User> findAll() throws SQLException {
+        allUsers.clear();
         String selectStatement = "SELECT * FROM users";
         Connection connection = JDBC.connection;
         DBQuery.setPreparedStatement(connection, selectStatement);
@@ -29,8 +28,8 @@ public class UserDAOImpl implements UserDAO {
         return allUsers;
     }
 
-    @Override
-    public User findByUsername(String username) throws SQLException {
+
+    public static User findByUsername(String username) throws SQLException {
 
         String selectStatement = "SELECT * FROM users WHERE User_Name = ?";
         Connection connection = JDBC.connection;
@@ -47,18 +46,18 @@ public class UserDAOImpl implements UserDAO {
         return null;
     }
 
-    @Override
-    public Boolean create() {
+
+    public static Boolean create() {
         return null;
     }
 
-    @Override
-    public Boolean update() {
+
+    public static Boolean update() {
         return null;
     }
 
-    @Override
-    public Boolean delete() {
+
+    public static Boolean delete() {
         return null;
     }
 }

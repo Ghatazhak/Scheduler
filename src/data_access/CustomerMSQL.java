@@ -1,7 +1,5 @@
-package dao;
+package data_access;
 
-import Util.DBQuery;
-import Util.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Customer;
@@ -11,12 +9,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CustomerDAOImpl implements CustomerDAO {
-    ObservableList<Customer> allCustomerList = FXCollections.observableArrayList();
+public class CustomerMSQL {
+    private static ObservableList<Customer> allCustomerList = FXCollections.observableArrayList();
 
-    @Override
-    public ObservableList<Customer> findAll() throws SQLException {
 
+    public static ObservableList<Customer> findAll() throws SQLException {
+        allCustomerList.clear();
         String selectStatement = "SELECT * FROM customers";
         Connection connection = JDBC.connection;
         DBQuery.setPreparedStatement(connection, selectStatement);
@@ -31,24 +29,22 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
 
-
-    @Override
-    public Customer findById(int id) {
+    public static Customer findById(int id) {
         return null;
     }
 
-    @Override
-    public Boolean create() {
+
+    public static Boolean create() {
         return null;
     }
 
-    @Override
     public Boolean update() {
         return null;
     }
 
-    @Override
+
     public Boolean delete() {
         return null;
     }
 }
+

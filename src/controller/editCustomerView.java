@@ -1,7 +1,7 @@
 package controller;
 
-import dao.CountryDAOImpl;
-import dao.DivisionDAOImpl;
+import data_access.CountryMYSQL;
+import data_access.DivisionMYSQL;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,7 +39,7 @@ public class editCustomerView implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Customer customer = customerManagementView.tempCustomer;
+        Customer customer = customerView.tempCustomer;
         customerIdTextField.setText(String.valueOf(customer.getCustomerId()));
         nameTextField.setText(customer.getCustomerName());
         addressTextField.setText(customer.getAddress());
@@ -48,16 +48,15 @@ public class editCustomerView implements Initializable {
 
 
         try {
-            CountryDAOImpl countryDAO = new CountryDAOImpl();
-            ObservableList allCountries = countryDAO.findAll();
+            ObservableList allCountries = CountryMYSQL.findAll();
             countryComboBox.setItems(allCountries);
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         try {
-            DivisionDAOImpl divisionDAO = new DivisionDAOImpl();
-            ObservableList allDivisions = divisionDAO.findAll();
+
+            ObservableList allDivisions = DivisionMYSQL.findAll();
             stateProvinceComboBox.setItems(allDivisions);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,7 +65,7 @@ public class editCustomerView implements Initializable {
     }
 
     public void returnToCustomerManagementView() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerManagementView.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerView.fxml")));
         Stage stage = (Stage) customerIdTextField.getScene().getWindow();
         Scene scene = new Scene(root, 540, 400);
         stage.setTitle("Customer Management");

@@ -1,6 +1,6 @@
 package controller;
 
-import dao.CustomerDAOImpl;
+import data_access.CustomerMSQL;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +19,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class customerManagementView implements Initializable {
+public class customerView implements Initializable {
     public static Customer tempCustomer;
     @FXML
     public TableView<Customer> allCustomersTableView;
@@ -40,8 +40,7 @@ public class customerManagementView implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         try{
-            CustomerDAOImpl customerDAO = new CustomerDAOImpl();
-            ObservableList<Customer> list = customerDAO.findAll();
+            ObservableList<Customer> list = CustomerMSQL.findAll();
             allCustomersTableView.setItems(list);
         } catch (Exception e){
             System.out.println(e.getMessage());
@@ -88,7 +87,7 @@ public class customerManagementView implements Initializable {
     }
     /** This event handler is for the cancel button. */
     public void cancelButtonClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/homeView.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/appoinmentView.fxml")));
         Stage stage = (Stage) allCustomersTableView.getScene().getWindow();
         Scene scene = new Scene(root, 1020, 475);
         stage.setTitle("Scheduler v1.0");

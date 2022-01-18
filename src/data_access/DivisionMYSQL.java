@@ -1,7 +1,5 @@
-package dao;
+package data_access;
 
-import Util.DBQuery;
-import Util.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Division;
@@ -11,10 +9,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DivisionDAOImpl implements DivisionDAO {
-    ObservableList<Division> allDivisions = FXCollections.observableArrayList();
-    @Override
-    public ObservableList<Division> findAll() throws SQLException {
+public class DivisionMYSQL {
+    public static ObservableList<Division> allDivisions = FXCollections.observableArrayList();
+
+    public static ObservableList<Division> findAll() throws SQLException {
+        allDivisions.clear();
         String selectStatement = "SELECT * FROM first_level_divisions";
         Connection connection = JDBC.connection;
         DBQuery.setPreparedStatement(connection, selectStatement);
@@ -28,23 +27,23 @@ public class DivisionDAOImpl implements DivisionDAO {
         return allDivisions;
     }
 
-    @Override
-    public Division findById(int id) {
+
+    public static Division findById(int id) {
         return null;
     }
 
-    @Override
-    public Boolean create() {
+
+    public static Boolean create() {
         return null;
     }
 
-    @Override
-    public Boolean update() {
+
+    public static Boolean update() {
         return null;
     }
 
-    @Override
-    public Boolean delete() {
+
+    public static Boolean delete() {
         return null;
     }
 }

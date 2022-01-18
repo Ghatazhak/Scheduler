@@ -1,6 +1,6 @@
 package controller;
 
-import dao.UserDAOImpl;
+import data_access.UserMYSQL;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 
 /** The controller for loginView. */
 public class loginView implements Initializable {
-    String retrievedPassword;
+
     @FXML
     public TextField usernameTextField;
     @FXML
@@ -59,17 +59,17 @@ public class loginView implements Initializable {
     }
 /** Event handler for login button. */
     public void loginButtonPressed(ActionEvent actionEvent) throws IOException, SQLException {
-
+        String retrievedPassword = null;
         try{
-            UserDAOImpl userDAO = new UserDAOImpl();
-            User user = userDAO.findByUsername(usernameTextField.getText());
+
+            User user = UserMYSQL.findByUsername(usernameTextField.getText());
             retrievedPassword = user.getPassword();
         } catch (Exception e){
            System.out.println(e.getMessage());
         }
 
         if(passwordTextField.getText().equals(retrievedPassword)){
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/homeView.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/appoinmentView.fxml")));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 1020, 475);
             stage.setTitle("Scheduler v1.0 Appointments");
