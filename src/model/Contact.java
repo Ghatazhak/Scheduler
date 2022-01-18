@@ -24,4 +24,8 @@ public class Contact {
     public void setContactId(int contactId) {
         this.contactId = contactId;
     }
+    @Override
+    public String toString(){
+        return contactName;
+    }
 }

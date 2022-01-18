@@ -1,5 +1,8 @@
 package controller;
 
+import data_access.ContactMYSQL;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +21,8 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class editAppointmentView implements Initializable {
+    ObservableList allContacts = FXCollections.observableArrayList();
+
     @FXML
     public TextField appointmentIdTextField;
     @FXML
@@ -39,15 +44,13 @@ public class editAppointmentView implements Initializable {
     @FXML
     public DatePicker endDateDP;
     @FXML
-    public TextField startTimeTextField;
+    public ComboBox<String> startHourCB;
     @FXML
-    public TextField endTimeTextField;
-    public DatePicker startDateDp;
-    public DatePicker endDateDp;
-    public ComboBox startHourCB;
-    public ComboBox endMinuteCB;
-    public ComboBox endHourCB;
-    public ComboBox startMinuteCB;
+    public ComboBox<String> endMinuteCB;
+    @FXML
+    public ComboBox<String> endHourCB;
+    @FXML
+    public ComboBox<String> startMinuteCB;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -56,12 +59,16 @@ public class editAppointmentView implements Initializable {
         titleTextField.setText(appointment.getTitle());
         descriptionTextField.setText(appointment.getDescription());
         locationTextField.setText(appointment.getLocation());
-        //contactComboBox
-        //typeComboBox
+
+
+
+        contactComboBox.setItems(allContacts = ContactMYSQL.findAll());
+
+
+
         startDateDP.setValue(appointment.getStartDateTime().toLocalDate());
         endDateDP.setValue(appointment.getStartDateTime().toLocalDate());
-        startTimeTextField.setText(appointment.getStartDateTime().toLocalTime().toString());
-        endTimeTextField.setText(appointment.getStartDateTime().toLocalTime().toString());
+
         customerIdTextField.setText(String.valueOf(appointment.getCustomerId()));
         userIdTextField.setText(String.valueOf(appointment.getUserId()));
     }

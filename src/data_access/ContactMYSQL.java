@@ -13,19 +13,25 @@ public class ContactMYSQL {
     private static ObservableList<Contact> allContacts = FXCollections.observableArrayList();
 
 
-    public static ObservableList<Contact> findAll() throws SQLException {
+    public static ObservableList<Contact> findAll()  {
         allContacts.clear();
         String selectStatement = "SELECT * FROM contacts";
         Connection connection = JDBC.connection;
-        DBQuery.setPreparedStatement(connection, selectStatement);
-        PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
-        preparedStatement.execute();
-        ResultSet resultSet = preparedStatement.getResultSet();
 
-        while (resultSet.next()) {
-            allContacts.add(new Contact(resultSet.getInt("Contact_ID"), resultSet.getString("Contact_Name")));
+        try {
+            DBQuery.setPreparedStatement(connection, selectStatement);
+            PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
+            preparedStatement.execute();
+            ResultSet resultSet = preparedStatement.getResultSet();
+
+            while (resultSet.next()) {
+                allContacts.add(new Contact(resultSet.getInt("Contact_ID"), resultSet.getString("Contact_Name")));
+            }
+            return allContacts;
+        } catch (SQLException e){
+            e.printStackTrace();
         }
-        return allContacts;
+        return null;
     }
 
 

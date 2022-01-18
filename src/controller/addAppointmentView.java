@@ -36,10 +36,10 @@ public class addAppointmentView implements Initializable {
     ObservableList<String> endHours = FXCollections.observableArrayList();
     ObservableList<String> endMinutes = FXCollections.observableArrayList();
     ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
-    ObservableList<Integer> allCustomerId = FXCollections.observableArrayList();
+    //ObservableList<Integer> allCustomerId = FXCollections.observableArrayList();
     ObservableList<String> allTypes = FXCollections.observableArrayList();
     ObservableList<Contact> allContacts = FXCollections.observableArrayList();
-    ObservableList<String> allContactsName = FXCollections.observableArrayList();
+    //ObservableList<String> allContactsName = FXCollections.observableArrayList();
 
     @FXML
     public TextField appointmentIdTextField;
@@ -50,11 +50,11 @@ public class addAppointmentView implements Initializable {
     @FXML
     public TextField locationTextField;
     @FXML
-    public ComboBox<String> contactComboBox;
+    public ComboBox<Contact> contactComboBox;
     @FXML
     public ComboBox<String> typeComboBox;
     @FXML
-    public ComboBox<Integer> customerIdCB;
+    public ComboBox<Customer> customerIdCB;
     @FXML
     public TextField userIdTextField;
     @FXML
@@ -72,7 +72,7 @@ public class addAppointmentView implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        allTypes.addAll("InPerson","Remote");
+        allTypes.addAll("InPerson", "Remote");
         typeComboBox.setItems(allTypes);
 
         startHours.addAll("00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11",
@@ -86,26 +86,16 @@ public class addAppointmentView implements Initializable {
         endMinutes.addAll("00", "15", "30", "45");
         endHourCB.setItems(endHours);
         endMinuteCB.setItems(endMinutes);
-        try {
-            allCustomers = CustomerMSQL.findAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
-        for (Customer c: allCustomers){
-            allCustomerId.add(c.getCustomerId());
-        }
-        customerIdCB.setItems(allCustomerId);
+        allCustomers = CustomerMSQL.findAll();
 
-        try {
-            allContacts = ContactMYSQL.findAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        for (Contact c: allContacts){
-            allContactsName.add(c.getContactName());
-        }
-       contactComboBox.setItems(allContactsName);
+        customerIdCB.setItems(allCustomers);
+//        for (Customer c: allCustomers){
+//            allCustomerId.add(c.getCustomerId());
+//        }
+//        customerIdCB.setItems(allCustomerId);
+
+        contactComboBox.setItems(allContacts = ContactMYSQL.findAll());
     }
 
    public void returnToHomeView() throws IOException {
@@ -134,12 +124,6 @@ public class addAppointmentView implements Initializable {
 
 
             if (UserMYSQL.userExist(Integer.parseInt(userIdTextField.getText()))) {
-                int contactID = 0;
-                for (Contact c : allContacts) {
-                    if (c.getContactName().equals(contactComboBox.getValue())) {
-                        contactID = c.getContactId();
-                    }
-                }
 
                 LocalDate startDateDpValue = startDateDp.getValue();
                 String startHour = startHourCB.getValue();
@@ -155,7 +139,7 @@ public class addAppointmentView implements Initializable {
                 ZonedDateTime endLocalZonedDateTime = ZonedDateTime.of(endLocalDateTime, ZoneId.systemDefault());
                 ZonedDateTime utcEndZonedDateTime = endLocalZonedDateTime.withZoneSameInstant(ZoneOffset.UTC);
 
-                Appointment newAppointment = new Appointment(1, titleTextField.getText(), descriptionTextField.getText(), locationTextField.getText(), typeComboBox.getValue(), startLocalDateTime, endLocalDateTime, customerIdCB.getValue(), Integer.parseInt(userIdTextField.getText()), contactID);
+                Appointment newAppointment = new Appointment(1, titleTextField.getText(), descriptionTextField.getText(), locationTextField.getText(), typeComboBox.getValue(), startLocalDateTime, endLocalDateTime, customerIdCB.getValue().getCustomerId(), Integer.parseInt(userIdTextField.getText()), contactComboBox.getValue().getContactId());
                 AppointmentMSQL.create(newAppointment);
                 returnToHomeView();
 

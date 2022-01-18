@@ -27,7 +27,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Customers">
             <items>
-                  <MenuItem mnemonicParsing="false" onAction="#customerManagementMenuClicked" text="Edit Customers" />
+                  <MenuItem mnemonicParsing="false" onAction="#customerEditclicked" text="Edit Customers" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Reports">

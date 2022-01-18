@@ -16,6 +16,7 @@ import model.Appointment;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -36,9 +37,9 @@ public class appointmentView implements Initializable {
     @FXML
     public TableColumn<Appointment, String> typeCol;
     @FXML
-    public TableColumn<Appointment, String> startDateTimeCol;
+    public TableColumn<Appointment, LocalDateTime> startDateTimeCol;
     @FXML
-    public TableColumn<Appointment, String> endDateTimeCol;
+    public TableColumn<Appointment, LocalDateTime> endDateTimeCol;
     @FXML
     public TableColumn<Appointment, String> customerIDCol;
     @FXML
@@ -119,7 +120,7 @@ public class appointmentView implements Initializable {
     public void deleteAppointmentMenuClicked(ActionEvent actionEvent) {
     }
     /** This is an event handler for customer management. */
-    public void customerManagementMenuClicked(ActionEvent actionEvent) throws IOException {
+    public void customerEditclicked(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerView.fxml")));
         // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();

@@ -72,11 +72,11 @@
       <TextField fx:id="userIdTextField" layoutX="139.0" layoutY="332.0" prefHeight="25.0" prefWidth="232.0" />
       <Button focusTraversable="false" layoutX="140.0" layoutY="369.0" mnemonicParsing="false" onAction="#saveButtonClicked" prefHeight="35.0" prefWidth="68.0" text="Save" />
       <Button focusTraversable="false" layoutX="239.0" layoutY="369.0" mnemonicParsing="false" onAction="#cancelButtonClicked" prefHeight="35.0" prefWidth="68.0" text="Cancel" />
-      <DatePicker fx:id="startDateDp" layoutX="137.0" layoutY="226.0" prefHeight="25.0" prefWidth="111.0" />
-      <DatePicker fx:id="endDateDp" layoutX="137.0" layoutY="261.0" prefHeight="25.0" prefWidth="111.0" />
-      <ComboBox fx:id="startHourCB" layoutX="252.0" layoutY="226.0" prefHeight="25.0" prefWidth="57.0" />
-      <ComboBox fx:id="startMinuteCB" layoutX="311.0" layoutY="226.0" prefHeight="25.0" prefWidth="57.0" />
-      <ComboBox fx:id="endHourCB" layoutX="252.0" layoutY="261.0" prefHeight="25.0" prefWidth="57.0" />
-      <ComboBox fx:id="endMinuteCB" layoutX="311.0" layoutY="261.0" prefHeight="25.0" prefWidth="57.0" />
+      <DatePicker fx:id="startDateDP" layoutX="137.0" layoutY="227.0" prefHeight="25.0" prefWidth="113.0" />
+      <DatePicker fx:id="endDateDP" layoutX="137.0" layoutY="262.0" prefHeight="25.0" prefWidth="113.0" />
+      <ComboBox fx:id="startHourCB" layoutX="252.0" layoutY="227.0" prefHeight="25.0" prefWidth="57.0" />
+      <ComboBox fx:id="startMinuteCB" layoutX="311.0" layoutY="227.0" prefHeight="25.0" prefWidth="57.0" />
+      <ComboBox fx:id="endHourCB" layoutX="252.0" layoutY="262.0" prefHeight="25.0" prefWidth="57.0" />
+      <ComboBox fx:id="endMinuteCB" layoutX="311.0" layoutY="262.0" prefHeight="25.0" prefWidth="57.0" />
    </children>
 </AnchorPane>

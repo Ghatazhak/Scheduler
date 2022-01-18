@@ -13,19 +13,25 @@ public class CustomerMSQL {
     private static ObservableList<Customer> allCustomerList = FXCollections.observableArrayList();
 
 
-    public static ObservableList<Customer> findAll() throws SQLException {
+    public static ObservableList<Customer> findAll() {
         allCustomerList.clear();
-        String selectStatement = "SELECT * FROM customers";
-        Connection connection = JDBC.connection;
-        DBQuery.setPreparedStatement(connection, selectStatement);
-        PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
-        preparedStatement.execute();
-        ResultSet resultSet = preparedStatement.getResultSet();
 
-        while (resultSet.next()) {
-            allCustomerList.add(new Customer(resultSet.getInt("Customer_ID"), resultSet.getString("Customer_Name"), resultSet.getString("Address"), resultSet.getString("Phone"), resultSet.getString("Postal_Code"), resultSet.getInt("Division_ID")));
+        try {
+            String selectStatement = "SELECT * FROM customers";
+            Connection connection = JDBC.connection;
+            DBQuery.setPreparedStatement(connection, selectStatement);
+            PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
+            preparedStatement.execute();
+            ResultSet resultSet = preparedStatement.getResultSet();
+
+            while (resultSet.next()) {
+                allCustomerList.add(new Customer(resultSet.getInt("Customer_ID"), resultSet.getString("Customer_Name"), resultSet.getString("Address"), resultSet.getString("Phone"), resultSet.getString("Postal_Code"), resultSet.getInt("Division_ID")));
+            }
+            return allCustomerList;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return allCustomerList;
+        return null;
     }
 
 
