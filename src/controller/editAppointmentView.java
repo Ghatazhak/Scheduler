@@ -42,6 +42,12 @@ public class editAppointmentView implements Initializable {
     public TextField startTimeTextField;
     @FXML
     public TextField endTimeTextField;
+    public DatePicker startDateDp;
+    public DatePicker endDateDp;
+    public ComboBox startHourCB;
+    public ComboBox endMinuteCB;
+    public ComboBox endHourCB;
+    public ComboBox startMinuteCB;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

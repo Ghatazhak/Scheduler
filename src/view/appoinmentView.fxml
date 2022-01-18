@@ -18,7 +18,7 @@
               <MenuItem mnemonicParsing="false" onAction="#logOffMenuClicked" text="Log off" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Schedule">
+          <Menu mnemonicParsing="false" text="Appointments">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#addAppointmentMenuClicked" text="Add Appointment" />
                   <MenuItem mnemonicParsing="false" onAction="#editAppointmentMenuClicked" text="Edit Appointment" />

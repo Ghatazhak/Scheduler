@@ -93,7 +93,7 @@ public class appointmentView implements Initializable {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/addAppointmentView.fxml")));
         // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
-        Scene scene = new Scene(root, 333, 429);
+        Scene scene = new Scene(root, 380, 430);
         stage.setTitle("Add Appointment");
         stage.setScene(scene);
         stage.show();
@@ -110,7 +110,7 @@ public class appointmentView implements Initializable {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/editAppointmentView.fxml")));
         // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
-        Scene scene = new Scene(root, 333, 429);
+        Scene scene = new Scene(root, 380, 430);
         stage.setTitle("Edit Appointment");
         stage.setScene(scene);
         stage.show();

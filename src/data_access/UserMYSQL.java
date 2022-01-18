@@ -45,7 +45,27 @@ public class UserMYSQL {
         }
         return null;
     }
+    public static Boolean userExist(int userId) throws SQLException {
+        allUsers.clear();
+        String sqlStatement = "SELECT * FROM users";
+        Connection connection = JDBC.connection;
+        DBQuery.setPreparedStatement(connection,sqlStatement);
+        PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
+        preparedStatement.execute();
+        ResultSet rs = preparedStatement.getResultSet();
 
+        while(rs.next()){
+            User user = new User(rs.getInt("User_ID"),rs.getString("User_Name"),rs.getString("Password"));
+            allUsers.add(user);
+        }
+
+        for(User u: allUsers){
+            if(u.getUserId() == userId){
+                return true;
+            }
+        }
+        return false;
+    }
 
     public static Boolean create() {
         return null;
