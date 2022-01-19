@@ -1,6 +1,7 @@
 package controller;
 
 import data_access.CountryMYSQL;
+import data_access.CustomerMSQL;
 import data_access.DivisionMYSQL;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -84,9 +86,22 @@ public class editCustomerView implements Initializable {
 
     /** This is the event handler for save button on add customer. */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException {
-
-        returnToCustomerManagementView();
+        if(nameTextField.getText().isEmpty() || addressTextField.getText().isEmpty() || postalCodeTextField.getText().isEmpty() || phoneNumberTextField.getText().isEmpty() || countryCB.getValue() == null || divisionCB.getValue() == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Missing Data!");
+            alert.setContentText("Missing Data in one or more fields");
+            alert.setGraphic(null);
+            Stage stage = (Stage) customerIdTextField.getScene().getWindow();
+            alert.initOwner(stage);
+            alert.showAndWait();
+        } else {
+            Customer customer = new Customer(Integer.parseInt(customerIdTextField.getText()),nameTextField.getText(), addressTextField.getText(),phoneNumberTextField.getText(), postalCodeTextField.getText(), divisionCB.getValue().getDivisionId());
+            CustomerMSQL.update(customer);
+            returnToCustomerManagementView();
+        }
     }
+
     /** This is the even handler for cancel button on add customer. */
     public void CancelButtonClicked(ActionEvent actionEvent) throws IOException {
         returnToCustomerManagementView();

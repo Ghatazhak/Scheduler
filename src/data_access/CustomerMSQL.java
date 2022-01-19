@@ -55,8 +55,25 @@ public class CustomerMSQL {
         }
     }
 
-    public static Boolean update() {
-        return null;
+    public static Boolean update(Customer customer) {
+
+        try{
+            String sqlStatement = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
+            Connection connection = JDBC.connection;
+            DBQuery.setPreparedStatement(connection,sqlStatement);
+            PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
+            preparedStatement.setString(1,customer.getCustomerName());
+            preparedStatement.setString(2,customer.getAddress());
+            preparedStatement.setString(3,customer.getPostalCode());
+            preparedStatement.setString(4,customer.getPhone());
+            preparedStatement.setInt(5,customer.getDivisionId());
+            preparedStatement.setInt(6,customer.getCustomerId());
+            preparedStatement.execute();
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
 
