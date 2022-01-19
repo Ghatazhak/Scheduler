@@ -59,16 +59,9 @@ public class editAppointmentView implements Initializable {
         titleTextField.setText(appointment.getTitle());
         descriptionTextField.setText(appointment.getDescription());
         locationTextField.setText(appointment.getLocation());
-
-
-
         contactComboBox.setItems(allContacts = ContactMYSQL.findAll());
-
-
-
         startDateDP.setValue(appointment.getStartDateTime().toLocalDate());
         endDateDP.setValue(appointment.getStartDateTime().toLocalDate());
-
         customerIdTextField.setText(String.valueOf(appointment.getCustomerId()));
         userIdTextField.setText(String.valueOf(appointment.getUserId()));
     }
@@ -84,6 +77,7 @@ public class editAppointmentView implements Initializable {
     }
 /** This is the event handler for the save button. */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException {
+
         returnToHomeView();
     }
 /** This is the event handler for the cancel button. */
