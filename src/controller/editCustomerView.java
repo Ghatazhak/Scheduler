@@ -58,7 +58,9 @@ public class editCustomerView implements Initializable {
         countryCB.setItems(allCountries);
 
         allDivisions = DivisionMYSQL.findAll();
+        divisionCB.setItems(allDivisions);
         divisionCB.setValue(DivisionMYSQL.findById(customer.getDivisionId()));
+
 
         for(Country c :allCountries ){
             if(c.getCountryId() == divisionCB.getValue().getCountryId()){
@@ -66,9 +68,7 @@ public class editCustomerView implements Initializable {
             }
         }
 
-
-        //divisionCB.setItems(filteredBySelectedCountryDivisions);
-        //divisionCB.setDisable(false);
+        divisionCB.setDisable(false);
 
 
 
@@ -94,7 +94,7 @@ public class editCustomerView implements Initializable {
 
     public void countryCBClicked(ActionEvent actionEvent) {
         Country country =  countryCB.getSelectionModel().getSelectedItem();
-        allDivisions = DivisionMYSQL.findAll();
+       // allDivisions = DivisionMYSQL.findAll();
         filteredBySelectedCountryDivisions.clear();
 
         for(Division d: allDivisions){

@@ -44,11 +44,13 @@ public class DivisionMYSQL {
             ResultSet rs = preparedStatement.getResultSet();
 
             while (rs.next()){
-                Division division = new Division(rs.)
+                Division division = new Division(rs.getInt("Division_ID"),rs.getString("Division"),rs.getInt("Country_ID"));
+                return  division;
             }
         } catch (SQLException e){
             e.printStackTrace();
         }
+        return null;
     }
 
 
