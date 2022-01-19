@@ -93,7 +93,7 @@ public class editCustomerView implements Initializable {
             alert.setContentText("Missing Data in one or more fields");
             alert.setGraphic(null);
             Stage stage = (Stage) customerIdTextField.getScene().getWindow();
-            alert.initOwner(stage);
+            //alert.initOwner(stage);
             alert.showAndWait();
         } else {
             Customer customer = new Customer(Integer.parseInt(customerIdTextField.getText()),nameTextField.getText(), addressTextField.getText(),phoneNumberTextField.getText(), postalCodeTextField.getText(), divisionCB.getValue().getDivisionId());

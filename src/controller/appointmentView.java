@@ -14,7 +14,9 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.Appointment;
 
 import java.io.IOException;
@@ -148,8 +150,9 @@ public class appointmentView implements Initializable {
     /** This is an event handler for customer management. */
     public void customerEditclicked(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerView.fxml")));
-        // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
-        Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
         Scene scene = new Scene(root, 540, 400);
         stage.setTitle("Customer Management");
         stage.setScene(scene);

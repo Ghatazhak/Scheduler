@@ -86,7 +86,13 @@ public class addCustomerView implements Initializable {
     }
 
     public void countryCBClicked(ActionEvent actionEvent) {
-        Country country =  countryCB.getSelectionModel().getSelectedItem();
+
+        Country country = countryCB.getSelectionModel().getSelectedItem();
+
+        if(country == null){
+            return;
+        }
+
         allDivisions = DivisionMYSQL.findAll();
         filteredBySelectedCountryDivisions.clear();
 
