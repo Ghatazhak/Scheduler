@@ -2,6 +2,7 @@ package controller;
 
 import data_access.CountryMYSQL;
 import data_access.DivisionMYSQL;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,14 +13,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.Country;
+import model.Division;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class addCustomerView implements Initializable {
+    ObservableList allCountries = FXCollections.observableArrayList();
+    ObservableList allDivisions = FXCollections.observableArrayList();
+    //ObservableList allCountries = FXCollections.observableArrayList();
     @FXML
     public TextField customerIdTextField;
     @FXML
@@ -31,27 +36,19 @@ public class addCustomerView implements Initializable {
     @FXML
     public TextField phoneNumberTextField;
     @FXML
-    public ComboBox<String> countryComboBox;
+    public ComboBox<Country> countryCB;
     @FXML
-    public ComboBox<String> stateProvinceComboBox;
+    public ComboBox<Division> divisionComboBox;
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        try {
-            ObservableList allCountries = CountryMYSQL.findAll();
-            countryComboBox.setItems(allCountries);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            ObservableList allDivisions = DivisionMYSQL.findAll();
-            stateProvinceComboBox.setItems(allDivisions);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
+            allCountries = CountryMYSQL.findAll();
+            countryCB.setItems(allCountries);
+            allDivisions = DivisionMYSQL.findAll();
+            divisionComboBox.setItems(allDivisions);
 
     }
 
@@ -72,6 +69,27 @@ public class addCustomerView implements Initializable {
     }
     /** This is the event handler for save button on add customer. */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException {
+
+
+
+        //Customer customer = new Customer(Integer.parseInt(customerIdTextField.getText()),nameTextField.getText(), addressTextField.getText(),phoneNumberTextField.getText(), postalCodeTextField.getText(), divisionComboBox.getValue().getDivisionId());
+        //CustomerMSQL.create();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         returnToCustomerManagementView();
     }
     /** This is the even handler for cancel button on add customer. */

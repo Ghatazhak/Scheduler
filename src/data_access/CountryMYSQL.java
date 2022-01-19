@@ -12,20 +12,25 @@ import java.sql.SQLException;
 public class CountryMYSQL {
     public static ObservableList<Country> allCountries = FXCollections.observableArrayList();
 
-    public static ObservableList<Country> findAll() throws SQLException {
+    public static ObservableList<Country> findAll()  {
         allCountries.clear();
-        String selectStatement = "SELECT * FROM countries";
-        Connection connection = JDBC.connection;
-        DBQuery.setPreparedStatement(connection, selectStatement);
-        PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
-        preparedStatement.execute();
-        ResultSet resultSet = preparedStatement.getResultSet();
+        try {
+            String selectStatement = "SELECT * FROM countries";
+            Connection connection = JDBC.connection;
+            DBQuery.setPreparedStatement(connection, selectStatement);
+            PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
+            preparedStatement.execute();
+            ResultSet resultSet = preparedStatement.getResultSet();
 
-        while (resultSet.next()) {
-            allCountries.add(new Country(resultSet.getInt("Country_ID"), resultSet.getString("Country")));
+            while (resultSet.next()) {
+                allCountries.add(new Country(resultSet.getInt("Country_ID"), resultSet.getString("Country")));
+            }
+
+        }catch (SQLException e) {
+            e.printStackTrace();
         }
-        return allCountries;
 
+        return allCountries;
     }
 
 

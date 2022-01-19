@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Customer;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class CustomerMSQL {
     private static ObservableList<Customer> allCustomerList = FXCollections.observableArrayList();
@@ -27,11 +24,11 @@ public class CustomerMSQL {
             while (resultSet.next()) {
                 allCustomerList.add(new Customer(resultSet.getInt("Customer_ID"), resultSet.getString("Customer_Name"), resultSet.getString("Address"), resultSet.getString("Phone"), resultSet.getString("Postal_Code"), resultSet.getInt("Division_ID")));
             }
-            return allCustomerList;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return allCustomerList;
     }
 
 
@@ -40,8 +37,22 @@ public class CustomerMSQL {
     }
 
 
-    public static Boolean create() {
-        return null;
+    public static void create(Customer customer) {
+
+        try{
+            String sqlStatement = "INSERT INTO customers (Customer_Name,Address,Postal_Code,Phone,Division_ID) VALUES(?,?,?,?,?)";
+            Connection connection = JDBC.connection;
+            DBQuery.setPreparedStatement(connection,sqlStatement);
+            PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
+            preparedStatement.setString(1,customer.getCustomerName());
+            preparedStatement.setString(2,customer.getAddress());
+            preparedStatement.setString(3,customer.getPostalCode());
+            preparedStatement.setString(4,customer.getPhone());
+            preparedStatement.setInt(5, customer.getDivisionId());
+            preparedStatement.execute();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     public static Boolean update() {

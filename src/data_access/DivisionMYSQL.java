@@ -12,17 +12,21 @@ import java.sql.SQLException;
 public class DivisionMYSQL {
     public static ObservableList<Division> allDivisions = FXCollections.observableArrayList();
 
-    public static ObservableList<Division> findAll() throws SQLException {
+    public static ObservableList<Division> findAll()  {
         allDivisions.clear();
-        String selectStatement = "SELECT * FROM first_level_divisions";
-        Connection connection = JDBC.connection;
-        DBQuery.setPreparedStatement(connection, selectStatement);
-        PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
-        preparedStatement.execute();
-        ResultSet resultSet = preparedStatement.getResultSet();
+        try {
+            String selectStatement = "SELECT * FROM first_level_divisions";
+            Connection connection = JDBC.connection;
+            DBQuery.setPreparedStatement(connection, selectStatement);
+            PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
+            preparedStatement.execute();
+            ResultSet resultSet = preparedStatement.getResultSet();
 
-        while (resultSet.next()) {
-            allDivisions.add(new Division(resultSet.getInt("Division_ID"), resultSet.getString("Division"), resultSet.getInt("Country_ID")));
+            while (resultSet.next()) {
+                allDivisions.add(new Division(resultSet.getInt("Division_ID"), resultSet.getString("Division"), resultSet.getInt("Country_ID")));
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
         }
         return allDivisions;
     }
