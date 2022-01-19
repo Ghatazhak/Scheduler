@@ -1,6 +1,5 @@
 package controller;
 
-import data_access.AppointmentMSQL;
 import data_access.CustomerMSQL;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +15,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import model.Appointment;
 import model.Customer;
 
 import java.io.IOException;
@@ -102,7 +100,7 @@ public class customerView implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             CustomerMSQL.delete(tempCustomer);
-            ObservableList<Appointment> allAppointments = AppointmentMSQL.findAll();
+            allCustomers = CustomerMSQL.findAll();
             allCustomersTableView.setItems(allCustomers);
         }
 

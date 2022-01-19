@@ -23,6 +23,7 @@ public class DivisionMYSQL {
             ResultSet resultSet = preparedStatement.getResultSet();
 
             while (resultSet.next()) {
+
                 allDivisions.add(new Division(resultSet.getInt("Division_ID"), resultSet.getString("Division"), resultSet.getInt("Country_ID")));
             }
         } catch (SQLException e){

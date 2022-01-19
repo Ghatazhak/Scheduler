@@ -1,6 +1,7 @@
 package controller;
 
 import data_access.CountryMYSQL;
+import data_access.CustomerMSQL;
 import data_access.DivisionMYSQL;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +15,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Country;
+import model.Customer;
 import model.Division;
 
 import java.io.IOException;
@@ -22,9 +24,9 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class addCustomerView implements Initializable {
-    ObservableList allCountries = FXCollections.observableArrayList();
-    ObservableList allDivisions = FXCollections.observableArrayList();
-    //ObservableList allCountries = FXCollections.observableArrayList();
+    ObservableList<Country> allCountries = FXCollections.observableArrayList();
+    ObservableList<Division> allDivisions = FXCollections.observableArrayList();
+
     @FXML
     public TextField customerIdTextField;
     @FXML
@@ -37,8 +39,8 @@ public class addCustomerView implements Initializable {
     public TextField phoneNumberTextField;
     @FXML
     public ComboBox<Country> countryCB;
-    @FXML
-    public ComboBox<Division> divisionComboBox;
+
+    public ComboBox<Division> divisionCB;
 
 
 
@@ -48,7 +50,7 @@ public class addCustomerView implements Initializable {
             allCountries = CountryMYSQL.findAll();
             countryCB.setItems(allCountries);
             allDivisions = DivisionMYSQL.findAll();
-            divisionComboBox.setItems(allDivisions);
+            divisionCB.setItems(allDivisions);
 
     }
 
@@ -70,25 +72,8 @@ public class addCustomerView implements Initializable {
     /** This is the event handler for save button on add customer. */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException {
 
-
-
-        //Customer customer = new Customer(Integer.parseInt(customerIdTextField.getText()),nameTextField.getText(), addressTextField.getText(),phoneNumberTextField.getText(), postalCodeTextField.getText(), divisionComboBox.getValue().getDivisionId());
-        //CustomerMSQL.create();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        Customer customer = new Customer(0,nameTextField.getText(), addressTextField.getText(),phoneNumberTextField.getText(), postalCodeTextField.getText(), divisionCB.getValue().getDivisionId());
+        CustomerMSQL.create(customer);
 
         returnToCustomerManagementView();
     }

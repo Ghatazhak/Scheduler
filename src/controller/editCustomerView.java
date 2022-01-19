@@ -2,6 +2,7 @@ package controller;
 
 import data_access.CountryMYSQL;
 import data_access.DivisionMYSQL;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,14 +15,22 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Country;
 import model.Customer;
+import model.Division;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class editCustomerView implements Initializable {
+    ObservableList<Country> allCountries = FXCollections.observableArrayList();
+    ObservableList<Division> allDivisions = FXCollections.observableArrayList();
+
+
+
+
+
+
     @FXML
     public TextField customerIdTextField;
     @FXML
@@ -33,9 +42,9 @@ public class editCustomerView implements Initializable {
     @FXML
     public TextField phoneNumberTextField;
     @FXML
-    public ComboBox<Country> countryComboBox;
+    public ComboBox<Country> countryCB;
     @FXML
-    public ComboBox<String> stateProvinceComboBox;
+    public ComboBox<Division> divisionCB;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -45,23 +54,10 @@ public class editCustomerView implements Initializable {
         addressTextField.setText(customer.getAddress());
         postalCodeTextField.setText(customer.getPostalCode());
         phoneNumberTextField.setText(String.valueOf(customer.getPhone()));
-
-
-        try {
-            ObservableList allCountries = CountryMYSQL.findAll();
-            countryComboBox.setItems(allCountries);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        try {
-
-            ObservableList allDivisions = DivisionMYSQL.findAll();
-            stateProvinceComboBox.setItems(allDivisions);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
+        allCountries = CountryMYSQL.findAll();
+        countryCB.setItems(allCountries);
+        allDivisions = DivisionMYSQL.findAll();
+        divisionCB.setItems(allDivisions);
     }
 
     public void returnToCustomerManagementView() throws IOException {
