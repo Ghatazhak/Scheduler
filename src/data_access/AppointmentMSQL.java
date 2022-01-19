@@ -10,18 +10,21 @@ public class AppointmentMSQL {
 
         private static ObservableList<Appointment> appointmentsList = FXCollections.observableArrayList();
 
-        public static ObservableList<Appointment> findAll() throws SQLException {
+        public static ObservableList<Appointment> findAll()  {
             appointmentsList.clear();
-            //String selectStatement = SELECT appointments.Appointment_ID, appointments.Title, appointments.Description, appointments.Location, appointments.Type, appointments.Start, appointments.End, customers.Customer_Name FROM appointments INNER JOIN customers ON appointments.Customer_ID = customers.Customer_ID;
-            String selectStatement = "SELECT * FROM appointments";
-            Connection connection = JDBC.connection;
-            DBQuery.setPreparedStatement(connection,selectStatement);
-            PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
-            preparedStatement.execute();
-            ResultSet resultSet = preparedStatement.getResultSet();
+            try {
+                String selectStatement = "SELECT * FROM appointments";
+                Connection connection = JDBC.connection;
+                DBQuery.setPreparedStatement(connection, selectStatement);
+                PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
+                preparedStatement.execute();
+                ResultSet resultSet = preparedStatement.getResultSet();
 
-            while(resultSet.next()){
-                appointmentsList.add(new Appointment(resultSet.getInt("Appointment_ID"),resultSet.getString("Title"),resultSet.getString("Description"),resultSet.getString("Location"),resultSet.getString("Type"),(resultSet.getTimestamp("Start").toLocalDateTime()),(resultSet.getTimestamp("End").toLocalDateTime()),resultSet.getInt("Customer_ID"),resultSet.getInt("User_ID"),resultSet.getInt("Contact_ID")));
+                while (resultSet.next()) {
+                    appointmentsList.add(new Appointment(resultSet.getInt("Appointment_ID"), resultSet.getString("Title"), resultSet.getString("Description"), resultSet.getString("Location"), resultSet.getString("Type"), (resultSet.getTimestamp("Start").toLocalDateTime()), (resultSet.getTimestamp("End").toLocalDateTime()), resultSet.getInt("Customer_ID"), resultSet.getInt("User_ID"), resultSet.getInt("Contact_ID")));
+                }
+            } catch (SQLException e){
+                e.printStackTrace();
             }
             return appointmentsList;
         }
@@ -64,7 +67,6 @@ public class AppointmentMSQL {
 
 
         public static Boolean delete(Appointment appointment) {
-            System.out.println("1");
             String sqlStatement = "DELETE FROM appointments WHERE Appointment_ID = (?) ;";
             Connection connection = JDBC.connection;
             try {

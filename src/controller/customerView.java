@@ -1,6 +1,8 @@
 package controller;
 
+import data_access.AppointmentMSQL;
 import data_access.CustomerMSQL;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,18 +10,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Appointment;
 import model.Customer;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class customerView implements Initializable {
+    ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
     public static Customer tempCustomer;
     @FXML
     public TableView<Customer> allCustomersTableView;
@@ -39,12 +46,8 @@ public class customerView implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        try{
-            ObservableList<Customer> list = CustomerMSQL.findAll();
-            allCustomersTableView.setItems(list);
-        } catch (Exception e){
-            System.out.println(e.getMessage());
-        }
+        allCustomers = CustomerMSQL.findAll();
+        allCustomersTableView.setItems(allCustomers);
 
         iDCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         nameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
@@ -52,8 +55,6 @@ public class customerView implements Initializable {
         phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
         postalCodeCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         divisionIdCol.setCellValueFactory(new PropertyValueFactory<>("divisionId"));
-
-
 
     }
     /** This event handler is for the add button. */
@@ -84,6 +85,28 @@ public class customerView implements Initializable {
     }
     /** This event handler is for the delete button. */
     public void deleteButtonClicked(ActionEvent actionEvent) {
+
+        tempCustomer = allCustomersTableView.getSelectionModel().getSelectedItem();
+
+        if (tempCustomer == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No Selection");
+            alert.setContentText("You must have a customer selected to delete.");
+            alert.setGraphic(null);
+            alert.showAndWait();
+            return;
+        }
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Are you sure you want to delete this customer?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            CustomerMSQL.delete(tempCustomer);
+            ObservableList<Appointment> allAppointments = AppointmentMSQL.findAll();
+            allCustomersTableView.setItems(allCustomers);
+        }
+
+
     }
     /** This event handler is for the cancel button. */
     public void cancelButtonClicked(ActionEvent actionEvent) throws IOException {

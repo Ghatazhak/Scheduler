@@ -1,6 +1,7 @@
 package controller;
 
 import data_access.AppointmentMSQL;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -18,10 +21,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class appointmentView implements Initializable {
     public static Appointment tempAppointment;
+    ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
+
     @FXML
     public TableView<Appointment> allAppointmentsTableView;
     @FXML
@@ -48,12 +54,8 @@ public class appointmentView implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        try{
-            ObservableList<Appointment> allAppointments = AppointmentMSQL.findAll();
-            allAppointmentsTableView.setItems(allAppointments);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+        allAppointments = AppointmentMSQL.findAll();
+        allAppointmentsTableView.setItems(allAppointments);
 
         appointmentIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -71,7 +73,6 @@ public class appointmentView implements Initializable {
 /** This is an event handler for log off. */
     public void logOffMenuClicked(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/loginView.fxml")));
-        // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
         Scene scene = new Scene(root, 500, 300);
         stage.setTitle("Scheduler v1.0");
@@ -92,7 +93,6 @@ public class appointmentView implements Initializable {
     public void addAppointmentMenuClicked(ActionEvent actionEvent) throws IOException {
 
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/addAppointmentView.fxml")));
-        // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
         Scene scene = new Scene(root, 380, 430);
         stage.setTitle("Add Appointment");
@@ -104,8 +104,13 @@ public class appointmentView implements Initializable {
 
         tempAppointment = allAppointmentsTableView.getSelectionModel().getSelectedItem();
 
-        if(tempAppointment == null){
-            return;
+        if (tempAppointment == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No Selection");
+            alert.setContentText("You must have an appointment selected to edit.");
+            alert.setGraphic(null);
+            alert.showAndWait();
         }
 
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/editAppointmentView.fxml")));
@@ -118,16 +123,27 @@ public class appointmentView implements Initializable {
     }
     /** This is an event handler for deleting appointments. */
     public void deleteAppointmentMenuClicked(ActionEvent actionEvent) {
-        Appointment appointment = allAppointmentsTableView.getSelectionModel().getSelectedItem();
-        AppointmentMSQL.delete(appointment);
-        try{
-            ObservableList<Appointment> allAppointments = AppointmentMSQL.findAll();
-            allAppointmentsTableView.setItems(allAppointments);
-        } catch (Exception e){
-            e.printStackTrace();
+        tempAppointment = allAppointmentsTableView.getSelectionModel().getSelectedItem();
+        if (tempAppointment == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No Selection");
+            alert.setContentText("You must have an appointment selected to delete.");
+            alert.setGraphic(null);
+            alert.showAndWait();
+            return;
         }
 
-    }
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Are you sure you want to delete this Appointment?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                AppointmentMSQL.delete(tempAppointment);
+                ObservableList<Appointment> allAppointments = AppointmentMSQL.findAll();
+                allAppointmentsTableView.setItems(allAppointments);
+            }
+        }
+
+
     /** This is an event handler for customer management. */
     public void customerEditclicked(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerView.fxml")));

@@ -44,12 +44,27 @@ public class CustomerMSQL {
         return null;
     }
 
-    public Boolean update() {
+    public static Boolean update() {
         return null;
     }
 
 
-    public Boolean delete() {
+    public static Boolean delete(Customer customer) {
+        String sqlStatement = "DELETE FROM customers WHERE Customer_ID = (?) ;";
+        Connection connection = JDBC.connection;
+        try {
+            DBQuery.setPreparedStatement(connection,sqlStatement);
+            PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
+            preparedStatement.setInt(1,customer.getCustomerId());
+            preparedStatement.execute();
+
+            if(preparedStatement.getUpdateCount() > 0){
+                return true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }
