@@ -25,10 +25,7 @@ import java.util.ResourceBundle;
 public class editCustomerView implements Initializable {
     ObservableList<Country> allCountries = FXCollections.observableArrayList();
     ObservableList<Division> allDivisions = FXCollections.observableArrayList();
-
-
-
-
+    ObservableList<Division> filteredBySelectedCountryDivisions = FXCollections.observableArrayList();
 
 
     @FXML
@@ -54,10 +51,27 @@ public class editCustomerView implements Initializable {
         addressTextField.setText(customer.getAddress());
         postalCodeTextField.setText(customer.getPostalCode());
         phoneNumberTextField.setText(String.valueOf(customer.getPhone()));
+
+
+        ;
         allCountries = CountryMYSQL.findAll();
         countryCB.setItems(allCountries);
+
         allDivisions = DivisionMYSQL.findAll();
-        divisionCB.setItems(allDivisions);
+        divisionCB.setValue(DivisionMYSQL.findById(customer.getDivisionId()));
+
+        for(Country c :allCountries ){
+            if(c.getCountryId() == divisionCB.getValue().getCountryId()){
+                countryCB.setValue(c);
+            }
+        }
+
+
+        //divisionCB.setItems(filteredBySelectedCountryDivisions);
+        //divisionCB.setDisable(false);
+
+
+
     }
 
     public void returnToCustomerManagementView() throws IOException {
@@ -69,12 +83,6 @@ public class editCustomerView implements Initializable {
         stage.show();
     }
 
-    /** This is the event handler for country combo box */
-    public void countryComboBoxClicked(ActionEvent actionEvent) {
-    }
-    /**  This is the event handler for State/Province combo box */
-    public void stateProvinceComboBoxClicked(ActionEvent actionEvent) {
-    }
     /** This is the event handler for save button on add customer. */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException {
         returnToCustomerManagementView();
@@ -82,5 +90,18 @@ public class editCustomerView implements Initializable {
     /** This is the even handler for cancel button on add customer. */
     public void CancelButtonClicked(ActionEvent actionEvent) throws IOException {
         returnToCustomerManagementView();
+    }
+
+    public void countryCBClicked(ActionEvent actionEvent) {
+        Country country =  countryCB.getSelectionModel().getSelectedItem();
+        allDivisions = DivisionMYSQL.findAll();
+        filteredBySelectedCountryDivisions.clear();
+
+        for(Division d: allDivisions){
+            if(d.getCountryId() == country.getCountryId())
+                filteredBySelectedCountryDivisions.add(d);
+        }
+        divisionCB.setItems(filteredBySelectedCountryDivisions);
+        divisionCB.setDisable(false);
     }
 }

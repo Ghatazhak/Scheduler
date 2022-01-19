@@ -34,7 +34,21 @@ public class DivisionMYSQL {
 
 
     public static Division findById(int id) {
-        return null;
+        try{
+            String sqlStatement = "SELECT * FROM first_level_divisions  WHERE Division_ID =  (?)";
+            Connection connection = JDBC.connection;
+            DBQuery.setPreparedStatement(connection,sqlStatement);
+            PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
+            preparedStatement.setInt(1,id);
+            preparedStatement.execute();
+            ResultSet rs = preparedStatement.getResultSet();
+
+            while (rs.next()){
+                Division division = new Division(rs.)
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
 

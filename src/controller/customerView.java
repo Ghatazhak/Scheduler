@@ -26,6 +26,7 @@ import java.util.ResourceBundle;
 public class customerView implements Initializable {
     ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
     public static Customer tempCustomer;
+
     @FXML
     public TableView<Customer> allCustomersTableView;
     @FXML

@@ -41,8 +41,8 @@
       <TextField fx:id="postalCodeTextField" layoutX="148.0" layoutY="137.0" prefHeight="25.0" prefWidth="181.0" promptText="Postal Code" />
       <TextField fx:id="phoneNumberTextField" layoutX="149.0" layoutY="173.0" prefHeight="25.0" prefWidth="181.0" promptText="Phone Number" />
       <Line endX="225.0" layoutX="121.0" layoutY="45.0" startX="-100.0" />
-      <ComboBox fx:id="countryCB" layoutX="149.0" layoutY="212.0" onAction="#countryComboBoxClicked" prefHeight="25.0" prefWidth="181.0" promptText="Select Country" />
-      <ComboBox fx:id="divisionCB" layoutX="147.0" layoutY="254.0" onAction="#stateProvinceComboBoxClicked" prefHeight="25.0" prefWidth="181.0" promptText="Select State/Province" />
+      <ComboBox fx:id="countryCB" layoutX="149.0" layoutY="212.0" onAction="#countryCBClicked" prefHeight="25.0" prefWidth="181.0" promptText="Select Country" />
+      <ComboBox fx:id="divisionCB" disable="true" layoutX="147.0" layoutY="254.0" prefHeight="25.0" prefWidth="181.0" promptText="Select State/Province" />
       <Label layoutX="20.0" layoutY="256.0" text="State/Provinces">
          <font>
             <Font size="14.0" />
