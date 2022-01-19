@@ -70,7 +70,13 @@ public class customerView implements Initializable {
     public void editButtonClicked(ActionEvent actionEvent) throws IOException {
         tempCustomer = allCustomersTableView.getSelectionModel().getSelectedItem();
 
-        if(tempCustomer == null){
+        if (tempCustomer == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No Selection");
+            alert.setContentText("You must have a customer selected to edit.");
+            alert.setGraphic(null);
+            alert.showAndWait();
             return;
         }
 

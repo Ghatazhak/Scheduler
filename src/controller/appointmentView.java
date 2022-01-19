@@ -111,6 +111,7 @@ public class appointmentView implements Initializable {
             alert.setContentText("You must have an appointment selected to edit.");
             alert.setGraphic(null);
             alert.showAndWait();
+            return;
         }
 
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/editAppointmentView.fxml")));

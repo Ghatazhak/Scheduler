@@ -26,6 +26,7 @@ public class editCustomerView implements Initializable {
     ObservableList<Country> allCountries = FXCollections.observableArrayList();
     ObservableList<Division> allDivisions = FXCollections.observableArrayList();
     ObservableList<Division> filteredBySelectedCountryDivisions = FXCollections.observableArrayList();
+    Country country;
 
 
     @FXML
@@ -45,15 +46,15 @@ public class editCustomerView implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         Customer customer = customerView.tempCustomer;
+        customerView.tempCustomer = null;
         customerIdTextField.setText(String.valueOf(customer.getCustomerId()));
         nameTextField.setText(customer.getCustomerName());
         addressTextField.setText(customer.getAddress());
         postalCodeTextField.setText(customer.getPostalCode());
         phoneNumberTextField.setText(String.valueOf(customer.getPhone()));
 
-
-        ;
         allCountries = CountryMYSQL.findAll();
         countryCB.setItems(allCountries);
 
@@ -64,13 +65,11 @@ public class editCustomerView implements Initializable {
 
         for(Country c :allCountries ){
             if(c.getCountryId() == divisionCB.getValue().getCountryId()){
+
                 countryCB.setValue(c);
+                divisionCB.setDisable(false);
             }
         }
-
-        divisionCB.setDisable(false);
-
-
 
     }
 
@@ -85,6 +84,7 @@ public class editCustomerView implements Initializable {
 
     /** This is the event handler for save button on add customer. */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException {
+
         returnToCustomerManagementView();
     }
     /** This is the even handler for cancel button on add customer. */
@@ -93,10 +93,14 @@ public class editCustomerView implements Initializable {
     }
 
     public void countryCBClicked(ActionEvent actionEvent) {
-        Country country =  countryCB.getSelectionModel().getSelectedItem();
-       // allDivisions = DivisionMYSQL.findAll();
-        filteredBySelectedCountryDivisions.clear();
 
+        divisionCB.setValue(null);
+        country =  countryCB.getValue();
+        if(country == null){
+            return;
+        }
+        allDivisions = DivisionMYSQL.findAll();
+        filteredBySelectedCountryDivisions.clear();
         for(Division d: allDivisions){
             if(d.getCountryId() == country.getCountryId())
                 filteredBySelectedCountryDivisions.add(d);
