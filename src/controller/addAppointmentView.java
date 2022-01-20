@@ -3,7 +3,6 @@ package controller;
 import data_access.AppointmentMSQL;
 import data_access.ContactMYSQL;
 import data_access.CustomerMSQL;
-import data_access.UserMYSQL;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,7 +25,10 @@ import model.User;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -107,7 +109,7 @@ public class addAppointmentView implements Initializable {
 /** This is the event handler for the save button. */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException, SQLException {
 
-        if(titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactComboBox.getValue() == null || typeTextField.getText().isEmpty()|| startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || startDateDp.getValue() == null || endDateDp.getValue() == null || userIdTextField.getText().isEmpty() || contactComboBox.getValue() == null){
+        if(titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactComboBox.getValue() == null || typeTextField.getText().isEmpty()|| startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || startDateDp.getValue() == null || endDateDp.getValue() == null || contactComboBox.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Missing Data!");
@@ -118,16 +120,16 @@ public class addAppointmentView implements Initializable {
         }
 
 
-            allUsers.addAll(UserMYSQL.findAll());
-            if (!UserMYSQL.userExist(Integer.parseInt(userIdTextField.getText()))) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Invalid");
-                alert.setContentText("No Such User ID!");
-                alert.setGraphic(null);
-                alert.showAndWait();
-                return;
-            }
+            //allUsers.addAll(UserMYSQL.findAll());
+//            if (UserMYSQL.findByUsername(userIdTextField.getText()) == null) {
+//                Alert alert = new Alert(Alert.AlertType.ERROR);
+//                alert.setTitle("Error");
+//                alert.setHeaderText("Invalid");
+//                alert.setContentText("No Such User ID!");
+//                alert.setGraphic(null);
+//                alert.showAndWait();
+//                return;
+//            }
 
                 LocalDate startDateDpValue = startDateDp.getValue();
                 String startHour = startHourCB.getValue();
@@ -152,7 +154,7 @@ public class addAppointmentView implements Initializable {
                     alert.showAndWait();
                     return;
                 }
-                Appointment newAppointment = new Appointment(1, titleTextField.getText(), descriptionTextField.getText(), locationTextField.getText(), typeTextField.getText(), startLocalDateTime, endLocalDateTime, customerIdCB.getValue().getCustomerId(), Integer.parseInt(userIdTextField.getText()), contactComboBox.getValue().getContactId());
+                Appointment newAppointment = new Appointment(1, titleTextField.getText(), descriptionTextField.getText(), locationTextField.getText(), typeTextField.getText(), startLocalDateTime, endLocalDateTime, customerIdCB.getValue().getCustomerId(), Main.currentUser.getUserId(), contactComboBox.getValue().getContactId());
                 AppointmentMSQL.create(newAppointment);
                 returnToHomeView();
         }

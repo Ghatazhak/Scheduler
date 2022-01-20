@@ -3,7 +3,6 @@ package controller;
 import data_access.AppointmentMSQL;
 import data_access.ContactMYSQL;
 import data_access.CustomerMSQL;
-import data_access.UserMYSQL;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -127,7 +126,7 @@ public class editAppointmentView implements Initializable {
     }
 /** This is the event handler for the save button. */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException, SQLException {
-        if(titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactCB.getValue() == null || typeTextField.getText().isEmpty()|| startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || startDateDP.getValue() == null || endDateDP.getValue() == null || userIdTextField.getText().isEmpty() || contactCB.getValue() == null){
+        if(titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactCB.getValue() == null || typeTextField.getText().isEmpty()|| startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || startDateDP.getValue() == null || endDateDP.getValue() == null || contactCB.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Missing Data!");
@@ -138,16 +137,16 @@ public class editAppointmentView implements Initializable {
         }
 
 
-        allUsers.addAll(UserMYSQL.findAll());
-        if (!UserMYSQL.userExist(Integer.parseInt(userIdTextField.getText()))) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Invalid");
-            alert.setContentText("No Such User ID!");
-            alert.setGraphic(null);
-            alert.showAndWait();
-            return;
-        }
+        //allUsers.addAll(UserMYSQL.findAll());
+//        if (UserMYSQL.findByUsername(userIdTextField.getText()) == null) {
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setTitle("Error");
+//            alert.setHeaderText("Invalid");
+//            alert.setContentText("No Such User ID!");
+//            alert.setGraphic(null);
+//            alert.showAndWait();
+//            return;
+//        }
 
         LocalDate startDateDpValue = startDateDP.getValue();
         String startHour = startHourCB.getValue();
@@ -172,8 +171,26 @@ public class editAppointmentView implements Initializable {
             alert.showAndWait();
             return;
         }
-        Appointment newAppointment = new Appointment(1, titleTextField.getText(), descriptionTextField.getText(), locationTextField.getText(), typeTextField.getText(), startLocalDateTime, endLocalDateTime, customerIdCB.getValue().getCustomerId(), Integer.parseInt(userIdTextField.getText()), contactCB.getValue().getContactId());
-        AppointmentMSQL.create(newAppointment);
+        Appointment newAppointment = new Appointment(Integer.parseInt(appointmentIdTextField.getText()), titleTextField.getText(), descriptionTextField.getText(), locationTextField.getText(), typeTextField.getText(), startLocalDateTime, endLocalDateTime, customerIdCB.getValue().getCustomerId(), Main.currentUser.getUserId(), contactCB.getValue().getContactId());
+        boolean updateResult = AppointmentMSQL.update(newAppointment);
+        if(updateResult){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Update");
+            alert.setContentText("You updated the appointment successfully.");
+            alert.setGraphic(null);
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Update");
+            alert.setContentText("Your update failed.");
+            alert.setGraphic(null);
+            alert.showAndWait();
+        }
+
+
+
         returnToHomeView();
     }
 /** This is the event handler for the cancel button. */

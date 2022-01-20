@@ -2,6 +2,7 @@ package data_access;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import model.Appointment;
 import model.Customer;
 
 import java.sql.Connection;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 
 public class CustomerMSQL {
     private static ObservableList<Customer> allCustomerList = FXCollections.observableArrayList();
+    private static ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
 
 
     public static ObservableList<Customer> findAll() {
@@ -91,12 +93,21 @@ public class CustomerMSQL {
         String sqlStatement = "DELETE FROM customers WHERE Customer_ID = (?) ;";
         Connection connection = JDBC.connection;
         try {
+            allAppointments.clear();
+            allAppointments = AppointmentMSQL.findAll();
+            for(Appointment a: allAppointments){
+                if(a.getCustomerId() == customer.getCustomerId()){
+                    AppointmentMSQL.delete(a);
+                }
+            }
+
             DBQuery.setPreparedStatement(connection,sqlStatement);
             PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
             preparedStatement.setInt(1,customer.getCustomerId());
             preparedStatement.execute();
 
             if(preparedStatement.getUpdateCount() > 0){
+
                 return true;
             }
 

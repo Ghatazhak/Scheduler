@@ -102,7 +102,7 @@ public class customerView implements Initializable {
             return;
         }
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Are you sure you want to delete this customer?");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Are you sure you want to delete this customer? This will also delete any associated appointments.");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             CustomerMSQL.delete(tempCustomer);

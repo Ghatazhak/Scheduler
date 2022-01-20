@@ -63,8 +63,27 @@ public class AppointmentMSQL {
 //            return appointmentsList;
         }
 
-        public static Boolean update() {
-            return null;
+        public static Boolean update(Appointment appointment) {
+
+            try{
+                String sqlStatement = "UPDATE appointments SET Title = ?, Description = ?, Location = ?, Type = ?, Customer_ID = ?, User_ID = ?,Contact_ID = ? WHERE Appointment_ID = ?";
+                Connection connection = JDBC.connection;
+                DBQuery.setPreparedStatement(connection,sqlStatement);
+                PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
+                preparedStatement.setString(1,appointment.getTitle());
+                preparedStatement.setString(2,appointment.getDescription());
+                preparedStatement.setString(3,appointment.getLocation());
+                preparedStatement.setString(4,appointment.getType());
+                preparedStatement.setInt(5,appointment.getCustomerId());
+                preparedStatement.setInt(6,appointment.getUserId());
+                preparedStatement.setInt(7,appointment.getContactId());
+                preparedStatement.setInt(8,appointment.getAppointmentId());
+                preparedStatement.execute();
+            } catch (SQLException e){
+                e.printStackTrace();
+                return false;
+            }
+            return true;
         }
 
 
