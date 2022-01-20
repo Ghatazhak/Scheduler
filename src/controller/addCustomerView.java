@@ -41,7 +41,7 @@ public class addCustomerView implements Initializable {
     public TextField phoneNumberTextField;
     @FXML
     public ComboBox<Country> countryCB;
-
+    @FXML
     public ComboBox<Division> divisionCB;
 
 

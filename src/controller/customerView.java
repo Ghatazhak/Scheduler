@@ -41,7 +41,7 @@ public class customerView implements Initializable {
     @FXML
     public TableColumn<Customer, String> postalCodeCol;
     @FXML
-    public TableColumn divisionCol;
+    public TableColumn<Customer, Integer> divisionCol;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

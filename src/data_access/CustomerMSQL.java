@@ -15,6 +15,9 @@ public class CustomerMSQL {
     private static ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
 
 
+
+
+
     public static ObservableList<Customer> findAll() {
         allCustomerList.clear();
 
@@ -27,7 +30,7 @@ public class CustomerMSQL {
             ResultSet resultSet = preparedStatement.getResultSet();
 
             while (resultSet.next()) {
-                allCustomerList.add(new Customer(resultSet.getInt("Customer_ID"), resultSet.getString("Customer_Name"), resultSet.getString("Address"), resultSet.getString("Phone"), resultSet.getString("Postal_Code"), resultSet.getInt("Division_ID")));
+                allCustomerList.add(new Customer(resultSet.getInt("Customer_ID"), resultSet.getString("Customer_Name"), resultSet.getString("Address"), resultSet.getString("Phone"), resultSet.getString("Postal_Code"), resultSet.getInt("")));
             }
 
         } catch (SQLException e) {

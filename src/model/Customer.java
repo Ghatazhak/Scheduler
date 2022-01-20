@@ -7,6 +7,7 @@ public class Customer {
     private String phone;
     private String postalCode;
     private int divisionId;
+    private Division division;
 
     public String getPhone() {
         return phone;
@@ -14,6 +15,14 @@ public class Customer {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Division getDivision() {
+        return division;
+    }
+
+    public void setDivision(Division division) {
+        this.division = division;
     }
 
     public Customer(int customerId, String customerName, String address, String phone, String postalCode, int divisionId) {
