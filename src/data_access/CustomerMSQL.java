@@ -22,7 +22,7 @@ public class CustomerMSQL {
         allCustomerList.clear();
 
         try {
-            String selectStatement = "SELECT * FROM customers";
+            String selectStatement = "SELECT customers.Customer_ID, customers.Customer_Name, customers.Address, customers.Postal_Code, customers.Phone, first_level_divisions.Division FROM customers INNER JOIN first_level_divisions ON customers.Division_ID = first_level_divisions.Division_ID;";
             Connection connection = JDBC.connection;
             DBQuery.setPreparedStatement(connection, selectStatement);
             PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
@@ -30,7 +30,7 @@ public class CustomerMSQL {
             ResultSet resultSet = preparedStatement.getResultSet();
 
             while (resultSet.next()) {
-                allCustomerList.add(new Customer(resultSet.getInt("Customer_ID"), resultSet.getString("Customer_Name"), resultSet.getString("Address"), resultSet.getString("Phone"), resultSet.getString("Postal_Code"), resultSet.getInt("")));
+                allCustomerList.add(new Customer(resultSet.getInt("Customer_ID"), resultSet.getString("Customer_Name"), resultSet.getString("Address"), resultSet.getString("Phone"), resultSet.getString("Postal_Code"), resultSet.getString("Division")));
             }
 
         } catch (SQLException e) {
@@ -63,7 +63,7 @@ public class CustomerMSQL {
             preparedStatement.setString(2,customer.getAddress());
             preparedStatement.setString(3,customer.getPostalCode());
             preparedStatement.setString(4,customer.getPhone());
-            preparedStatement.setInt(5, customer.getDivisionId());
+            preparedStatement.setInt(5,DivisionMYSQL.findByName(customer.getDivision()));
             preparedStatement.execute();
         } catch (SQLException e){
             e.printStackTrace();
@@ -81,7 +81,7 @@ public class CustomerMSQL {
             preparedStatement.setString(2,customer.getAddress());
             preparedStatement.setString(3,customer.getPostalCode());
             preparedStatement.setString(4,customer.getPhone());
-            preparedStatement.setInt(5,customer.getDivisionId());
+            preparedStatement.setInt(5,DivisionMYSQL.findByName(customer.getDivision()));
             preparedStatement.setInt(6,customer.getCustomerId());
             preparedStatement.execute();
         } catch (SQLException e){

@@ -62,7 +62,11 @@ public class editCustomerView implements Initializable {
 
         allDivisions = DivisionMYSQL.findAll();
         divisionCB.setItems(allDivisions);
-        divisionCB.setValue(DivisionMYSQL.findById(customer.getDivisionId()));
+        for(Division d: allDivisions){
+          if(Objects.equals(d.getDivision(), customer.getDivision()))
+              divisionCB.setValue(DivisionMYSQL.findById(DivisionMYSQL.findByName(d.getDivision())));
+        }
+
 
 
         for(Country c :allCountries ){
@@ -96,7 +100,7 @@ public class editCustomerView implements Initializable {
             //alert.initOwner(stage);
             alert.showAndWait();
         } else {
-            Customer customer = new Customer(Integer.parseInt(customerIdTextField.getText()),nameTextField.getText(), addressTextField.getText(),phoneNumberTextField.getText(), postalCodeTextField.getText(), divisionCB.getValue().getDivisionId());
+            Customer customer = new Customer(Integer.parseInt(customerIdTextField.getText()),nameTextField.getText(), addressTextField.getText(),phoneNumberTextField.getText(), postalCodeTextField.getText(), divisionCB.getValue().getDivision());
             CustomerMSQL.update(customer);
             returnToCustomerManagementView();
         }

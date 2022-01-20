@@ -32,6 +32,25 @@ public class DivisionMYSQL {
         return allDivisions;
     }
 
+    public static int findByName(String name){
+        try{
+            String sqlStatement = "SELECT * FROM first_level_divisions  WHERE Division =  (?)";
+            Connection connection = JDBC.connection;
+            DBQuery.setPreparedStatement(connection,sqlStatement);
+            PreparedStatement preparedStatement = DBQuery.getPreparedStatement();
+            preparedStatement.setString(1,name);
+            preparedStatement.execute();
+            ResultSet rs = preparedStatement.getResultSet();
+
+            while (rs.next()){
+                Division division = new Division(rs.getInt("Division_ID"),rs.getString("Division"),rs.getInt("Country_ID"));
+                return  division.getDivisionId();
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
     public static Division findById(int id) {
         try{

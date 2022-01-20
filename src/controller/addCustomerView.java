@@ -75,7 +75,7 @@ public class addCustomerView implements Initializable {
             alert.setGraphic(null);
             alert.showAndWait();
         } else {
-            Customer customer = new Customer(0,nameTextField.getText(), addressTextField.getText(),phoneNumberTextField.getText(), postalCodeTextField.getText(), divisionCB.getValue().getDivisionId());
+            Customer customer = new Customer(0,nameTextField.getText(), addressTextField.getText(),phoneNumberTextField.getText(), postalCodeTextField.getText(), divisionCB.getValue().getDivision());
             CustomerMSQL.create(customer);
             returnToCustomerManagementView();
         }

@@ -41,7 +41,7 @@ public class customerView implements Initializable {
     @FXML
     public TableColumn<Customer, String> postalCodeCol;
     @FXML
-    public TableColumn<Customer, Integer> divisionCol;
+    public TableColumn<Customer, String> divisionCol;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -54,7 +54,7 @@ public class customerView implements Initializable {
         addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
         phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
         postalCodeCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
-        divisionCol.setCellValueFactory(new PropertyValueFactory<>("divisionId"));
+        divisionCol.setCellValueFactory(new PropertyValueFactory<>("division"));
 
     }
     /** This event handler is for the add button. */
