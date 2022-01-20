@@ -17,6 +17,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import main.Main;
 import model.Appointment;
 import model.Contact;
 import model.Customer;
@@ -89,6 +90,8 @@ public class addAppointmentView implements Initializable {
         allCustomers = CustomerMSQL.findAll();
         customerIdCB.setItems(allCustomers);
         contactComboBox.setItems(allContacts = ContactMYSQL.findAll());
+
+        userIdTextField.setText(String.valueOf(Main.currentUser.getUserId()) + " (" + Main.currentUser.getUsername() + ")");
     }
 
    public void returnToHomeView() throws IOException {

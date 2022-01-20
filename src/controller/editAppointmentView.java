@@ -17,6 +17,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import main.Main;
 import model.Appointment;
 import model.Contact;
 import model.Customer;
@@ -107,12 +108,12 @@ public class editAppointmentView implements Initializable {
         startHourCB.setValue(String.valueOf(appointment.getStartDateTime().getHour()));
         endHourCB.setValue(String.valueOf(appointment.getEndDateTime().getHour()));
         startMinuteCB.setValue(String.valueOf(appointment.getStartDateTime().getHour()));
-        startMinuteCB.setValue(String.valueOf(appointment.getEndDateTime().getHour()));
+        endMinuteCB.setValue(String.valueOf(appointment.getEndDateTime().getHour()));
         allCustomers = CustomerMSQL.findAll();
         customerIdCB.setItems(allCustomers);
         customerIdCB.setValue(CustomerMSQL.findById(appointment.getCustomerId()));
 
-        userIdTextField.setText(String.valueOf(appointment.getUserId()));
+        userIdTextField.setText(String.valueOf(Main.currentUser.getUserId()) + " (" + Main.currentUser.getUsername() + ")");
     }
 
     public void returnToHomeView() throws IOException {

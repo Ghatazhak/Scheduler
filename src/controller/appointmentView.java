@@ -140,7 +140,13 @@ public class appointmentView implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Are you sure you want to delete this Appointment?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                AppointmentMSQL.delete(tempAppointment);
+                String change = AppointmentMSQL.delete(tempAppointment);
+                Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                alert2.setTitle("Deleted");
+                alert2.setHeaderText("You deleted the following!");
+                alert2.setContentText(change);
+                alert2.setGraphic(null);
+                alert2.showAndWait();
                 ObservableList<Appointment> allAppointments = AppointmentMSQL.findAll();
                 allAppointmentsTableView.setItems(allAppointments);
             }

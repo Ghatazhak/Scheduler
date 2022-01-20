@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import main.Main;
 import model.User;
 
 import java.io.IOException;
@@ -62,6 +63,7 @@ public class loginView implements Initializable {
         String retrievedPassword = null;
         try{
             User user = UserMYSQL.findByUsername(usernameTextField.getText());
+            Main.currentUser = user;
             retrievedPassword = user.getPassword();
         } catch (Exception e){
            System.out.println(e.getMessage());
@@ -71,7 +73,7 @@ public class loginView implements Initializable {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/appointmentView.fxml")));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 1020, 475);
-            stage.setTitle("Scheduler v1.0 Appointments");
+            stage.setTitle("Scheduler v1.0 Appointments:   " + Main.currentUser.getUsername());
             stage.setScene(scene);
             stage.show();
         }

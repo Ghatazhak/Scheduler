@@ -7,11 +7,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.User;
 
-import java.sql.*;
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class Main extends Application {
+    public static User currentUser;
+
     public static void main(String[] args) throws SQLException {
         JDBC.openConnection();
         launch(args);

@@ -67,7 +67,7 @@
       <TextField fx:id="descriptionTextField" layoutX="139.0" layoutY="87.0" prefHeight="25.0" prefWidth="232.0" promptText="Enter Description" />
       <TextField fx:id="locationTextField" layoutX="139.0" layoutY="122.0" prefHeight="25.0" prefWidth="232.0" promptText="Enter Location" />
       <ComboBox fx:id="contactCB" layoutX="140.0" layoutY="157.0" prefHeight="25.0" prefWidth="232.0" />
-      <TextField fx:id="userIdTextField" layoutX="139.0" layoutY="332.0" prefHeight="25.0" prefWidth="232.0" />
+      <TextField fx:id="userIdTextField" editable="false" layoutX="139.0" layoutY="332.0" prefHeight="25.0" prefWidth="232.0" />
       <Button focusTraversable="false" layoutX="140.0" layoutY="369.0" mnemonicParsing="false" onAction="#saveButtonClicked" prefHeight="35.0" prefWidth="68.0" text="Save" />
       <Button focusTraversable="false" layoutX="239.0" layoutY="369.0" mnemonicParsing="false" onAction="#cancelButtonClicked" prefHeight="35.0" prefWidth="68.0" text="Cancel" />
       <DatePicker fx:id="startDateDP" layoutX="137.0" layoutY="227.0" prefHeight="25.0" prefWidth="113.0" />

@@ -68,7 +68,7 @@ public class AppointmentMSQL {
         }
 
 
-        public static Boolean delete(Appointment appointment) {
+        public static String delete(Appointment appointment) {
             String sqlStatement = "DELETE FROM appointments WHERE Appointment_ID = (?) ;";
             Connection connection = JDBC.connection;
             try {
@@ -78,8 +78,8 @@ public class AppointmentMSQL {
                 preparedStatement.execute();
 
                 if(preparedStatement.getUpdateCount() > 0){
-                    System.out.println("2");
-                    return true;
+                    String result = "Appointment ID: "+appointment.getAppointmentId()+ " Type: " +appointment.getType()+ " deleted.";
+                    return result;
                 }
 
             } catch (SQLException e) {
