@@ -31,13 +31,14 @@ import java.util.ResourceBundle;
 
 public class addAppointmentView implements Initializable {
 
+
     ObservableList<String> startHours = FXCollections.observableArrayList();
     ObservableList<String> startMinutes = FXCollections.observableArrayList();
     ObservableList<String> endHours = FXCollections.observableArrayList();
     ObservableList<String> endMinutes = FXCollections.observableArrayList();
     ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
-    ObservableList<String> allTypes = FXCollections.observableArrayList();
     ObservableList<Contact> allContacts = FXCollections.observableArrayList();
+    ObservableList<User> allUsers = FXCollections.observableArrayList();
 
 
     @FXML
@@ -51,7 +52,7 @@ public class addAppointmentView implements Initializable {
     @FXML
     public ComboBox<Contact> contactComboBox;
     @FXML
-    public ComboBox<String> typeComboBox;
+    public TextField typeTextField;
     @FXML
     public ComboBox<Customer> customerIdCB;
     @FXML
@@ -71,8 +72,7 @@ public class addAppointmentView implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        allTypes.addAll("InPerson", "Remote");
-        typeComboBox.setItems(allTypes);
+
 
         startHours.addAll("00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11",
                 "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23");
@@ -87,13 +87,7 @@ public class addAppointmentView implements Initializable {
         endMinuteCB.setItems(endMinutes);
 
         allCustomers = CustomerMSQL.findAll();
-
         customerIdCB.setItems(allCustomers);
-//        for (Customer c: allCustomers){
-//            allCustomerId.add(c.getCustomerId());
-//        }
-//        customerIdCB.setItems(allCustomerId);
-
         contactComboBox.setItems(allContacts = ContactMYSQL.findAll());
     }
 
@@ -110,54 +104,56 @@ public class addAppointmentView implements Initializable {
 /** This is the event handler for the save button. */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException, SQLException {
 
-        if(titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactComboBox.getValue() == null || typeComboBox.getValue() == null || startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || startDateDp.getValue() == null || endDateDp.getValue() == null || userIdTextField.getText().isEmpty() || contactComboBox.getValue() == null){
+        if(titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactComboBox.getValue() == null || typeTextField.getText().isEmpty()|| startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || startDateDp.getValue() == null || endDateDp.getValue() == null || userIdTextField.getText().isEmpty() || contactComboBox.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Missing Data!");
             alert.setContentText("Missing Data in one or more fields");
             alert.setGraphic(null);
             alert.showAndWait();
-        } else {
-            ObservableList<User> allUsers = FXCollections.observableArrayList();
+            return;
+        }
+
+
             allUsers.addAll(UserMYSQL.findAll());
-
-
-            if (UserMYSQL.userExist(Integer.parseInt(userIdTextField.getText()))) {
-
-                LocalDate startDateDpValue = startDateDp.getValue();
-                String startHour = startHourCB.getValue();
-                String startMinute = startMinuteCB.getValue();
-                LocalDateTime startLocalDateTime = LocalDateTime.of(startDateDpValue.getYear(), startDateDpValue.getMonthValue(), startDateDpValue.getDayOfMonth(), Integer.parseInt(startHour), Integer.parseInt(startMinute));
-                ZonedDateTime startLocalZonedDateTime = ZonedDateTime.of(startLocalDateTime, ZoneId.systemDefault());
-                ZonedDateTime utcStartZonedDateTime = startLocalZonedDateTime.withZoneSameInstant(ZoneOffset.UTC);
-
-                LocalDate endDateDpValue = startDateDp.getValue();
-                String endHour = startHourCB.getValue();
-                String endMinute = startMinuteCB.getValue();
-                LocalDateTime endLocalDateTime = LocalDateTime.of(endDateDpValue.getYear(), endDateDpValue.getMonthValue(), endDateDpValue.getDayOfMonth(), Integer.parseInt(endHour), Integer.parseInt(endMinute));
-                ZonedDateTime endLocalZonedDateTime = ZonedDateTime.of(endLocalDateTime, ZoneId.systemDefault());
-                ZonedDateTime utcEndZonedDateTime = endLocalZonedDateTime.withZoneSameInstant(ZoneOffset.UTC);
-
-                Appointment newAppointment = new Appointment(1, titleTextField.getText(), descriptionTextField.getText(), locationTextField.getText(), typeComboBox.getValue(), startLocalDateTime, endLocalDateTime, customerIdCB.getValue().getCustomerId(), Integer.parseInt(userIdTextField.getText()), contactComboBox.getValue().getContactId());
-                AppointmentMSQL.create(newAppointment);
-                returnToHomeView();
-
-            } else {
+            if (!UserMYSQL.userExist(Integer.parseInt(userIdTextField.getText()))) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("Invalid");
                 alert.setContentText("No Such User ID!");
                 alert.setGraphic(null);
                 alert.showAndWait();
+                return;
             }
+
+                LocalDate startDateDpValue = startDateDp.getValue();
+                String startHour = startHourCB.getValue();
+                String startMinute = startMinuteCB.getValue();
+                LocalDateTime startLocalDateTime = LocalDateTime.of(startDateDpValue.getYear(), startDateDpValue.getMonthValue(), startDateDpValue.getDayOfMonth(), Integer.parseInt(startHour), Integer.parseInt(startMinute));
+                ZonedDateTime startLocalZonedDateTime = ZonedDateTime.of(startLocalDateTime, ZoneId.systemDefault());
+                //ZonedDateTime utcStartZonedDateTime = startLocalZonedDateTime.withZoneSameInstant(ZoneOffset.UTC);
+
+                LocalDate endDateDpValue = endDateDp.getValue();
+                String endHour = endHourCB.getValue();
+                String endMinute = endMinuteCB.getValue();
+                LocalDateTime endLocalDateTime = LocalDateTime.of(endDateDpValue.getYear(), endDateDpValue.getMonthValue(), endDateDpValue.getDayOfMonth(), Integer.parseInt(endHour), Integer.parseInt(endMinute));
+                ZonedDateTime endLocalZonedDateTime = ZonedDateTime.of(endLocalDateTime, ZoneId.systemDefault());
+               // ZonedDateTime utcEndZonedDateTime = endLocalZonedDateTime.withZoneSameInstant(ZoneOffset.UTC);
+
+                if(startLocalDateTime.isAfter(endLocalDateTime) || startLocalDateTime.isEqual(endLocalDateTime)){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Date Time Mismatch");
+                    alert.setContentText("The start time cannot be greater than or equal to the end date/time.");
+                    alert.setGraphic(null);
+                    alert.showAndWait();
+                    return;
+                }
+                Appointment newAppointment = new Appointment(1, titleTextField.getText(), descriptionTextField.getText(), locationTextField.getText(), typeTextField.getText(), startLocalDateTime, endLocalDateTime, customerIdCB.getValue().getCustomerId(), Integer.parseInt(userIdTextField.getText()), contactComboBox.getValue().getContactId());
+                AppointmentMSQL.create(newAppointment);
+                returnToHomeView();
         }
 
-
-
-
-
-
-    }
 /** This is the event handler for the cancel button. */
     public void cancelButtonClicked(ActionEvent actionEvent) throws IOException {
         returnToHomeView();

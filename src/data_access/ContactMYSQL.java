@@ -34,22 +34,31 @@ public class ContactMYSQL {
     }
 
 
-    public Contact findById(int id) {
+    public static Contact findById(int id) {
+        ObservableList<Contact> contacts;
+        contacts = ContactMYSQL.findAll();
+        for(Contact c: contacts){
+            if(c.getContactId() == id){
+                return c;
+            }
+        }
+
         return null;
     }
 
 
-    public Boolean create() {
+    public static Boolean create() {
         return null;
     }
 
 
-    public Boolean update() {
+    public static Boolean update() {
         return null;
     }
 
 
-    public Boolean delete() {
+    public static Boolean delete() {
         return null;
     }
+
 }

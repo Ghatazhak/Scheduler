@@ -19,7 +19,7 @@
       </TableView>
       <Button layoutX="10.0" layoutY="20.0" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="30.0" prefWidth="60.0" text="Add" />
       <Button layoutX="77.0" layoutY="20.0" mnemonicParsing="false" onAction="#editButtonClicked" prefHeight="30.0" prefWidth="60.0" text="Edit" />
-      <Button layoutX="472.0" layoutY="20.0" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="30.0" prefWidth="60.0" text="Delete" textFill="#da1010" />
-      <Button layoutX="144.0" layoutY="20.0" mnemonicParsing="false" onAction="#cancelButtonClicked" prefHeight="30.0" prefWidth="60.0" text="Close" />
+      <Button layoutX="144.0" layoutY="20.0" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="30.0" prefWidth="60.0" text="Delete" textFill="#da1010" />
+      <Button layoutX="466.0" layoutY="20.0" mnemonicParsing="false" onAction="#cancelButtonClicked" prefHeight="30.0" prefWidth="60.0" text="Close" />
    </children>
 </AnchorPane>

@@ -4,7 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Customer;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class CustomerMSQL {
     private static ObservableList<Customer> allCustomerList = FXCollections.observableArrayList();
@@ -33,9 +36,16 @@ public class CustomerMSQL {
 
 
     public static Customer findById(int id) {
+        ObservableList<Customer> customers;
+        customers = CustomerMSQL.findAll();
+        for(Customer c: customers){
+            if(c.getCustomerId() == id){
+                return c;
+            }
+        }
+
         return null;
     }
-
 
     public static void create(Customer customer) {
 
