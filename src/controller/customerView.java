@@ -24,6 +24,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class customerView implements Initializable {
+
     ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
     public static Customer tempCustomer;
 
@@ -40,7 +41,7 @@ public class customerView implements Initializable {
     @FXML
     public TableColumn<Customer, String> postalCodeCol;
     @FXML
-    public TableColumn<Customer, String> divisionIdCol;
+    public TableColumn divisionCol;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -53,7 +54,7 @@ public class customerView implements Initializable {
         addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
         phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
         postalCodeCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
-        divisionIdCol.setCellValueFactory(new PropertyValueFactory<>("divisionId"));
+        divisionCol.setCellValueFactory(new PropertyValueFactory<>("divisionId"));
 
     }
     /** This event handler is for the add button. */

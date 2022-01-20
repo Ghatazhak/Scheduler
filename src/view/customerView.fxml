@@ -14,7 +14,7 @@
             <TableColumn fx:id="addressCol" prefWidth="113.33331298828125" text="Address" />
             <TableColumn fx:id="phoneCol" prefWidth="113.33331298828125" text="Phone" />
             <TableColumn fx:id="postalCodeCol" prefWidth="74.0" text="Postal Code" />
-            <TableColumn fx:id="divisionIdCol" prefWidth="67.33328247070312" text="Division ID" />
+            <TableColumn fx:id="divisionCol" prefWidth="67.33328247070312" text="Division" />
         </columns>
       </TableView>
       <Button layoutX="10.0" layoutY="20.0" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="30.0" prefWidth="60.0" text="Add" />
