@@ -16,7 +16,7 @@
 
 
 
--  When deleting a customer record, all of the customer’s appointments must be deleted first, due to foreign key constraints.
+
 
 
 
@@ -128,7 +128,7 @@ Note: You do not need to save and print the reports to a file or provide a scree
 
 
 
-B.  Write at least two different lambda expressions to improve your code.
+B.  Write at least two different lambda expressions to improve your code. (One left to do).
 
 
 

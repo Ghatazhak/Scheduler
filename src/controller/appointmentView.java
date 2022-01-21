@@ -16,6 +16,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Appointment;
+import view.FXMLLoaderInterface;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,6 +30,11 @@ public class appointmentView implements Initializable {
     public static Appointment tempAppointment;
     private ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
     private FilteredList<Appointment> filteredList;
+
+    FXMLLoaderInterface loaderLambda = s -> {
+        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
+        return root;
+    };
 
     @FXML
     public TableView<Appointment> allAppointmentsTableView;
@@ -84,7 +90,7 @@ public class appointmentView implements Initializable {
 
 /** This is an event handler for log off. */
     public void logOffMenuClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/loginView.fxml")));
+        Parent root = loaderLambda.getRoot("/view/loginView.fxml");
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
         Scene scene = new Scene(root, 500, 300);
         stage.setTitle("Scheduler v1.0");
@@ -103,8 +109,7 @@ public class appointmentView implements Initializable {
     }
     /** This is an event handler for adding an appointment. */
     public void addAppointmentMenuClicked(ActionEvent actionEvent) throws IOException {
-
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/addAppointmentView.fxml")));
+        Parent root = loaderLambda.getRoot("/view/addAppointmentView.fxml");
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
         Scene scene = new Scene(root, 380, 430);
         stage.setTitle("Add Appointment");
@@ -126,8 +131,7 @@ public class appointmentView implements Initializable {
             return;
         }
 
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/editAppointmentView.fxml")));
-        // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
+        Parent root = loaderLambda.getRoot("/view/editAppointmentView.fxml");
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
         Scene scene = new Scene(root, 380, 430);
         stage.setTitle("Edit Appointment");
@@ -165,7 +169,7 @@ public class appointmentView implements Initializable {
 
     /** This is an event handler for customer management. */
     public void customerEditclicked(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerView.fxml")));
+        Parent root = loaderLambda.getRoot("/view/customerView.fxml");
         Stage stage = new Stage();
         stage.initStyle(StageStyle.UNDECORATED);
         stage.initModality(Modality.APPLICATION_MODAL);

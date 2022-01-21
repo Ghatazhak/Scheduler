@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import model.Country;
 import model.Customer;
 import model.Division;
+import view.FXMLLoaderInterface;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,6 +30,11 @@ public class editCustomerView implements Initializable {
     ObservableList<Division> allDivisions = FXCollections.observableArrayList();
     ObservableList<Division> filteredBySelectedCountryDivisions = FXCollections.observableArrayList();
     Country country;
+
+    FXMLLoaderInterface loaderLambda = s -> {
+        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
+        return root;
+    };
 
 
     @FXML
@@ -80,7 +86,7 @@ public class editCustomerView implements Initializable {
     }
 
     public void returnToCustomerManagementView() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerView.fxml")));
+        Parent root = loaderLambda.getRoot("/view/customerView.fxml");
         Stage stage = (Stage) customerIdTextField.getScene().getWindow();
         Scene scene = new Scene(root, 540, 400);
         stage.setTitle("Customer Management");

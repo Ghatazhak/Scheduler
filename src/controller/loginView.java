@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.Main;
 import model.User;
+import view.FXMLLoaderInterface;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +26,11 @@ import java.util.ResourceBundle;
 
 /** The controller for loginView. */
 public class loginView implements Initializable {
+    FXMLLoaderInterface loaderLambda = s -> {
+        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
+        return root;
+    };
+
 
     @FXML
     public TextField usernameTextField;
@@ -45,6 +51,8 @@ public class loginView implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
         /* Locale french = new Locale("fr","France");
         Locale.setDefault(french); */
         userLocation.setText((Locale.getDefault().getCountry()));
@@ -70,7 +78,8 @@ public class loginView implements Initializable {
         }
 
         if(passwordTextField.getText().equals(retrievedPassword)){
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/appointmentView.fxml")));
+
+            Parent root = loaderLambda.getRoot("/view/appointmentView.fxml");
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 1020, 475);
             stage.setTitle("Scheduler v1.0 Appointments:   " + Main.currentUser.getUsername());

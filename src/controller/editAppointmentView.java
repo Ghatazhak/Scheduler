@@ -21,6 +21,7 @@ import model.Appointment;
 import model.Contact;
 import model.Customer;
 import model.User;
+import view.FXMLLoaderInterface;
 
 import java.io.IOException;
 import java.net.URL;
@@ -43,6 +44,10 @@ public class editAppointmentView implements Initializable {
     ObservableList<Contact> allContacts = FXCollections.observableArrayList();
     ObservableList<User> allUsers = FXCollections.observableArrayList();
     ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
+    FXMLLoaderInterface loaderLambda = s -> {
+        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
+        return root;
+    };
 
 
     @FXML
@@ -114,8 +119,7 @@ public class editAppointmentView implements Initializable {
     }
 
     public void returnToHomeView() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/appointmentView.fxml")));
-        // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
+        Parent root = loaderLambda.getRoot("/view/appointmentView.fxml");
         Stage stage = (Stage) appointmentIdTextField.getScene().getWindow();
         Scene scene = new Scene(root, 1020, 475);
         stage.setTitle("Scheduler v1.0");
@@ -186,8 +190,6 @@ public class editAppointmentView implements Initializable {
             alert.setGraphic(null);
             alert.showAndWait();
         }
-
-
 
         returnToHomeView();
     }

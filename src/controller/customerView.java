@@ -16,6 +16,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Customer;
+import view.FXMLLoaderInterface;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,6 +28,13 @@ public class customerView implements Initializable {
 
     ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
     public static Customer tempCustomer;
+
+    FXMLLoaderInterface loaderLambda = s -> {
+        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
+        return root;
+    };
+
+
 
     @FXML
     public TableView<Customer> allCustomersTableView;
@@ -59,7 +67,7 @@ public class customerView implements Initializable {
     }
     /** This event handler is for the add button. */
     public void addButtonClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/addCustomerView.fxml")));
+        Parent root = loaderLambda.getRoot("/view/addCustomerView.fxml");
         Stage stage = (Stage) allCustomersTableView.getScene().getWindow();
         Scene scene = new Scene(root, 370, 390);
         stage.setTitle("Add New Customer");
@@ -79,9 +87,7 @@ public class customerView implements Initializable {
             alert.showAndWait();
             return;
         }
-
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/editCustomerView.fxml")));
-        // Couldn't get stage from menu item. Had to pick something else on the screen. I picked the table view.
+        Parent root = loaderLambda.getRoot("/view/editCustomerView.fxml");
         Stage stage = (Stage) allCustomersTableView.getScene().getWindow();
         Scene scene = new Scene(root, 370, 390);
         stage.setTitle("Edit Customer");
@@ -129,7 +135,8 @@ public class customerView implements Initializable {
 //        stage.setTitle("Scheduler v1.0");
 //        stage.setScene(scene);
 //        stage.show();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/appointmentView.fxml")));
+        Parent root = loaderLambda.getRoot("/view/appointmentView.fxml");
+        //Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/appointmentView.fxml")));
         Stage stage = (Stage) allCustomersTableView.getScene().getWindow();
         stage.close();
     }
