@@ -192,7 +192,11 @@ public class appointmentView implements Initializable {
         filteredList.setPredicate(new Predicate<Appointment>() {
             @Override
             public boolean test(Appointment appointment) {
-                if(true){
+                int appointmentDayOfYear = appointment.getStartDateTime().getDayOfMonth();
+                int currentDayOfYear = LocalDateTime.now().getDayOfMonth();
+                int appointmentWeek = appointmentDayOfYear / 7;
+                int currentWeek = currentDayOfYear / 7;
+                if(appointmentWeek == currentWeek && appointment.getStartDateTime().getYear() == LocalDateTime.now().getYear()){
                     return true;
                 }
                 return false;
@@ -205,7 +209,7 @@ public class appointmentView implements Initializable {
         filteredList.setPredicate(new Predicate<Appointment>() {
             @Override
             public boolean test(Appointment appointment) {
-                if(appointment.getStartDateTime().getMonth() == LocalDateTime.now().getMonth()){
+                if(appointment.getStartDateTime().getMonth() == LocalDateTime.now().getMonth() && appointment.getStartDateTime().getYear() == LocalDateTime.now().getYear()){
                     return true;
                 }
                 return false;
