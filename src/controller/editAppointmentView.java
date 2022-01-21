@@ -35,6 +35,7 @@ import java.util.ResourceBundle;
 public class editAppointmentView implements Initializable {
 
 
+
     ObservableList<String> startHours = FXCollections.observableArrayList();
     ObservableList<String> startMinutes = FXCollections.observableArrayList();
     ObservableList<String> endHours = FXCollections.observableArrayList();
@@ -61,9 +62,7 @@ public class editAppointmentView implements Initializable {
     @FXML
     public TextField userIdTextField;
     @FXML
-    public DatePicker startDateDP;
-    @FXML
-    public DatePicker endDateDP;
+    public DatePicker datePicker;
     @FXML
     public ComboBox<String> startHourCB;
     @FXML
@@ -102,8 +101,7 @@ public class editAppointmentView implements Initializable {
         contactCB.setValue(ContactMYSQL.findById(appointment.getContactId()));
 
         typeTextField.setText(appointment.getType());
-        startDateDP.setValue(appointment.getStartDateTime().toLocalDate());
-        endDateDP.setValue(appointment.getStartDateTime().toLocalDate());
+        datePicker.setValue(appointment.getStartDateTime().toLocalDate());
         startHourCB.setValue(String.valueOf(appointment.getStartDateTime().getHour()));
         endHourCB.setValue(String.valueOf(appointment.getEndDateTime().getHour()));
         startMinuteCB.setValue(String.valueOf(appointment.getStartDateTime().getHour()));
@@ -126,7 +124,7 @@ public class editAppointmentView implements Initializable {
     }
 /** This is the event handler for the save button. */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException, SQLException {
-        if(titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactCB.getValue() == null || typeTextField.getText().isEmpty()|| startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || startDateDP.getValue() == null || endDateDP.getValue() == null || contactCB.getValue() == null){
+        if(titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactCB.getValue() == null || typeTextField.getText().isEmpty()|| startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || datePicker.getValue() == null || contactCB.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Missing Data!");
@@ -148,17 +146,17 @@ public class editAppointmentView implements Initializable {
 //            return;
 //        }
 
-        LocalDate startDateDpValue = startDateDP.getValue();
+        LocalDate datePickerValue = datePicker.getValue();
         String startHour = startHourCB.getValue();
         String startMinute = startMinuteCB.getValue();
-        LocalDateTime startLocalDateTime = LocalDateTime.of(startDateDpValue.getYear(), startDateDpValue.getMonthValue(), startDateDpValue.getDayOfMonth(), Integer.parseInt(startHour), Integer.parseInt(startMinute));
+        LocalDateTime startLocalDateTime = LocalDateTime.of(datePickerValue.getYear(), datePickerValue.getMonthValue(), datePickerValue.getDayOfMonth(), Integer.parseInt(startHour), Integer.parseInt(startMinute));
         ZonedDateTime startLocalZonedDateTime = ZonedDateTime.of(startLocalDateTime, ZoneId.systemDefault());
         //ZonedDateTime utcStartZonedDateTime = startLocalZonedDateTime.withZoneSameInstant(ZoneOffset.UTC);
 
-        LocalDate endDateDpValue = endDateDP.getValue();
+
         String endHour = endHourCB.getValue();
         String endMinute = endMinuteCB.getValue();
-        LocalDateTime endLocalDateTime = LocalDateTime.of(endDateDpValue.getYear(), endDateDpValue.getMonthValue(), endDateDpValue.getDayOfMonth(), Integer.parseInt(endHour), Integer.parseInt(endMinute));
+        LocalDateTime endLocalDateTime = LocalDateTime.of(datePickerValue.getYear(), datePickerValue.getMonthValue(), datePickerValue.getDayOfMonth(), Integer.parseInt(endHour), Integer.parseInt(endMinute));
         ZonedDateTime endLocalZonedDateTime = ZonedDateTime.of(endLocalDateTime, ZoneId.systemDefault());
         // ZonedDateTime utcEndZonedDateTime = endLocalZonedDateTime.withZoneSameInstant(ZoneOffset.UTC);
 

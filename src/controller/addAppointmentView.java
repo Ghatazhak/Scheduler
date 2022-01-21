@@ -35,6 +35,7 @@ import java.util.ResourceBundle;
 public class addAppointmentView implements Initializable {
 
 
+
     ObservableList<String> startHours = FXCollections.observableArrayList();
     ObservableList<String> startMinutes = FXCollections.observableArrayList();
     ObservableList<String> endHours = FXCollections.observableArrayList();
@@ -61,6 +62,8 @@ public class addAppointmentView implements Initializable {
     @FXML
     public TextField userIdTextField;
     @FXML
+    public DatePicker datePicker;
+    @FXML
     public ComboBox<String> startHourCB;
     @FXML
     public ComboBox<String> startMinuteCB;
@@ -68,10 +71,7 @@ public class addAppointmentView implements Initializable {
     public ComboBox<String> endHourCB;
     @FXML
     public ComboBox<String> endMinuteCB;
-    @FXML
-    public DatePicker endDateDp;
-    @FXML
-    public DatePicker startDateDp;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -109,7 +109,7 @@ public class addAppointmentView implements Initializable {
 /** This is the event handler for the save button. */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException, SQLException {
 
-        if(titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactComboBox.getValue() == null || typeTextField.getText().isEmpty()|| startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || startDateDp.getValue() == null || endDateDp.getValue() == null || contactComboBox.getValue() == null){
+        if(titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactComboBox.getValue() == null || typeTextField.getText().isEmpty()|| startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || datePicker.getValue() == null || contactComboBox.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Missing Data!");
@@ -131,17 +131,17 @@ public class addAppointmentView implements Initializable {
 //                return;
 //            }
 
-                LocalDate startDateDpValue = startDateDp.getValue();
+                LocalDate datePickerValue = datePicker.getValue();
                 String startHour = startHourCB.getValue();
                 String startMinute = startMinuteCB.getValue();
-                LocalDateTime startLocalDateTime = LocalDateTime.of(startDateDpValue.getYear(), startDateDpValue.getMonthValue(), startDateDpValue.getDayOfMonth(), Integer.parseInt(startHour), Integer.parseInt(startMinute));
+                LocalDateTime startLocalDateTime = LocalDateTime.of(datePickerValue.getYear(), datePickerValue.getMonthValue(), datePickerValue.getDayOfMonth(), Integer.parseInt(startHour), Integer.parseInt(startMinute));
                 ZonedDateTime startLocalZonedDateTime = ZonedDateTime.of(startLocalDateTime, ZoneId.systemDefault());
                 //ZonedDateTime utcStartZonedDateTime = startLocalZonedDateTime.withZoneSameInstant(ZoneOffset.UTC);
 
-                LocalDate endDateDpValue = endDateDp.getValue();
+
                 String endHour = endHourCB.getValue();
                 String endMinute = endMinuteCB.getValue();
-                LocalDateTime endLocalDateTime = LocalDateTime.of(endDateDpValue.getYear(), endDateDpValue.getMonthValue(), endDateDpValue.getDayOfMonth(), Integer.parseInt(endHour), Integer.parseInt(endMinute));
+                LocalDateTime endLocalDateTime = LocalDateTime.of(datePickerValue.getYear(), datePickerValue.getMonthValue(), datePickerValue.getDayOfMonth(), Integer.parseInt(endHour), Integer.parseInt(endMinute));
                 ZonedDateTime endLocalZonedDateTime = ZonedDateTime.of(endLocalDateTime, ZoneId.systemDefault());
                // ZonedDateTime utcEndZonedDateTime = endLocalZonedDateTime.withZoneSameInstant(ZoneOffset.UTC);
 

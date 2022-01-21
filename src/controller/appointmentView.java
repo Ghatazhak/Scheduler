@@ -3,16 +3,14 @@ package controller;
 import data_access.AppointmentMSQL;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -25,13 +23,17 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 public class appointmentView implements Initializable {
     public static Appointment tempAppointment;
-    ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
+    private ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
+    private FilteredList<Appointment> filteredList;
 
     @FXML
     public TableView<Appointment> allAppointmentsTableView;
+    @FXML
+    public ToggleGroup timePeriodFilterRadioGroup;
     @FXML
     public TableColumn<Appointment, Integer> appointmentIdCol;
     @FXML
@@ -57,8 +59,17 @@ public class appointmentView implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         allAppointments = AppointmentMSQL.findAll();
-        allAppointmentsTableView.setItems(allAppointments);
+        Appointment appointment = allAppointments.get(0);
+        System.out.println(appointment.getStartDateTime().getDayOfMonth());
 
+        filteredList = new FilteredList<Appointment>(allAppointments);
+        new Predicate<Appointment>() {
+            @Override
+            public boolean test(Appointment appointment) {
+                return true;
+            }
+        };
+        allAppointmentsTableView.setItems(filteredList);
         appointmentIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
         descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -69,7 +80,6 @@ public class appointmentView implements Initializable {
         customerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         userIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
         contactCol.setCellValueFactory(new PropertyValueFactory<>("ContactId"));
-
     }
 
 /** This is an event handler for log off. */
@@ -175,11 +185,39 @@ public class appointmentView implements Initializable {
     }
 
     public void onWeeklyRadioButton(ActionEvent actionEvent) {
+        filteredList.setPredicate(new Predicate<Appointment>() {
+            @Override
+            public boolean test(Appointment appointment) {
+                if(true){
+                    return true;
+                }
+                return false;
+            }
+
+        });
     }
 
     public void onMonthRadioButton(ActionEvent actionEvent) {
+        filteredList.setPredicate(new Predicate<Appointment>() {
+            @Override
+            public boolean test(Appointment appointment) {
+                if(appointment.getStartDateTime().getMonth() == LocalDateTime.now().getMonth()){
+                    return true;
+                }
+                return false;
+            }
+
+        });
+
     }
 
     public void onAllRadioButton(ActionEvent actionEvent) {
+        filteredList.setPredicate(new Predicate<Appointment>() {
+            @Override
+            public boolean test(Appointment appointment) {
+                return true;
+            }
+        });
     }
+
 }
