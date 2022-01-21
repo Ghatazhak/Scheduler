@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.appointmentView">
+   <children>
+      <MenuBar prefHeight="25.0" prefWidth="289.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#logOffMenuClicked" text="Log off" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Appointments">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#addAppointmentMenuClicked" text="Add Appointment" />
+                  <MenuItem mnemonicParsing="false" onAction="#editAppointmentMenuClicked" text="Edit Appointment" />
+                  <MenuItem mnemonicParsing="false" onAction="#deleteAppointmentMenuClicked" text="Delete Appointment" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Customers">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#customerEditclicked" text="Edit Customers" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Reports">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#typeByMonthReportMenuClicked" text="Type By Month Report" />
+                  <MenuItem mnemonicParsing="false" onAction="#contactReportMenuClicked" text="Contact Report" />
+                  <MenuItem mnemonicParsing="false" onAction="#customReportMenuClicked" text="Custom Report" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <TableView fx:id="allAppointmentsTableView" layoutY="24.0" prefHeight="442.0" prefWidth="1018.0">
+         <columns>
+            <TableColumn fx:id="appointmentIdCol" prefWidth="99.33331298828125" text="Appointment ID" />
+            <TableColumn fx:id="titleCol" prefWidth="72.00006103515625" text="Title" />
+            <TableColumn fx:id="descriptionCol" prefWidth="158.0" text="Description" />
+            <TableColumn fx:id="locationCol" prefWidth="90.666748046875" text="Location" />
+            <TableColumn fx:id="contactCol" prefWidth="80.66650390625" text="Contact" />
+            <TableColumn fx:id="typeCol" prefWidth="68.666748046875" text="Type" />
+            <TableColumn fx:id="startDateTimeCol" prefWidth="145.3333740234375" text="Start Date/Time" />
+            <TableColumn fx:id="endDateTimeCol" prefWidth="114.0" text="End Date/Time" />
+            <TableColumn fx:id="customerIDCol" prefWidth="96.6666259765625" text="Customer ID" />
+            <TableColumn fx:id="userIdCol" prefWidth="87.99995930989587" text="User ID" />
+         </columns>
+      </TableView>
+      <RadioButton layoutX="332.0" layoutY="4.0" mnemonicParsing="false" onAction="#onAllRadioButton" selected="true" text="All">
+         <toggleGroup>
+            <ToggleGroup fx:id="timePeriodFilterRadioGroup" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton layoutX="377.0" layoutY="4.0" mnemonicParsing="false" onAction="#onMonthRadioButton" text="Month" toggleGroup="$timePeriodFilterRadioGroup" />
+      <RadioButton layoutX="444.0" layoutY="4.0" mnemonicParsing="false" onAction="#onWeeklyRadioButton" text="Week" toggleGroup="$timePeriodFilterRadioGroup" />
+   </children>
+</AnchorPane>
