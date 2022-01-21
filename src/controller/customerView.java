@@ -117,26 +117,17 @@ public class customerView implements Initializable {
                 Alert alert2 = new Alert(Alert.AlertType.ERROR);
                 alert2.setTitle("Information");
                 alert2.setHeaderText("Success");
-                alert2.setContentText("Customer was deleted and all associated appointments.");
+                alert2.setContentText("Customer " + tempCustomer.getCustomerName() + " and associated appointments where deleted.");
                 alert2.setGraphic(null);
                 alert2.showAndWait();
             }
             allCustomers = CustomerMSQL.findAll();
             allCustomersTableView.setItems(allCustomers);
         }
-
-
     }
     /** This event handler is for the cancel button. */
     public void cancelButtonClicked(ActionEvent actionEvent) throws IOException {
-//        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/appointmentView.fxml")));
-//        Stage stage = (Stage) allCustomersTableView.getScene().getWindow();
-//        Scene scene = new Scene(root, 1020, 475);
-//        stage.setTitle("Scheduler v1.0");
-//        stage.setScene(scene);
-//        stage.show();
         Parent root = loaderLambda.getRoot("/view/appointmentView.fxml");
-        //Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/appointmentView.fxml")));
         Stage stage = (Stage) allCustomersTableView.getScene().getWindow();
         stage.close();
     }
