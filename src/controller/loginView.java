@@ -1,5 +1,6 @@
 package controller;
 
+import data_access.UserLogI;
 import data_access.UserMYSQL;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -17,7 +18,7 @@ import main.Main;
 import model.User;
 import view.FXMLLoaderInterface;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Locale;
@@ -30,6 +31,24 @@ public class loginView implements Initializable {
         Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
         return root;
     };
+
+    UserLogI log = (user,ldt,result) -> {
+
+        PrintWriter log = null;
+        try {
+            log = new PrintWriter(new FileOutputStream(new File("log.txt"), true));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+            log.append("User: " + user + "Attempted to login at: " + ldt +  " and: " + result + "\n");
+            log.close();
+
+            //Logger.getLogger(loginView.class.getName()).log(Level.SEVERE, null, e);
+
+
+    };
+
 
 
     @FXML
