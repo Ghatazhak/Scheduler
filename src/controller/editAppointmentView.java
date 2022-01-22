@@ -93,8 +93,6 @@ public class editAppointmentView implements Initializable {
         endMinuteCB.setItems(endMinutes);
 
 
-
-
         Appointment appointment = appointmentView.tempAppointment;
         appointmentIdTextField.setText(String.valueOf(appointment.getAppointmentId()));
         titleTextField.setText(appointment.getTitle());
@@ -138,18 +136,6 @@ public class editAppointmentView implements Initializable {
             return;
         }
 
-
-        //allUsers.addAll(UserMYSQL.findAll());
-//        if (UserMYSQL.findByUsername(userIdTextField.getText()) == null) {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setTitle("Error");
-//            alert.setHeaderText("Invalid");
-//            alert.setContentText("No Such User ID!");
-//            alert.setGraphic(null);
-//            alert.showAndWait();
-//            return;
-//        }
-
         LocalDate datePickerValue = datePicker.getValue();
         String startHour = startHourCB.getValue();
         String startMinute = startMinuteCB.getValue();
@@ -190,7 +176,6 @@ public class editAppointmentView implements Initializable {
             alert.setGraphic(null);
             alert.showAndWait();
         }
-
         returnToHomeView();
     }
 /** This is the event handler for the cancel button. */

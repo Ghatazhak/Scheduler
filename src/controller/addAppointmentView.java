@@ -20,7 +20,6 @@ import main.Main;
 import model.Appointment;
 import model.Contact;
 import model.Customer;
-import model.User;
 import view.FXMLLoaderInterface;
 
 import java.io.IOException;
@@ -35,21 +34,18 @@ import java.util.ResourceBundle;
 
 public class addAppointmentView implements Initializable {
 
-
-
     ObservableList<String> startHours = FXCollections.observableArrayList();
     ObservableList<String> startMinutes = FXCollections.observableArrayList();
     ObservableList<String> endHours = FXCollections.observableArrayList();
     ObservableList<String> endMinutes = FXCollections.observableArrayList();
     ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
     ObservableList<Contact> allContacts = FXCollections.observableArrayList();
-    ObservableList<User> allUsers = FXCollections.observableArrayList();
+    //ObservableList<User> allUsers = FXCollections.observableArrayList();
 
     FXMLLoaderInterface loaderLambda = s -> {
         Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
         return root;
     };
-
 
     @FXML
     public TextField appointmentIdTextField;
@@ -78,10 +74,8 @@ public class addAppointmentView implements Initializable {
     @FXML
     public ComboBox<String> endMinuteCB;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
 
         startHours.addAll("00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11",
                 "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23");
@@ -94,11 +88,9 @@ public class addAppointmentView implements Initializable {
         endMinutes.addAll("00", "15", "30", "45");
         endHourCB.setItems(endHours);
         endMinuteCB.setItems(endMinutes);
-
         allCustomers = CustomerMSQL.findAll();
         customerIdCB.setItems(allCustomers);
         contactComboBox.setItems(allContacts = ContactMYSQL.findAll());
-
         userIdTextField.setText(String.valueOf(Main.currentUser.getUserId()) + " (" + Main.currentUser.getUsername() + ")");
     }
 
@@ -123,18 +115,6 @@ public class addAppointmentView implements Initializable {
             alert.showAndWait();
             return;
         }
-
-
-            //allUsers.addAll(UserMYSQL.findAll());
-//            if (UserMYSQL.findByUsername(userIdTextField.getText()) == null) {
-//                Alert alert = new Alert(Alert.AlertType.ERROR);
-//                alert.setTitle("Error");
-//                alert.setHeaderText("Invalid");
-//                alert.setContentText("No Such User ID!");
-//                alert.setGraphic(null);
-//                alert.showAndWait();
-//                return;
-//            }
 
                 LocalDate datePickerValue = datePicker.getValue();
                 String startHour = startHourCB.getValue();

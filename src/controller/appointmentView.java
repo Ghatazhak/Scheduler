@@ -66,15 +66,15 @@ public class appointmentView implements Initializable {
 
         allAppointments = AppointmentMSQL.findAll();
         Appointment appointment = allAppointments.get(0);
-        System.out.println(appointment.getStartDateTime().getDayOfMonth());
 
-        filteredList = new FilteredList<Appointment>(allAppointments);
+        filteredList = new FilteredList<>(allAppointments);
         new Predicate<Appointment>() {
             @Override
             public boolean test(Appointment appointment) {
                 return true;
             }
         };
+
         allAppointmentsTableView.setItems(filteredList);
         appointmentIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));

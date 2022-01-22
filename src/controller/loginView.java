@@ -31,7 +31,7 @@ import java.util.ResourceBundle;
 public class loginView implements Initializable {
     String retrievedPassword = null;
     String loginResult = null;
-    String userAttemptingLogin = null;
+    String userAttemptingLogin = "null";
 
 
     FXMLLoaderInterface loaderLambda = s -> {
@@ -49,15 +49,7 @@ public class loginView implements Initializable {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-
-
-            //Logger.getLogger(loginView.class.getName()).log(Level.SEVERE, null, e);
-
-
     };
-
-
 
     @FXML
     public TextField usernameTextField;
@@ -78,7 +70,6 @@ public class loginView implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
 
         /* Locale french = new Locale("fr","France");
         Locale.setDefault(french); */
