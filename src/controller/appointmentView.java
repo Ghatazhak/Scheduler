@@ -65,7 +65,7 @@ public class appointmentView implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         allAppointments = AppointmentMSQL.findAll();
-        Appointment appointment = allAppointments.get(0);
+
 
         filteredList = new FilteredList<>(allAppointments);
         new Predicate<Appointment>() {
