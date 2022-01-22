@@ -25,10 +25,7 @@ import view.FXMLLoaderInterface;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -120,17 +117,17 @@ public class addAppointmentView implements Initializable {
                 String startHour = startHourCB.getValue();
                 String startMinute = startMinuteCB.getValue();
                 LocalDateTime startLocalDateTime = LocalDateTime.of(datePickerValue.getYear(), datePickerValue.getMonthValue(), datePickerValue.getDayOfMonth(), Integer.parseInt(startHour), Integer.parseInt(startMinute));
-                ZonedDateTime startLocalZonedDateTime = ZonedDateTime.of(startLocalDateTime, ZoneId.systemDefault());
-                //ZonedDateTime utcStartZonedDateTime = startLocalZonedDateTime.withZoneSameInstant(ZoneOffset.UTC);
+                //ZonedDateTime startLocalZonedDateTime = ZonedDateTime.of(startLocalDateTime, ZoneId.systemDefault());
+
 
 
                 String endHour = endHourCB.getValue();
                 String endMinute = endMinuteCB.getValue();
-                LocalDateTime endLocalDateTime = LocalDateTime.of(datePickerValue.getYear(), datePickerValue.getMonthValue(), datePickerValue.getDayOfMonth(), Integer.parseInt(endHour), Integer.parseInt(endMinute));
-                ZonedDateTime endLocalZonedDateTime = ZonedDateTime.of(endLocalDateTime, ZoneId.systemDefault());
-               // ZonedDateTime utcEndZonedDateTime = endLocalZonedDateTime.withZoneSameInstant(ZoneOffset.UTC);
+                LocalDateTime localDateTime = LocalDateTime.of(datePickerValue.getYear(), datePickerValue.getMonthValue(), datePickerValue.getDayOfMonth(), Integer.parseInt(endHour), Integer.parseInt(endMinute));
+                //ZonedDateTime localDateTimeZoned = ZonedDateTime.of(localDateTime, ZoneId.systemDefault());
 
-                if(startLocalDateTime.isAfter(endLocalDateTime) || startLocalDateTime.isEqual(endLocalDateTime)){
+
+                if(startLocalDateTime.isAfter(localDateTime) || startLocalDateTime.isEqual(localDateTime)){
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText("Date Time Mismatch");
@@ -139,7 +136,7 @@ public class addAppointmentView implements Initializable {
                     alert.showAndWait();
                     return;
                 }
-                Appointment newAppointment = new Appointment(1, titleTextField.getText(), descriptionTextField.getText(), locationTextField.getText(), typeTextField.getText(), startLocalDateTime, endLocalDateTime, customerIdCB.getValue().getCustomerId(), Main.currentUser.getUserId(), contactComboBox.getValue().getContactId());
+                Appointment newAppointment = new Appointment(1, titleTextField.getText(), descriptionTextField.getText(), locationTextField.getText(), typeTextField.getText(), startLocalDateTime, localDateTime, customerIdCB.getValue().getCustomerId(), Main.currentUser.getUserId(), contactComboBox.getValue().getContactId());
                 AppointmentMSQL.create(newAppointment);
                 returnToHomeView();
         }

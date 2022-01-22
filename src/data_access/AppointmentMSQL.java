@@ -5,6 +5,10 @@ import javafx.collections.ObservableList;
 import model.Appointment;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 
 public class AppointmentMSQL {
 
@@ -45,8 +49,17 @@ public class AppointmentMSQL {
                 preparedStatement.setString(2,appointment.getDescription());
                 preparedStatement.setString(3,appointment.getLocation());
                 preparedStatement.setString(4,appointment.getType());
-                preparedStatement.setTimestamp(5, Timestamp.valueOf(appointment.getStartDateTime()));
-                preparedStatement.setTimestamp(6, Timestamp.valueOf(appointment.getEndDateTime()));
+
+                LocalDateTime localDateTime = appointment.getStartDateTime();
+                ZonedDateTime localDateTimeZoned = ZonedDateTime.of(localDateTime, ZoneId.systemDefault());
+                ZonedDateTime UTClocalDateTimeZoned = localDateTimeZoned.withZoneSameInstant(ZoneOffset.UTC);
+
+                LocalDateTime endLocalDateTime = appointment.getEndDateTime();
+                ZonedDateTime endLocalDateTimeZoned = ZonedDateTime.of(localDateTime, ZoneId.systemDefault());
+                ZonedDateTime endUTClocalDateTimeZoned = localDateTimeZoned.withZoneSameInstant(ZoneOffset.UTC);
+
+                preparedStatement.setTimestamp(5, Timestamp.valueOf(UTClocalDateTimeZoned.toLocalDateTime()));
+                preparedStatement.setTimestamp(6, Timestamp.valueOf(endUTClocalDateTimeZoned.toLocalDateTime()));
                 preparedStatement.setInt(7, appointment.getCustomerId());
                 preparedStatement.setInt(8,appointment.getUserId());
                 preparedStatement.setInt(9, appointment.getContactId());
