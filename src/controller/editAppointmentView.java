@@ -107,8 +107,8 @@ public class editAppointmentView implements Initializable {
         datePicker.setValue(appointment.getStartDateTime().toLocalDate());
         startHourCB.setValue(String.valueOf(appointment.getStartDateTime().getHour()));
         endHourCB.setValue(String.valueOf(appointment.getEndDateTime().getHour()));
-        startMinuteCB.setValue(String.valueOf(appointment.getStartDateTime().getHour()));
-        endMinuteCB.setValue(String.valueOf(appointment.getEndDateTime().getHour()));
+        startMinuteCB.setValue(String.valueOf(appointment.getStartDateTime().getMinute()));
+        endMinuteCB.setValue(String.valueOf(appointment.getEndDateTime().getMinute()));
         allCustomers = CustomerMSQL.findAll();
         customerIdCB.setItems(allCustomers);
         customerIdCB.setValue(CustomerMSQL.findById(appointment.getCustomerId()));

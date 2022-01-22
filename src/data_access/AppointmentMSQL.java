@@ -30,13 +30,9 @@ public class AppointmentMSQL {
                     ZoneId systemDefault = ZoneId.systemDefault();
                     ZonedDateTime zdt = timestamp.toLocalDateTime().atZone(ZoneId.of("UTC"));
                     ZonedDateTime zldt = zdt.withZoneSameInstant(systemDefault);
-
                     Timestamp endTimeStamp = resultSet.getTimestamp("End");
-
                     ZonedDateTime endzdt = endTimeStamp.toLocalDateTime().atZone(ZoneId.of("UTC"));
                     ZonedDateTime endzldt = endzdt.withZoneSameInstant(systemDefault);
-
-
 
 
                     appointmentsList.add(new Appointment(resultSet.getInt("Appointment_ID"), resultSet.getString("Title"), resultSet.getString("Description"), resultSet.getString("Location"), resultSet.getString("Type"), zldt.toLocalDateTime(), endzldt.toLocalDateTime(), resultSet.getInt("Customer_ID"), resultSet.getInt("User_ID"), resultSet.getInt("Contact_ID")));
