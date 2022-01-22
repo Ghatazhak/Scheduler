@@ -21,28 +21,36 @@ import view.FXMLLoaderInterface;
 import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 /** The controller for loginView. */
 public class loginView implements Initializable {
+    String retrievedPassword = null;
+    String loginResult = null;
+    String userAttemptingLogin = null;
+
+
     FXMLLoaderInterface loaderLambda = s -> {
         Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
         return root;
     };
 
-    UserLogI log = (user,ldt,result) -> {
+    UserLogI logLambda = (user,ldt,result) -> {
 
         PrintWriter log = null;
         try {
-            log = new PrintWriter(new FileOutputStream(new File("log.txt"), true));
+            log = new PrintWriter(new FileOutputStream(new File("login_activity.txt"), true));
+            log.append("\nUser [" + user + "] attempted to login at [" + ldt + "] Result [ " + result + "]");
+            log.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-            log.append("User: " + user + "Attempted to login at: " + ldt +  " and: " + result + "\n");
-            log.close();
+
 
             //Logger.getLogger(loginView.class.getName()).log(Level.SEVERE, null, e);
 
@@ -87,16 +95,19 @@ public class loginView implements Initializable {
     }
 /** Event handler for login button. */
     public void loginButtonPressed(ActionEvent actionEvent) throws IOException, SQLException {
-        String retrievedPassword = null;
+        userAttemptingLogin = usernameTextField.getText();
         try{
             User user = UserMYSQL.findByUsername(usernameTextField.getText());
             Main.currentUser = user;
             retrievedPassword = user.getPassword();
+            userAttemptingLogin = Main.currentUser.getUsername();
         } catch (Exception e){
-           System.out.println(e.getMessage());
+            System.out.println("User Not in Database");
         }
 
         if(passwordTextField.getText().equals(retrievedPassword)){
+            loginResult = "Successful";
+            logLambda.writeLog(userAttemptingLogin, LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM-dd-yyyy hh:mm")),loginResult);
 
             Parent root = loaderLambda.getRoot("/view/appointmentView.fxml");
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -104,13 +115,21 @@ public class loginView implements Initializable {
             stage.setTitle("Scheduler v1.0 Appointments:   " + Main.currentUser.getUsername());
             stage.setScene(scene);
             stage.show();
-        }
+        } else {
             ResourceBundle rb = ResourceBundle.getBundle("language_files/rb",Locale.getDefault());
+            if(Main.currentUser == null){
+
+            }
             if(Locale.getDefault().getLanguage().equals("fr")){
+                loginResult = "Failed";
+                logLambda.writeLog(userAttemptingLogin, LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM-dd-yyyy hh:mm")),loginResult);
                 errorMessageLabel.setText(rb.getString("Invalid") + " " + rb.getString("Login"));
             } else {
+                loginResult = "Failed";
+                logLambda.writeLog(userAttemptingLogin,  LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM-dd-yyyy hh:mm")),loginResult);
                 errorMessageLabel.setText(rb.getString("Invalid") + " " + rb.getString("Login"));
             }
+        }
         }
 
 /** Event handler for the exit button. */

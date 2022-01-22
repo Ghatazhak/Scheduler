@@ -46,7 +46,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="25.0" layoutY="265.0" text="End Date/Time">
+      <Label layoutX="25.0" layoutY="265.0" text="Times">
          <font>
             <Font size="14.0" />
          </font>
