@@ -67,9 +67,6 @@ public class appointmentView implements Initializable {
 
         allAppointments = AppointmentMSQL.findAll();
 
-
-
-
         filteredList = new FilteredList<>(allAppointments);
         new Predicate<Appointment>() {
             @Override
