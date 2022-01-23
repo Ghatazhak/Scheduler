@@ -154,14 +154,22 @@ public class addAppointmentView implements Initializable {
                 }
 
                 for(Appointment a: AppointmentMSQL.findAll()) {
-                    LocalTime start = startLocalDateTime.toLocalTime();
-                    LocalTime end = endLocalDateTime.toLocalTime();
+                    int start = Integer.parseInt(startLocalDateTime.toString());
+                    System.out.println(start);
+                    int end = Integer.parseInt(endLocalDateTime.toLocalTime().toString());
+                    System.out.println(end);
+                    int startOfOldApp = Integer.parseInt(a.getStartDateTime().toLocalTime().toString());
+                    System.out.println(startOfOldApp);
+                    int endOfOldApp = Integer.parseInt(a.getEndDateTime().toLocalTime().toString());
+                    System.out.println(endOfOldApp);
 
 
 
-                    if (start.isAfter(a.getStartDateTime().toLocalTime()) && start.isBefore(a.getEndDateTime().toLocalTime())){
-                        isAppointmentConflict = true;
+                    if(start >= startOfOldApp && start < endOfOldApp){
+                        isAppointmentConflict=true;
                     }
+
+
 
 
                     if (isAppointmentConflict) {
