@@ -155,28 +155,20 @@ public class addAppointmentView implements Initializable {
 
                 for(Appointment a: AppointmentMSQL.findAll()) {
 
-                    if(startLocalDateTime.isEqual(a.getStartDateTime())) {
-                        System.out.println("1");
-                        appointmentsConflicts.add(a);
-                    }
                     if(startLocalDateTime.isAfter(a.getStartDateTime()) && startLocalDateTime.isBefore(a.getEndDateTime())){
-                        System.out.println("2");
                         appointmentsConflicts.add(a);
-                    }
-
-                    if(startLocalDateTime.isBefore(a.getStartDateTime()) && endLocalDateTime.isAfter(a.getStartDateTime())){
-                        System.out.println("3");
+                    } else if(startLocalDateTime.isEqual(a.getStartDateTime())) {
                         appointmentsConflicts.add(a);
+                    } else {
+                        if (!appointmentsConflicts.isEmpty()) {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("Appointment Time Conflict");
+                            alert.setHeaderText("Sorry Unavailable Date/Time.");
+                            alert.setContentText("Those dates and times are not available.");
+                            alert.setGraphic(null);
+                            alert.showAndWait();
+                            return;
                     }
-
-                    if (!appointmentsConflicts.isEmpty()) {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Appointment Time Conflict");
-                        alert.setHeaderText("Sorry Unavailable Date/Time.");
-                        alert.setContentText("Those dates and times are not available.");
-                        alert.setGraphic(null);
-                        alert.showAndWait();
-                        return;
                     }
                 }
 
