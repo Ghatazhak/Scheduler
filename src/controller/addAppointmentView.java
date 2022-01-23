@@ -37,7 +37,9 @@ public class addAppointmentView implements Initializable {
     ObservableList<String> endMinutes = FXCollections.observableArrayList();
     ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
     ObservableList<Contact> allContacts = FXCollections.observableArrayList();
-    //ObservableList<User> allUsers = FXCollections.observableArrayList();
+    boolean isAppointmentConflict = false;
+    LocalTime openingBusinessTime = LocalTime.of(8,0,0);
+    LocalTime closingBusinessTime = LocalTime.of(22,0,0);
 
     FXMLLoaderInterface loaderLambda = s -> {
         Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
@@ -103,7 +105,7 @@ public class addAppointmentView implements Initializable {
 /** This is the event handler for the save button. */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException, SQLException {
 
-        if(titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactComboBox.getValue() == null || typeTextField.getText().isEmpty()|| startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || datePicker.getValue() == null || contactComboBox.getValue() == null){
+        if(titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactComboBox.getValue() == null || typeTextField.getText().isEmpty()|| startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || datePicker.getValue() == null || contactComboBox.getValue() == null || customerIdCB.getValue()== null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Missing Data!");
@@ -112,7 +114,6 @@ public class addAppointmentView implements Initializable {
             alert.showAndWait();
             return;
         }
-
                 LocalDate datePickerValue = datePicker.getValue();
                 String startHour = startHourCB.getValue();
                 String startMinute = startMinuteCB.getValue();
@@ -120,18 +121,17 @@ public class addAppointmentView implements Initializable {
 
                 String endHour = endHourCB.getValue();
                 String endMinute = endMinuteCB.getValue();
-                LocalDateTime localDateTime = LocalDateTime.of(datePickerValue.getYear(), datePickerValue.getMonthValue(), datePickerValue.getDayOfMonth(), Integer.parseInt(endHour), Integer.parseInt(endMinute));
+                LocalDateTime endLocalDateTime = LocalDateTime.of(datePickerValue.getYear(), datePickerValue.getMonthValue(), datePickerValue.getDayOfMonth(), Integer.parseInt(endHour), Integer.parseInt(endMinute));
 
                 ZonedDateTime startzdt = startLocalDateTime.atZone(ZoneId.systemDefault());
                 ZonedDateTime  startzdtE = startzdt.withZoneSameInstant(ZoneId.of("US/Eastern"));
                 LocalTime startEasternTime = startzdtE.toLocalTime();
 
-                ZonedDateTime zdt = localDateTime.atZone(ZoneId.systemDefault());
+                ZonedDateTime zdt = endLocalDateTime.atZone(ZoneId.systemDefault());
                 ZonedDateTime  zdtE = zdt.withZoneSameInstant(ZoneId.of("US/Eastern"));
                 LocalTime easternTime = zdtE.toLocalTime();
 
-                LocalTime openingBusinessTime = LocalTime.of(8,0,0);
-                LocalTime closingBusinessTime = LocalTime.of(22,0,0);
+
 
                 if(startEasternTime.isBefore(openingBusinessTime) || startEasternTime.isAfter(closingBusinessTime) || (easternTime.isBefore(openingBusinessTime) || easternTime.isAfter(closingBusinessTime))) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -143,13 +143,7 @@ public class addAppointmentView implements Initializable {
                     return;
                 }
 
-
-
-
-                //ZonedDateTime localDateTimeZoned = ZonedDateTime.of(localDateTime, ZoneId.systemDefault());
-
-
-                if(startLocalDateTime.isAfter(localDateTime) || startLocalDateTime.isEqual(localDateTime)){
+                if(startLocalDateTime.isAfter(endLocalDateTime) || startLocalDateTime.isEqual(endLocalDateTime)){
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText("Date Time Mismatch");
@@ -158,7 +152,30 @@ public class addAppointmentView implements Initializable {
                     alert.showAndWait();
                     return;
                 }
-                Appointment newAppointment = new Appointment(1, titleTextField.getText(), descriptionTextField.getText(), locationTextField.getText(), typeTextField.getText(), startLocalDateTime, localDateTime, customerIdCB.getValue().getCustomerId(), Main.currentUser.getUserId(), contactComboBox.getValue().getContactId());
+
+                for(Appointment a: AppointmentMSQL.findAll()) {
+                    LocalTime start = startLocalDateTime.toLocalTime();
+                    LocalTime end = endLocalDateTime.toLocalTime();
+
+
+
+                    if (start.isAfter(a.getStartDateTime().toLocalTime()) && start.isBefore(a.getEndDateTime().toLocalTime())){
+                        isAppointmentConflict = true;
+                    }
+
+
+                    if (isAppointmentConflict) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Appointment Time Conflict");
+                        alert.setHeaderText("Sorry Unavailable Date/Time.");
+                        alert.setContentText("Those dates and times are not available.");
+                        alert.setGraphic(null);
+                        alert.showAndWait();
+                        return;
+                    }
+                }
+
+                Appointment newAppointment = new Appointment(1, titleTextField.getText(), descriptionTextField.getText(), locationTextField.getText(), typeTextField.getText(), startLocalDateTime, endLocalDateTime, customerIdCB.getValue().getCustomerId(), Main.currentUser.getUserId(), contactComboBox.getValue().getContactId());
                 AppointmentMSQL.create(newAppointment);
                 returnToHomeView();
         }
