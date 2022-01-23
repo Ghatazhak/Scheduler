@@ -1,5 +1,6 @@
 package controller;
 
+import data_access.AppointmentMSQL;
 import data_access.UserLogI;
 import data_access.UserMYSQL;
 import javafx.application.Platform;
@@ -12,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -26,24 +28,27 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-/** The controller for loginView. */
+/**
+ * The controller for loginView.
+ */
 public class loginView implements Initializable {
     String retrievedPassword = null;
     String loginResult = null;
     String userAttemptingLogin = "null";
-    ObservableList<Appointment> allappointments = FXCollections.observableArrayList();
-
+    ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
+    boolean isUpcomingAppointment = false;
 
     FXMLLoaderInterface loaderLambda = s -> {
         Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
         return root;
     };
 
-    UserLogI logLambda = (user,ldt,result) -> {
+    UserLogI logLambda = (user, ldt, result) -> {
 
         PrintWriter log = null;
         try {
@@ -79,8 +84,8 @@ public class loginView implements Initializable {
         /* Locale french = new Locale("fr","France");
         Locale.setDefault(french); */
         userLocation.setText((Locale.getDefault().getCountry()));
-        ResourceBundle rb = ResourceBundle.getBundle("language_files/rb",Locale.getDefault());
-        if(Locale.getDefault().getLanguage().equals("fr")){
+        ResourceBundle rb = ResourceBundle.getBundle("language_files/rb", Locale.getDefault());
+        if (Locale.getDefault().getLanguage().equals("fr")) {
             userNameLabel.setText(rb.getString("Username"));
             usernameTextField.setPromptText(rb.getString("Username"));
             passwordTextField.setPromptText(rb.getString("Password"));
@@ -88,57 +93,77 @@ public class loginView implements Initializable {
             loginButtonText.setText(rb.getString("Login"));
             exitButtonText.setText(rb.getString("Exit"));
         }
-//        allappointments = AppointmentMSQL.findAll();
-//        for(Appointment a: allappointments){
-//
-//        }
-
-
-
-
-
-    }
+        }
 /** Event handler for login button. */
-    public void loginButtonPressed(ActionEvent actionEvent) throws IOException, SQLException {
-        userAttemptingLogin = usernameTextField.getText();
-        try{
-            User user = UserMYSQL.findByUsername(usernameTextField.getText());
-            Main.currentUser = user;
-            retrievedPassword = user.getPassword();
-            userAttemptingLogin = Main.currentUser.getUsername();
-        } catch (Exception e){
-            System.out.println("User Not in Database");
-        }
-
-        if(passwordTextField.getText().equals(retrievedPassword)){
-            loginResult = "Successful";
-            logLambda.writeLog(userAttemptingLogin, LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM-dd-yyyy hh:mm")),loginResult);
-
-            Parent root = loaderLambda.getRoot("/view/appointmentView.fxml");
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root, 1020, 475);
-            stage.setTitle("Scheduler v1.0 Appointments:   " + Main.currentUser.getUsername());
-            stage.setScene(scene);
-            stage.show();
-        } else {
-            ResourceBundle rb = ResourceBundle.getBundle("language_files/rb",Locale.getDefault());
-            if(Main.currentUser == null){
-
+        public void loginButtonPressed (ActionEvent actionEvent) throws IOException, SQLException {
+            userAttemptingLogin = usernameTextField.getText();
+            try {
+                User user = UserMYSQL.findByUsername(usernameTextField.getText());
+                Main.currentUser = user;
+                retrievedPassword = user.getPassword();
+                userAttemptingLogin = Main.currentUser.getUsername();
+            } catch (Exception e) {
+                System.out.println("User Not in Database");
             }
-            if(Locale.getDefault().getLanguage().equals("fr")){
-                loginResult = "Failed";
-                logLambda.writeLog(userAttemptingLogin, LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM-dd-yyyy hh:mm")),loginResult);
-                errorMessageLabel.setText(rb.getString("Invalid") + " " + rb.getString("Login"));
+
+            if (passwordTextField.getText().equals(retrievedPassword)) {
+                loginResult = "Successful";
+                logLambda.writeLog(userAttemptingLogin, LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM-dd-yyyy hh:mm")), loginResult);
+
+
+                allAppointments = AppointmentMSQL.findAll();
+
+                for (Appointment a : allAppointments) {
+
+                    LocalDateTime currentTime = LocalDateTime.now();
+
+                    long timeDifference = ChronoUnit.MINUTES.between(a.getStartDateTime(), currentTime) + 1;
+
+                    if ((timeDifference * -1) < 15 && (timeDifference * -1 > 0)) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Appointments Alert");
+                        alert.setHeaderText("Upcoming Appointment");
+                        alert.setContentText("You have the following Appointment with in 15 minutes: ID: "+ a.getAppointmentId() +" Date/Time: "+a.getStartDateTime());
+                        alert.setGraphic(null);
+                        isUpcomingAppointment = true;
+                        alert.showAndWait();
+                    }
+                }
+
+                if(!isUpcomingAppointment){
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Appointments Alert");
+                    alert.setHeaderText("No Appointment");
+                    alert.setContentText("You have no appointment within 15 minutes");
+                    alert.setGraphic(null);
+                    alert.showAndWait();
+                }
+
+                Parent root = loaderLambda.getRoot("/view/appointmentView.fxml");
+                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root, 1020, 475);
+                stage.setTitle("Scheduler v1.0 Appointments:   " + Main.currentUser.getUsername());
+                stage.setScene(scene);
+                stage.show();
             } else {
-                loginResult = "Failed";
-                logLambda.writeLog(userAttemptingLogin,  LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM-dd-yyyy hh:mm")),loginResult);
-                errorMessageLabel.setText(rb.getString("Invalid") + " " + rb.getString("Login"));
+                ResourceBundle rb = ResourceBundle.getBundle("language_files/rb", Locale.getDefault());
+                if (Main.currentUser == null) {
+
+                }
+                if (Locale.getDefault().getLanguage().equals("fr")) {
+                    loginResult = "Failed";
+                    logLambda.writeLog(userAttemptingLogin, LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM-dd-yyyy hh:mm")), loginResult);
+                    errorMessageLabel.setText(rb.getString("Invalid") + " " + rb.getString("Login"));
+                } else {
+                    loginResult = "Failed";
+                    logLambda.writeLog(userAttemptingLogin, LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM-dd-yyyy hh:mm")), loginResult);
+                    errorMessageLabel.setText(rb.getString("Invalid") + " " + rb.getString("Login"));
+                }
             }
-        }
         }
 
 /** Event handler for the exit button. */
-    public void exitButtonPressed(ActionEvent actionEvent) {
-        Platform.exit();
+        public void exitButtonPressed (ActionEvent actionEvent){
+            Platform.exit();
+        }
     }
-}

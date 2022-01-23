@@ -21,6 +21,7 @@ import view.FXMLLoaderInterface;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -65,6 +66,8 @@ public class appointmentView implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         allAppointments = AppointmentMSQL.findAll();
+
+
 
 
         filteredList = new FilteredList<>(allAppointments);
