@@ -37,7 +37,7 @@ public class addAppointmentView implements Initializable {
     ObservableList<String> endMinutes = FXCollections.observableArrayList();
     ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
     ObservableList<Contact> allContacts = FXCollections.observableArrayList();
-    boolean isAppointmentConflict = false;
+    ObservableList<Appointment> appointmentsConflicts = FXCollections.observableArrayList();
     LocalTime openingBusinessTime = LocalTime.of(8,0,0);
     LocalTime closingBusinessTime = LocalTime.of(22,0,0);
 
@@ -104,7 +104,7 @@ public class addAppointmentView implements Initializable {
 
 /** This is the event handler for the save button. */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException, SQLException {
-
+        appointmentsConflicts.clear();
         if(titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactComboBox.getValue() == null || typeTextField.getText().isEmpty()|| startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || datePicker.getValue() == null || contactComboBox.getValue() == null || customerIdCB.getValue()== null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -154,25 +154,22 @@ public class addAppointmentView implements Initializable {
                 }
 
                 for(Appointment a: AppointmentMSQL.findAll()) {
-                    int start = Integer.parseInt(startLocalDateTime.toString());
-                    System.out.println(start);
-                    int end = Integer.parseInt(endLocalDateTime.toLocalTime().toString());
-                    System.out.println(end);
-                    int startOfOldApp = Integer.parseInt(a.getStartDateTime().toLocalTime().toString());
-                    System.out.println(startOfOldApp);
-                    int endOfOldApp = Integer.parseInt(a.getEndDateTime().toLocalTime().toString());
-                    System.out.println(endOfOldApp);
 
-
-
-                    if(start >= startOfOldApp && start < endOfOldApp){
-                        isAppointmentConflict=true;
+                    if(startLocalDateTime.isEqual(a.getStartDateTime())) {
+                        System.out.println("1");
+                        appointmentsConflicts.add(a);
+                    }
+                    if(startLocalDateTime.isAfter(a.getStartDateTime()) && startLocalDateTime.isBefore(a.getEndDateTime())){
+                        System.out.println("2");
+                        appointmentsConflicts.add(a);
                     }
 
+                    if(startLocalDateTime.isBefore(a.getStartDateTime()) && endLocalDateTime.isAfter(a.getStartDateTime())){
+                        System.out.println("3");
+                        appointmentsConflicts.add(a);
+                    }
 
-
-
-                    if (isAppointmentConflict) {
+                    if (!appointmentsConflicts.isEmpty()) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Appointment Time Conflict");
                         alert.setHeaderText("Sorry Unavailable Date/Time.");

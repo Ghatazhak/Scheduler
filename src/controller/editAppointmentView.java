@@ -20,7 +20,6 @@ import main.Main;
 import model.Appointment;
 import model.Contact;
 import model.Customer;
-import model.User;
 import view.FXMLLoaderInterface;
 
 import java.io.IOException;
@@ -39,7 +38,8 @@ public class editAppointmentView implements Initializable {
     ObservableList<String> endHours = FXCollections.observableArrayList();
     ObservableList<String> endMinutes = FXCollections.observableArrayList();
     ObservableList<Contact> allContacts = FXCollections.observableArrayList();
-    ObservableList<User> allUsers = FXCollections.observableArrayList();
+    ObservableList<Appointment> appointmentsConflicts = FXCollections.observableArrayList();
+
     ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
     FXMLLoaderInterface loaderLambda = s -> {
         Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
@@ -176,6 +176,33 @@ public class editAppointmentView implements Initializable {
             alert.setGraphic(null);
             alert.showAndWait();
             return;
+        }
+
+        for(Appointment a: AppointmentMSQL.findAll()) {
+
+            if(startLocalDateTime.isEqual(a.getStartDateTime())) {
+                System.out.println("1");
+                appointmentsConflicts.add(a);
+            }
+            if(startLocalDateTime.isAfter(a.getStartDateTime()) && startLocalDateTime.isBefore(a.getEndDateTime())){
+                System.out.println("2");
+                appointmentsConflicts.add(a);
+            }
+
+            if(startLocalDateTime.isBefore(a.getStartDateTime()) && endLocalDateTime.isAfter(a.getStartDateTime())){
+                System.out.println("3");
+                appointmentsConflicts.add(a);
+            }
+
+            if (!appointmentsConflicts.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Appointment Time Conflict");
+                alert.setHeaderText("Sorry Unavailable Date/Time.");
+                alert.setContentText("Those dates and times are not available.");
+                alert.setGraphic(null);
+                alert.showAndWait();
+                return;
+            }
         }
 
         Appointment newAppointment = new Appointment(Integer.parseInt(appointmentIdTextField.getText()), titleTextField.getText(), descriptionTextField.getText(), locationTextField.getText(), typeTextField.getText(), startLocalDateTime, endLocalDateTime, customerIdCB.getValue().getCustomerId(), Main.currentUser.getUserId(), contactCB.getValue().getContactId());
