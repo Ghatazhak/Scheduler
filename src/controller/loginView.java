@@ -3,6 +3,8 @@ package controller;
 import data_access.UserLogI;
 import data_access.UserMYSQL;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.Main;
+import model.Appointment;
 import model.User;
 import view.FXMLLoaderInterface;
 
@@ -32,6 +35,7 @@ public class loginView implements Initializable {
     String retrievedPassword = null;
     String loginResult = null;
     String userAttemptingLogin = "null";
+    ObservableList<Appointment> allappointments = FXCollections.observableArrayList();
 
 
     FXMLLoaderInterface loaderLambda = s -> {
@@ -71,6 +75,7 @@ public class loginView implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
         /* Locale french = new Locale("fr","France");
         Locale.setDefault(french); */
         userLocation.setText((Locale.getDefault().getCountry()));
@@ -83,6 +88,15 @@ public class loginView implements Initializable {
             loginButtonText.setText(rb.getString("Login"));
             exitButtonText.setText(rb.getString("Exit"));
         }
+//        allappointments = AppointmentMSQL.findAll();
+//        for(Appointment a: allappointments){
+//
+//        }
+
+
+
+
+
     }
 /** Event handler for login button. */
     public void loginButtonPressed(ActionEvent actionEvent) throws IOException, SQLException {

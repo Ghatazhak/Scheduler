@@ -31,8 +31,6 @@ import java.util.ResourceBundle;
 
 public class editAppointmentView implements Initializable {
 
-
-
     ObservableList<String> startHours = FXCollections.observableArrayList();
     ObservableList<String> startMinutes = FXCollections.observableArrayList();
     ObservableList<String> endHours = FXCollections.observableArrayList();
@@ -40,13 +38,11 @@ public class editAppointmentView implements Initializable {
     ObservableList<Contact> allContacts = FXCollections.observableArrayList();
     ObservableList<Appointment> appointmentsConflicts = FXCollections.observableArrayList();
     Appointment appointment;
-
     ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
     FXMLLoaderInterface loaderLambda = s -> {
         Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
         return root;
     };
-
 
     @FXML
     public TextField appointmentIdTextField;
@@ -140,14 +136,11 @@ public class editAppointmentView implements Initializable {
         String startMinute = startMinuteCB.getValue();
         LocalDateTime startLocalDateTime = LocalDateTime.of(datePickerValue.getYear(), datePickerValue.getMonthValue(), datePickerValue.getDayOfMonth(), Integer.parseInt(startHour), Integer.parseInt(startMinute));
         ZonedDateTime startLocalZonedDateTime = ZonedDateTime.of(startLocalDateTime, ZoneId.systemDefault());
-        //ZonedDateTime utcStartZonedDateTime = startLocalZonedDateTime.withZoneSameInstant(ZoneOffset.UTC);
-
 
         String endHour = endHourCB.getValue();
         String endMinute = endMinuteCB.getValue();
         LocalDateTime endLocalDateTime = LocalDateTime.of(datePickerValue.getYear(), datePickerValue.getMonthValue(), datePickerValue.getDayOfMonth(), Integer.parseInt(endHour), Integer.parseInt(endMinute));
         ZonedDateTime endLocalZonedDateTime = ZonedDateTime.of(endLocalDateTime, ZoneId.systemDefault());
-        // ZonedDateTime utcEndZonedDateTime = endLocalZonedDateTime.withZoneSameInstant(ZoneOffset.UTC);
 
         if(startLocalDateTime.isAfter(endLocalDateTime) || startLocalDateTime.isEqual(endLocalDateTime)){
             Alert alert = new Alert(Alert.AlertType.ERROR);
