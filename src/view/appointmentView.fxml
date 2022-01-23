@@ -39,7 +39,7 @@
             </Menu>
         </menus>
       </MenuBar>
-      <TableView fx:id="allAppointmentsTableView" layoutY="24.0" prefHeight="442.0" prefWidth="1018.0">
+      <TableView fx:id="allAppointmentsTableView" layoutY="26.0" prefHeight="448.0" prefWidth="1018.0">
          <columns>
             <TableColumn fx:id="appointmentIdCol" prefWidth="99.33331298828125" text="Appointment ID" />
             <TableColumn fx:id="titleCol" prefWidth="72.00006103515625" text="Title" />

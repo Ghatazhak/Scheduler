@@ -39,6 +39,7 @@ public class editAppointmentView implements Initializable {
     ObservableList<String> endMinutes = FXCollections.observableArrayList();
     ObservableList<Contact> allContacts = FXCollections.observableArrayList();
     ObservableList<Appointment> appointmentsConflicts = FXCollections.observableArrayList();
+    Appointment appointment;
 
     ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
     FXMLLoaderInterface loaderLambda = s -> {
@@ -90,7 +91,7 @@ public class editAppointmentView implements Initializable {
         endMinuteCB.setItems(endMinutes);
 
 
-        Appointment appointment = appointmentView.tempAppointment;
+        appointment = appointmentView.tempAppointment;
         appointmentIdTextField.setText(String.valueOf(appointment.getAppointmentId()));
         titleTextField.setText(appointment.getTitle());
         descriptionTextField.setText(appointment.getDescription());
@@ -123,6 +124,7 @@ public class editAppointmentView implements Initializable {
     }
 /** This is the event handler for the save button. */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException, SQLException {
+        appointmentsConflicts.clear();
         if(titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactCB.getValue() == null || typeTextField.getText().isEmpty()|| startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || datePicker.getValue() == null || contactCB.getValue() == null || customerIdCB.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -180,16 +182,16 @@ public class editAppointmentView implements Initializable {
 
         for(Appointment a: AppointmentMSQL.findAll()) {
 
-            if(startLocalDateTime.isEqual(a.getStartDateTime())) {
+            if(startLocalDateTime.isEqual(a.getStartDateTime()) && appointment.getAppointmentId() != a.getAppointmentId()) {
                 System.out.println("1");
                 appointmentsConflicts.add(a);
             }
-            if(startLocalDateTime.isAfter(a.getStartDateTime()) && startLocalDateTime.isBefore(a.getEndDateTime())){
+            if(startLocalDateTime.isAfter(a.getStartDateTime()) && startLocalDateTime.isBefore(a.getEndDateTime()) && appointment.getAppointmentId() != a.getAppointmentId()){
                 System.out.println("2");
                 appointmentsConflicts.add(a);
             }
 
-            if(startLocalDateTime.isBefore(a.getStartDateTime()) && endLocalDateTime.isAfter(a.getStartDateTime())){
+            if(startLocalDateTime.isBefore(a.getStartDateTime()) && endLocalDateTime.isAfter(a.getStartDateTime()) && appointment.getAppointmentId() != a.getAppointmentId()){
                 System.out.println("3");
                 appointmentsConflicts.add(a);
             }
