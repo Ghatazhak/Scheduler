@@ -26,10 +26,7 @@ import view.FXMLLoaderInterface;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -159,6 +156,28 @@ public class editAppointmentView implements Initializable {
             alert.showAndWait();
             return;
         }
+
+        ZonedDateTime startzdt = startLocalDateTime.atZone(ZoneId.systemDefault());
+        ZonedDateTime  startzdtE = startzdt.withZoneSameInstant(ZoneId.of("US/Eastern"));
+        LocalTime startEasternTime = startzdtE.toLocalTime();
+
+        ZonedDateTime zdt = endLocalDateTime.atZone(ZoneId.systemDefault());
+        ZonedDateTime  zdtE = zdt.withZoneSameInstant(ZoneId.of("US/Eastern"));
+        LocalTime easternTime = zdtE.toLocalTime();
+
+        LocalTime openingBusinessTime = LocalTime.of(8,0,0);
+        LocalTime closingBusinessTime = LocalTime.of(22,0,0);
+
+        if(startEasternTime.isBefore(openingBusinessTime) || startEasternTime.isAfter(closingBusinessTime) || (easternTime.isBefore(openingBusinessTime) || easternTime.isAfter(closingBusinessTime))) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Scheduling Error");
+            alert.setHeaderText("Business Hours");
+            alert.setContentText("Sorry our Business hours are 8 AM til 10 PM. Please change appointment");
+            alert.setGraphic(null);
+            alert.showAndWait();
+            return;
+        }
+
         Appointment newAppointment = new Appointment(Integer.parseInt(appointmentIdTextField.getText()), titleTextField.getText(), descriptionTextField.getText(), locationTextField.getText(), typeTextField.getText(), startLocalDateTime, endLocalDateTime, customerIdCB.getValue().getCustomerId(), Main.currentUser.getUserId(), contactCB.getValue().getContactId());
         boolean updateResult = AppointmentMSQL.update(newAppointment);
         if(updateResult){

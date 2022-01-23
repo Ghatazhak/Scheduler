@@ -117,13 +117,35 @@ public class addAppointmentView implements Initializable {
                 String startHour = startHourCB.getValue();
                 String startMinute = startMinuteCB.getValue();
                 LocalDateTime startLocalDateTime = LocalDateTime.of(datePickerValue.getYear(), datePickerValue.getMonthValue(), datePickerValue.getDayOfMonth(), Integer.parseInt(startHour), Integer.parseInt(startMinute));
-                //ZonedDateTime startLocalZonedDateTime = ZonedDateTime.of(startLocalDateTime, ZoneId.systemDefault());
-
-
 
                 String endHour = endHourCB.getValue();
                 String endMinute = endMinuteCB.getValue();
                 LocalDateTime localDateTime = LocalDateTime.of(datePickerValue.getYear(), datePickerValue.getMonthValue(), datePickerValue.getDayOfMonth(), Integer.parseInt(endHour), Integer.parseInt(endMinute));
+
+                ZonedDateTime startzdt = startLocalDateTime.atZone(ZoneId.systemDefault());
+                ZonedDateTime  startzdtE = startzdt.withZoneSameInstant(ZoneId.of("US/Eastern"));
+                LocalTime startEasternTime = startzdtE.toLocalTime();
+
+                ZonedDateTime zdt = localDateTime.atZone(ZoneId.systemDefault());
+                ZonedDateTime  zdtE = zdt.withZoneSameInstant(ZoneId.of("US/Eastern"));
+                LocalTime easternTime = zdtE.toLocalTime();
+
+                LocalTime openingBusinessTime = LocalTime.of(8,0,0);
+                LocalTime closingBusinessTime = LocalTime.of(22,0,0);
+
+                if(startEasternTime.isBefore(openingBusinessTime) || startEasternTime.isAfter(closingBusinessTime) || (easternTime.isBefore(openingBusinessTime) || easternTime.isAfter(closingBusinessTime))) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Scheduling Error");
+                    alert.setHeaderText("Business Hours");
+                    alert.setContentText("Sorry our Business hours are 8 AM til 10 PM. Please change appointment");
+                    alert.setGraphic(null);
+                    alert.showAndWait();
+                    return;
+                }
+
+
+
+
                 //ZonedDateTime localDateTimeZoned = ZonedDateTime.of(localDateTime, ZoneId.systemDefault());
 
 
