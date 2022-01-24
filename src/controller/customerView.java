@@ -29,12 +29,7 @@ public class customerView implements Initializable {
     ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
     public static Customer tempCustomer;
 
-    FXMLLoaderInterface loaderLambda = s -> {
-        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
-        return root;
-    };
-
-
+    FXMLLoaderInterface loaderLambda = s -> FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
 
     @FXML
     public TableView<Customer> allCustomersTableView;

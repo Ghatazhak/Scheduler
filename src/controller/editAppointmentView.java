@@ -39,10 +39,8 @@ public class editAppointmentView implements Initializable {
     ObservableList<Appointment> appointmentsConflicts = FXCollections.observableArrayList();
     Appointment appointment;
     ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
-    FXMLLoaderInterface loaderLambda = s -> {
-        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
-        return root;
-    };
+
+    FXMLLoaderInterface loaderLambda = s -> FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
 
     @FXML
     public TextField appointmentIdTextField;

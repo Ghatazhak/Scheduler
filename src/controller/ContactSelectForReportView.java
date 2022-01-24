@@ -25,10 +25,7 @@ public class ContactSelectForReportView implements Initializable {
     public ComboBox<Contact> contactCB;
 
 
-    FXMLLoaderInterface loaderLambda = s -> {
-        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
-        return root;
-    };
+    FXMLLoaderInterface loaderLambda = s -> FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

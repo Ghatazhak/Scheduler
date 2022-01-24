@@ -41,10 +41,7 @@ public class addAppointmentView implements Initializable {
     LocalTime openingBusinessTime = LocalTime.of(8,0,0);
     LocalTime closingBusinessTime = LocalTime.of(22,0,0);
 
-    FXMLLoaderInterface loaderLambda = s -> {
-        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
-        return root;
-    };
+    FXMLLoaderInterface loaderLambda = s -> FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
 
     @FXML
     public TextField appointmentIdTextField;

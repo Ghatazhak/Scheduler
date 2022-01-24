@@ -33,10 +33,7 @@ public class appointmentView implements Initializable {
     private ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
 
 
-    FXMLLoaderInterface loaderLambda = s -> {
-        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
-        return root;
-    };
+    FXMLLoaderInterface loaderLambda = s -> FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
 
     @FXML
     public TableView<Appointment> allAppointmentsTableView;

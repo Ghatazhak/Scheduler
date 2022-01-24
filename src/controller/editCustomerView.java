@@ -31,11 +31,7 @@ public class editCustomerView implements Initializable {
     ObservableList<Division> filteredBySelectedCountryDivisions = FXCollections.observableArrayList();
     Country country;
 
-    FXMLLoaderInterface loaderLambda = s -> {
-        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
-        return root;
-    };
-
+    FXMLLoaderInterface loaderLambda = s -> FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
 
     @FXML
     public TextField customerIdTextField;
