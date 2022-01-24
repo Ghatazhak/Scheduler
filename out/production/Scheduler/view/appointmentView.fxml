@@ -34,7 +34,7 @@
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#typeByMonthReportMenuClicked" text="Type By Month Report" />
                   <MenuItem mnemonicParsing="false" onAction="#contactReportMenuClicked" text="Contact Report" />
-                  <MenuItem mnemonicParsing="false" onAction="#customReportMenuClicked" text="Custom Report" />
+                  <MenuItem mnemonicParsing="false" onAction="#customReportMenuClicked" text="Entities Report" />
                </items>
             </Menu>
         </menus>

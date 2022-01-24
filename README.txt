@@ -9,7 +9,7 @@ IDE: IntelliJ Community 2021.2.4
 JDK Version: 11.0.13
 JAVAFX Version: 17.0.1
 DirectionsToRun: Launch Application and login with username: admin and password: admin.
-Custom Report: A report of all people who are recorded in the database. All customers all users, all contacts.
+Custom Report: A report of all human entities who are recorded in the database. All customers all users, all contacts.
 MySQL Connector Driver Version:  mysql-connector-java-8.0.27
 
 
