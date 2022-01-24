@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -30,7 +31,7 @@ import java.util.function.Predicate;
 public class appointmentView implements Initializable {
     public static Appointment tempAppointment;
     private ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
-    private FilteredList<Appointment> filteredList;
+
 
     FXMLLoaderInterface loaderLambda = s -> {
         Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
@@ -66,16 +67,7 @@ public class appointmentView implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         allAppointments = AppointmentMSQL.findAll();
-
-        filteredList = new FilteredList<>(allAppointments);
-        new Predicate<Appointment>() {
-            @Override
-            public boolean test(Appointment appointment) {
-                return true;
-            }
-        };
-
-        allAppointmentsTableView.setItems(filteredList);
+        allAppointmentsTableView.setItems(allAppointments);
         appointmentIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
         descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -170,59 +162,35 @@ public class appointmentView implements Initializable {
         stage.show();
     }
     /** This is an event handler for type by month report. */
+    @FXML
     public void typeByMonthReportMenuClicked(ActionEvent actionEvent) {
     }
     /** This is an event handler for contact report. */
+    @FXML
     public void contactReportMenuClicked(ActionEvent actionEvent) throws IOException {
         Parent root = loaderLambda.getRoot("/view/ContactSelectForReportView.fxml");
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
         Scene scene = new Scene(root, 340, 175);
-        stage.setTitle("Add Appointment");
+        stage.setTitle("Contact Select Screen");
         stage.setScene(scene);
         stage.show();
     }
     /** This is an event handler for custom report. */
+    @FXML
     public void customReportMenuClicked(ActionEvent actionEvent) {
     }
-
+    @FXML
     public void onWeeklyRadioButton(ActionEvent actionEvent) {
-        filteredList.setPredicate(new Predicate<Appointment>() {
-            @Override
-            public boolean test(Appointment appointment) {
-                int appointmentDayOfYear = appointment.getStartDateTime().getDayOfMonth();
-                int currentDayOfYear = LocalDateTime.now().getDayOfMonth();
-                int appointmentWeek = appointmentDayOfYear / 7;
-                int currentWeek = currentDayOfYear / 7;
-                if(appointmentWeek == currentWeek && appointment.getStartDateTime().getYear() == LocalDateTime.now().getYear()){
-                    return true;
-                }
-                return false;
-            }
 
-        });
     }
-
+    @FXML
     public void onMonthRadioButton(ActionEvent actionEvent) {
-        filteredList.setPredicate(new Predicate<Appointment>() {
-            @Override
-            public boolean test(Appointment appointment) {
-                if(appointment.getStartDateTime().getMonth() == LocalDateTime.now().getMonth() && appointment.getStartDateTime().getYear() == LocalDateTime.now().getYear()){
-                    return true;
-                }
-                return false;
-            }
 
-        });
 
     }
-
+    @FXML
     public void onAllRadioButton(ActionEvent actionEvent) {
-        filteredList.setPredicate(new Predicate<Appointment>() {
-            @Override
-            public boolean test(Appointment appointment) {
-                return true;
-            }
-        });
+
     }
 
 }
