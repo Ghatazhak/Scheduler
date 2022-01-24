@@ -1,15 +1,20 @@
 
 
 
-
-
-
-
-
-f.  Write code that generates accurate information in each of the following reports and will display the reports in the user interface:
-Note: You do not need to save and print the reports to a file or provide a screenshot.
 •  the total number of customer appointments by type and month
-•  a schedule for each contact in your organization that includes appointment ID, title, type and description, start date and time, end date and time, and customer ID
+SELECT COUNT(*) AS Types,
+monthname(start) as ByMonth
+FROM appointments
+GROUP BY month(start);
+
+
+SELECT DATE_FORMAT(yourColumnName, '%m-%Y') from yourTableName
+GROUP BY MONTH(yourColumnName), YEAR(yourColumnName)DESC;
+
+
+
+
+
 •  an additional report of your choice that is different from the two other required reports in this prompt and from the user log-in date and time stamp that will be tracked in part C
 
 D.  Provide descriptive Javadoc comments for at least 70 percent of the classes and their members throughout the code, and create an index.html file of your comments to include with your submission based on Oracle’s guidelines for the Javadoc tool best practices. Your comments should include a justification for each lambda expression in the method where it is used.

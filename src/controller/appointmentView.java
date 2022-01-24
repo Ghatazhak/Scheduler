@@ -3,12 +3,10 @@ package controller;
 import data_access.AppointmentMSQL;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -22,11 +20,9 @@ import view.FXMLLoaderInterface;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.function.Predicate;
 
 public class appointmentView implements Initializable {
     public static Appointment tempAppointment;
@@ -160,7 +156,13 @@ public class appointmentView implements Initializable {
     }
     /** This is an event handler for type by month report. */
     @FXML
-    public void typeByMonthReportMenuClicked(ActionEvent actionEvent) {
+    public void typeByMonthReportMenuClicked(ActionEvent actionEvent) throws IOException {
+        Parent root = loaderLambda.getRoot("/view/typeAmountByMonthView.fxml");
+        Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
+        Scene scene = new Scene(root, 408, 400);
+        stage.setTitle("Contact Select Screen");
+        stage.setScene(scene);
+        stage.show();
     }
     /** This is an event handler for contact report. */
     @FXML
