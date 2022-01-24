@@ -3,6 +3,7 @@ package controller;
 import data_access.AppointmentMSQL;
 import data_access.ContactMYSQL;
 import data_access.CustomerMSQL;
+import data_access.UserMYSQL;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,10 +17,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import main.Main;
 import model.Appointment;
 import model.Contact;
 import model.Customer;
+import model.User;
 import view.FXMLLoaderInterface;
 
 import java.io.IOException;
@@ -31,11 +32,13 @@ import java.util.ResourceBundle;
 
 public class editAppointmentView implements Initializable {
 
+
     ObservableList<String> startHours = FXCollections.observableArrayList();
     ObservableList<String> startMinutes = FXCollections.observableArrayList();
     ObservableList<String> endHours = FXCollections.observableArrayList();
     ObservableList<String> endMinutes = FXCollections.observableArrayList();
     ObservableList<Contact> allContacts = FXCollections.observableArrayList();
+    ObservableList<User> allUsers = FXCollections.observableArrayList();
     ObservableList<Appointment> appointmentsConflicts = FXCollections.observableArrayList();
     Appointment appointment;
     ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
@@ -57,7 +60,7 @@ public class editAppointmentView implements Initializable {
     @FXML
     public ComboBox<Customer> customerIdCB;
     @FXML
-    public TextField userIdTextField;
+    public ComboBox<User> userIDComboBox;
     @FXML
     public DatePicker datePicker;
     @FXML
@@ -105,7 +108,19 @@ public class editAppointmentView implements Initializable {
         customerIdCB.setItems(allCustomers);
         customerIdCB.setValue(CustomerMSQL.findById(appointment.getCustomerId()));
 
-        userIdTextField.setText(String.valueOf(Main.currentUser.getUserId()) + " (" + Main.currentUser.getUsername() + ")");
+        try {
+            allUsers = UserMYSQL.findAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        userIDComboBox.setItems(allUsers);
+        try {
+            userIDComboBox.setValue(UserMYSQL.findById(appointment.getUserId()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void returnToHomeView() throws IOException {
@@ -119,7 +134,7 @@ public class editAppointmentView implements Initializable {
 /** This is the event handler for the save button. */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException, SQLException {
         appointmentsConflicts.clear();
-        if(titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactCB.getValue() == null || typeTextField.getText().isEmpty()|| startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || datePicker.getValue() == null || contactCB.getValue() == null || customerIdCB.getValue() == null){
+        if(titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactCB.getValue() == null || typeTextField.getText().isEmpty()|| startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || datePicker.getValue() == null || contactCB.getValue() == null || customerIdCB.getValue() == null || userIDComboBox.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Missing Data!");
@@ -198,7 +213,7 @@ public class editAppointmentView implements Initializable {
             }
         }
 
-        Appointment newAppointment = new Appointment(Integer.parseInt(appointmentIdTextField.getText()), titleTextField.getText(), descriptionTextField.getText(), locationTextField.getText(), typeTextField.getText(), startLocalDateTime, endLocalDateTime, customerIdCB.getValue().getCustomerId(), Main.currentUser.getUserId(), contactCB.getValue().getContactId());
+        Appointment newAppointment = new Appointment(Integer.parseInt(appointmentIdTextField.getText()), titleTextField.getText(), descriptionTextField.getText(), locationTextField.getText(), typeTextField.getText(), startLocalDateTime, endLocalDateTime, customerIdCB.getValue().getCustomerId(), userIDComboBox.getValue().getUserId(), contactCB.getValue().getContactId());
         boolean updateResult = AppointmentMSQL.update(newAppointment);
         if(updateResult){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -220,5 +235,8 @@ public class editAppointmentView implements Initializable {
 /** This is the event handler for the cancel button. */
     public void cancelButtonClicked(ActionEvent actionEvent) throws IOException {
         returnToHomeView();
+    }
+
+    public void userIDComboBoxClicked(ActionEvent actionEvent) {
     }
 }

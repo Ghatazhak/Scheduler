@@ -45,7 +45,7 @@ public class UserMYSQL {
         }
         return null;
     }
-    public static Boolean userExist(int userId) throws SQLException {
+    public static User findById(int userId) throws SQLException {
         allUsers.clear();
         String sqlStatement = "SELECT * FROM users";
         Connection connection = JDBC.connection;
@@ -61,10 +61,10 @@ public class UserMYSQL {
 
         for (User u : allUsers) {
             if (u.getUserId() == userId) {
-                return true;
+                return u;
             }
         }
-        return false;
+        return null;
     }
 
     public static Boolean create() {
