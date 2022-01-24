@@ -2,7 +2,7 @@
 
 
 
-Note: Since evaluation may be testing your application outside business hours, your alerts must be robust enough to trigger an appointment within 15 minutes of the local time set on the user’s computer, which may or may not be EST.
+
 
 
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ContactReportView">
+   <children>
+      <TableView prefHeight="410.0" prefWidth="782.0">
+        <columns>
+          <TableColumn fx:id="appointmentIDCol" prefWidth="106.0" text="Appointment ID" />
+          <TableColumn fx:id="titleCol" prefWidth="112.0" text="Title" />
+            <TableColumn fx:id="typeCol" prefWidth="112.0" text="Type" />
+            <TableColumn fx:id="descriptionCol" prefWidth="112.0" text="Description" />
+            <TableColumn fx:id="startCol" prefWidth="112.0" text="Start Date/Time" />
+            <TableColumn fx:id="endCol" prefWidth="112.0" text="End Date/Time" />
+            <TableColumn fx:id="customerIDCol" prefWidth="115.0" text="Customer ID" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

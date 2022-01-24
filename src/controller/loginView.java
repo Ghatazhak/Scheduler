@@ -27,7 +27,8 @@ import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Locale;
@@ -116,9 +117,13 @@ public class loginView implements Initializable {
 
                 for (Appointment a : allAppointments) {
 
-                    LocalDateTime currentTime = LocalDateTime.now(ZoneOffset.of("US/Eastern"));
 
-                    long timeDifference = ChronoUnit.MINUTES.between(a.getStartDateTime(), currentTime) + 1;
+                    ZoneId zid = ZoneId.of("US/Eastern");
+                    LocalDateTime currentTime = LocalDateTime.now(zid);
+
+                    ZonedDateTime startDT = a.getStartDateTime().atZone(zid);
+
+                    long timeDifference = ChronoUnit.MINUTES.between(startDT.toLocalDateTime(), currentTime) + 1;
 
                     if ((timeDifference * -1) < 15 && (timeDifference * -1 > 0)) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
