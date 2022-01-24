@@ -6,7 +6,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ContactReportView">
    <children>
-      <TableView prefHeight="410.0" prefWidth="782.0">
+      <TableView fx:id="contactReportTableView" prefHeight="410.0" prefWidth="782.0">
         <columns>
           <TableColumn fx:id="appointmentIDCol" prefWidth="106.0" text="Appointment ID" />
           <TableColumn fx:id="titleCol" prefWidth="112.0" text="Title" />
