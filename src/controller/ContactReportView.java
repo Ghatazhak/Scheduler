@@ -3,18 +3,29 @@ package controller;
 import data_access.AppointmentMSQL;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import main.Main;
 import model.Appointment;
+import view.FXMLLoaderInterface;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ContactReportView implements Initializable {
+
     ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
     ObservableList<Appointment> appointmentsByContact = FXCollections.observableArrayList();
+
     public TableView contactReportTableView;
     public TableColumn appointmentIDCol;
     public TableColumn titleCol;
@@ -23,6 +34,8 @@ public class ContactReportView implements Initializable {
     public TableColumn startCol;
     public TableColumn endCol;
     public TableColumn customerIDCol;
+
+    FXMLLoaderInterface loaderLambda = s -> FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -42,5 +55,14 @@ public class ContactReportView implements Initializable {
         endCol.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
         customerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
 
+    }
+
+    public void returnButtonClicked(ActionEvent actionEvent) throws IOException {
+        Parent root = loaderLambda.getRoot("/view/appointmentView.fxml");
+        Stage stage = (Stage) contactReportTableView.getScene().getWindow();
+        Scene scene = new Scene(root, 1020, 475);
+        stage.setTitle("Scheduler v1.0 Appointments:   " + Main.currentUser.getUsername());
+        stage.setScene(scene);
+        stage.show();
     }
 }
