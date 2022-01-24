@@ -22,7 +22,6 @@ import model.Contact;
 import model.Customer;
 import model.User;
 import view.FXMLLoaderInterface;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -31,8 +30,6 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class addAppointmentView implements Initializable {
-
-
     ObservableList<String> startHours = FXCollections.observableArrayList();
     ObservableList<String> startMinutes = FXCollections.observableArrayList();
     ObservableList<String> endHours = FXCollections.observableArrayList();
@@ -101,7 +98,7 @@ public class addAppointmentView implements Initializable {
 
 
     }
-
+    /** A method that can return you to the Appointment View. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root. */
    public void returnToHomeView() throws IOException {
        Parent root = loaderLambda.getRoot("/view/appointmentView.fxml");
        Stage stage = (Stage) appointmentIdTextField.getScene().getWindow();
@@ -189,8 +186,5 @@ public class addAppointmentView implements Initializable {
 /** This is the event handler for the cancel button. */
     public void cancelButtonClicked(ActionEvent actionEvent) throws IOException {
         returnToHomeView();
-    }
-
-    public void userIDComboBoxClicked(ActionEvent actionEvent) {
     }
 }

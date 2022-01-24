@@ -46,7 +46,6 @@ public class ContactReportView implements Initializable {
             }
         }
         contactReportTableView.setItems(appointmentsByContact);
-
         appointmentIDCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
         descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -56,7 +55,7 @@ public class ContactReportView implements Initializable {
         customerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
 
     }
-
+    /** An event handler that returns the user to appointment view.(loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
     public void returnButtonClicked(ActionEvent actionEvent) throws IOException {
         Parent root = loaderLambda.getRoot("/view/appointmentView.fxml");
         Stage stage = (Stage) contactReportTableView.getScene().getWindow();

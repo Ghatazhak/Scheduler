@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Appointment;
 import view.FXMLLoaderInterface;
-
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -28,7 +27,6 @@ public class appointmentView implements Initializable {
     public static Appointment tempAppointment;
     private ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
     private ObservableList<Appointment> filteredAppointments = FXCollections.observableArrayList();
-
 
     FXMLLoaderInterface loaderLambda = s -> FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
 
@@ -74,7 +72,7 @@ public class appointmentView implements Initializable {
         contactCol.setCellValueFactory(new PropertyValueFactory<>("ContactId"));
     }
 
-/** This is an event handler for log off. */
+/** This is an event handler for log off. It take you back to the login screen. */
     public void logOffMenuClicked(ActionEvent actionEvent) throws IOException {
         Parent root = loaderLambda.getRoot("/view/loginView.fxml");
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
@@ -84,7 +82,7 @@ public class appointmentView implements Initializable {
         stage.show();
     }
 
-        /** This is an event handler for adding an appointment. */
+    /** This is an event handler for adding an appointment. It takes you to a view for adding appointments. */
     public void addAppointmentMenuClicked(ActionEvent actionEvent) throws IOException {
         Parent root = loaderLambda.getRoot("/view/addAppointmentView.fxml");
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
@@ -93,7 +91,7 @@ public class appointmentView implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    /** This is an event handler for editing appointments. */
+    /** This is an event handler for editing appointments. It takes you to a view for editing appointments. */
     public void editAppointmentMenuClicked(ActionEvent actionEvent) throws IOException {
 
         tempAppointment = allAppointmentsTableView.getSelectionModel().getSelectedItem();
@@ -115,7 +113,7 @@ public class appointmentView implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    /** This is an event handler for deleting appointments. */
+    /** This is an event handler for deleting appointments. It deletes the selected appointment. */
     public void deleteAppointmentMenuClicked(ActionEvent actionEvent) {
         tempAppointment = allAppointmentsTableView.getSelectionModel().getSelectedItem();
         if (tempAppointment == null) {
@@ -144,7 +142,7 @@ public class appointmentView implements Initializable {
         }
 
 
-    /** This is an event handler for customer management. */
+    /** This is an event handler for customer management. It takes you to a customer management screen (Modal). */
     public void customerEditclicked(ActionEvent actionEvent) throws IOException {
         Parent root = loaderLambda.getRoot("/view/customerView.fxml");
         Stage stage = new Stage();
@@ -155,7 +153,7 @@ public class appointmentView implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    /** This is an event handler for type by month report. */
+    /** This is an event handler for type by month report. This filters all the appointments that are not in the current month. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root. */
     @FXML
     public void typeByMonthReportMenuClicked(ActionEvent actionEvent) throws IOException {
         Parent root = loaderLambda.getRoot("/view/typeAmountByMonthView.fxml");
@@ -165,7 +163,7 @@ public class appointmentView implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    /** This is an event handler for contact report. */
+    /** This is an event handler for contact report. This reports all appointments by contact. */
     @FXML
     public void contactReportMenuClicked(ActionEvent actionEvent) throws IOException {
         Parent root = loaderLambda.getRoot("/view/ContactSelectForReportView.fxml");
@@ -175,7 +173,7 @@ public class appointmentView implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    /** This is an event handler for custom report. */
+    /** This event handler is for the Entities Report. It reports all user names, contact names, and customer names. */
     @FXML
     public void customReportMenuClicked(ActionEvent actionEvent) throws IOException {
         Parent root = loaderLambda.getRoot("/view/humanentitiesreportview.fxml");
@@ -193,7 +191,6 @@ public class appointmentView implements Initializable {
             if((a.getStartDateTime().getDayOfYear()/7 == (LocalDateTime.now().getDayOfYear()/7))){
                 filteredAppointments.add(a);
             }
-
         }
         allAppointmentsTableView.setItems(filteredAppointments);
     }

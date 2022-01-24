@@ -33,13 +33,12 @@ public class typeAmountByView implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         contactReport = ContactReportMYSQL.getContactReport();
-
         typeAmountByMonthTableView.setItems(contactReport);
         monthCol.setCellValueFactory(new PropertyValueFactory<>("month"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         amountCol.setCellValueFactory(new PropertyValueFactory<>("typeAmount"));
     }
-
+/** A event handler that returns the user to appointment view. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
     public void returnButtonClicked(ActionEvent actionEvent) throws IOException {
         Parent root = loaderLambda.getRoot("/view/appointmentView.fxml");
         Stage stage = (Stage) typeAmountByMonthTableView.getScene().getWindow();

@@ -96,7 +96,7 @@ public class loginView implements Initializable {
             exitButtonText.setText(rb.getString("Exit"));
         }
         }
-/** Event handler for login button. */
+    /** An event handler for the login button. It checks your username and password and logs the time and if the login was successful in a text file. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
         public void loginButtonPressed (ActionEvent actionEvent) throws IOException, SQLException {
             userAttemptingLogin = usernameTextField.getText();
             try {
@@ -168,7 +168,7 @@ public class loginView implements Initializable {
             }
         }
 
-/** Event handler for the exit button. */
+/** Event handler for the exit button. It exits the application */
         public void exitButtonPressed (ActionEvent actionEvent){
             Platform.exit();
         }

@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.addAppointmentView">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.addAppointmentView">
    <children>
       <Label layoutX="25.0" layoutY="20.0" text="Appointment ID">
          <font>
@@ -61,14 +61,13 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="appointmentIdTextField" disable="true" layoutX="139.0" layoutY="17.0" prefHeight="25.0" prefWidth="233.0" promptText="Appointment ID Disabled" />
+      <TextField fx:id="appointmentIdTextField" disable="true" layoutX="137.0" layoutY="17.0" prefHeight="25.0" prefWidth="233.0" promptText="Appointment ID Disabled" />
       <Line endX="179.66665649414062" endY="3.814697265625E-6" layoutX="139.0" layoutY="47.0" startX="-120.99999237060547" startY="3.814697265625E-6" />
-      <TextField fx:id="titleTextField" layoutX="139.0" layoutY="52.0" prefHeight="25.0" prefWidth="233.0" promptText="Enter Title" />
-      <TextField fx:id="descriptionTextField" layoutX="139.0" layoutY="87.0" prefHeight="25.0" prefWidth="233.0" promptText="Enter Description" />
-      <TextField fx:id="locationTextField" layoutX="139.0" layoutY="122.0" prefHeight="25.0" prefWidth="233.0" promptText="Enter Location" />
-      <ComboBox fx:id="contactComboBox" layoutX="140.0" layoutY="157.0" prefHeight="25.0" prefWidth="233.0" />
-      <DatePicker fx:id="datePicker" layoutX="137.0" layoutY="227.0" prefHeight="25.0" prefWidth="232.0" />
-      <TextField fx:id="userIdTextField" editable="false" layoutX="139.0" layoutY="332.0" prefHeight="25.0" prefWidth="233.0" />
+      <TextField fx:id="titleTextField" layoutX="137.0" layoutY="52.0" prefHeight="25.0" prefWidth="233.0" promptText="Enter Title" />
+      <TextField fx:id="descriptionTextField" layoutX="137.0" layoutY="87.0" prefHeight="25.0" prefWidth="233.0" promptText="Enter Description" />
+      <TextField fx:id="locationTextField" layoutX="137.0" layoutY="122.0" prefHeight="25.0" prefWidth="233.0" promptText="Enter Location" />
+      <ComboBox fx:id="contactComboBox" layoutX="137.0" layoutY="157.0" prefHeight="25.0" prefWidth="233.0" />
+      <DatePicker fx:id="datePicker" layoutX="137.0" layoutY="227.0" prefHeight="25.0" prefWidth="233.0" />
       <Button focusTraversable="false" layoutX="140.0" layoutY="369.0" mnemonicParsing="false" onAction="#saveButtonClicked" prefHeight="35.0" prefWidth="68.0" text="Save" />
       <Button focusTraversable="false" layoutX="239.0" layoutY="369.0" mnemonicParsing="false" onAction="#cancelButtonClicked" prefHeight="35.0" prefWidth="68.0" text="Cancel" />
       <ComboBox fx:id="startHourCB" layoutX="137.0" layoutY="262.0" prefHeight="25.0" prefWidth="57.0" />
@@ -76,6 +75,7 @@
       <ComboBox fx:id="endHourCB" layoutX="253.0" layoutY="262.0" prefHeight="25.0" prefWidth="57.0" />
       <ComboBox fx:id="endMinuteCB" layoutX="312.0" layoutY="262.0" prefHeight="25.0" prefWidth="57.0" />
       <ComboBox fx:id="customerIdCB" layoutX="137.0" layoutY="297.0" prefHeight="25.0" prefWidth="233.0" />
-      <TextField fx:id="typeTextField" layoutX="140.0" layoutY="193.0" prefHeight="25.0" prefWidth="232.0" />
+      <TextField fx:id="typeTextField" layoutX="137.0" layoutY="193.0" prefHeight="25.0" prefWidth="233.0" />
+      <ComboBox fx:id="userIDComboBox" layoutX="137.0" layoutY="333.0" onAction="#userIDComboBoxClicked" prefHeight="25.0" prefWidth="233.0" />
    </children>
 </AnchorPane>

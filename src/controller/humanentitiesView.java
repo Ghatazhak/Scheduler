@@ -33,18 +33,9 @@ public class humanentitiesView implements Initializable {
         allEntityNames.addAll(HumanEntitiesReportMYSQL.getCustomers());
         allEntityNames.addAll(HumanEntitiesReportMYSQL.getContacts());
         humanEntitiesTableView.setItems(allEntityNames);
-
         NameCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
-
-
-
-
-
-
-
-
     }
-
+    /** Event handler for returning to appointment view. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
     public void returnButtonClicked(ActionEvent actionEvent) throws IOException {
         Parent root = loaderLambda.getRoot("/view/appointmentView.fxml");
         Stage stage = (Stage) humanEntitiesTableView.getScene().getWindow();

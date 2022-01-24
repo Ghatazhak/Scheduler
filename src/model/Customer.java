@@ -71,6 +71,6 @@ public class Customer {
     }
     @Override
     public String toString(){
-        return String.valueOf(customerName);
+        return String.valueOf(customerId);
     }
 }

@@ -60,7 +60,7 @@ public class customerView implements Initializable {
         divisionCol.setCellValueFactory(new PropertyValueFactory<>("division"));
 
     }
-    /** This event handler is for the add button. */
+    /** An event handler for adding customers. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
     public void addButtonClicked(ActionEvent actionEvent) throws IOException {
         Parent root = loaderLambda.getRoot("/view/addCustomerView.fxml");
         Stage stage = (Stage) allCustomersTableView.getScene().getWindow();
@@ -69,7 +69,7 @@ public class customerView implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    /** This event handler is for the edit button. */
+    /** An event handler for editing customers. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
     public void editButtonClicked(ActionEvent actionEvent) throws IOException {
         tempCustomer = allCustomersTableView.getSelectionModel().getSelectedItem();
 
@@ -89,7 +89,7 @@ public class customerView implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    /** This event handler is for the delete button. */
+    /** This event handler is for the delete button. It deletes the selected customer. */
     public void deleteButtonClicked(ActionEvent actionEvent) {
 
         tempCustomer = allCustomersTableView.getSelectionModel().getSelectedItem();
@@ -120,7 +120,7 @@ public class customerView implements Initializable {
             allCustomersTableView.setItems(allCustomers);
         }
     }
-    /** This event handler is for the cancel button. */
+    /** An event handler that returns the user to appointment view (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
     public void cancelButtonClicked(ActionEvent actionEvent) throws IOException {
         Parent root = loaderLambda.getRoot("/view/appointmentView.fxml");
         Stage stage = (Stage) allCustomersTableView.getScene().getWindow();

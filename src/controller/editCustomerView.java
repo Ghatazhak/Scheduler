@@ -69,8 +69,6 @@ public class editCustomerView implements Initializable {
               divisionCB.setValue(DivisionMYSQL.findById(DivisionMYSQL.findByName(d.getDivision())));
         }
 
-
-
         for(Country c :allCountries ){
             if(c.getCountryId() == divisionCB.getValue().getCountryId()){
 
@@ -80,7 +78,7 @@ public class editCustomerView implements Initializable {
         }
 
     }
-
+    /** An event handler to return to customer management. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
     public void returnToCustomerManagementView() throws IOException {
         Parent root = loaderLambda.getRoot("/view/customerView.fxml");
         Stage stage = (Stage) customerIdTextField.getScene().getWindow();
@@ -90,7 +88,7 @@ public class editCustomerView implements Initializable {
         stage.show();
     }
 
-    /** This is the event handler for save button on add customer. */
+    /** This is the event handler for save button on add customer. It validates input and calls returnToCustomerManagement */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException {
         if(nameTextField.getText().isEmpty() || addressTextField.getText().isEmpty() || postalCodeTextField.getText().isEmpty() || phoneNumberTextField.getText().isEmpty() || countryCB.getValue() == null || divisionCB.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -108,11 +106,11 @@ public class editCustomerView implements Initializable {
         }
     }
 
-    /** This is the even handler for cancel button on add customer. */
+    /** This is the even handler for cancel button on add customer. It returns you to customer management. */
     public void CancelButtonClicked(ActionEvent actionEvent) throws IOException {
         returnToCustomerManagementView();
     }
-
+    /** An event handler for the country combo box. It filters the first level divisions when clicked. */
     public void countryCBClicked(ActionEvent actionEvent) {
 
         divisionCB.setValue(null);

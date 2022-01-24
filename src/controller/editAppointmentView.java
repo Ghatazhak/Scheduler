@@ -80,24 +80,19 @@ public class editAppointmentView implements Initializable {
         startMinutes.addAll("00", "15", "30", "45");
         startHourCB.setItems(startHours);
         startMinuteCB.setItems(startMinutes);
-
         endHours.addAll("00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11",
                 "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23");
         endMinutes.addAll("00", "15", "30", "45");
         endHourCB.setItems(endHours);
         endMinuteCB.setItems(endMinutes);
-
-
         appointment = appointmentView.tempAppointment;
         appointmentIdTextField.setText(String.valueOf(appointment.getAppointmentId()));
         titleTextField.setText(appointment.getTitle());
         descriptionTextField.setText(appointment.getDescription());
         locationTextField.setText(appointment.getLocation());
-
         allContacts = ContactMYSQL.findAll();
         contactCB.setItems(allContacts);
         contactCB.setValue(ContactMYSQL.findById(appointment.getContactId()));
-
         typeTextField.setText(appointment.getType());
         datePicker.setValue(appointment.getStartDateTime().toLocalDate());
         startHourCB.setValue(String.valueOf(appointment.getStartDateTime().getHour()));
@@ -120,9 +115,8 @@ public class editAppointmentView implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
-
+    /** A method that can be called to change the view to home. (loaderLambda) Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root. */
     public void returnToHomeView() throws IOException {
         Parent root = loaderLambda.getRoot("/view/appointmentView.fxml");
         Stage stage = (Stage) appointmentIdTextField.getScene().getWindow();
@@ -235,8 +229,5 @@ public class editAppointmentView implements Initializable {
 /** This is the event handler for the cancel button. */
     public void cancelButtonClicked(ActionEvent actionEvent) throws IOException {
         returnToHomeView();
-    }
-
-    public void userIDComboBoxClicked(ActionEvent actionEvent) {
     }
 }

@@ -51,7 +51,7 @@ public class addCustomerView implements Initializable {
             allCountries = CountryMYSQL.findAll();
             countryCB.setItems(allCountries);
     }
-
+    /** A method that can return you to the Customer management view. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root. */
     public void returnToCustomerManagementView() throws IOException {
         Parent root = loaderLambda.getRoot("/view/customerView.fxml");
         Stage stage = (Stage) customerIdTextField.getScene().getWindow();
@@ -81,7 +81,7 @@ public class addCustomerView implements Initializable {
     public void CancelButtonClicked(ActionEvent actionEvent) throws IOException {
         returnToCustomerManagementView();
     }
-
+    /** This is the event handler for when you select a country. It filters the first level divisions. */
     public void countryCBClicked(ActionEvent actionEvent) {
 
         Country country = countryCB.getSelectionModel().getSelectedItem();

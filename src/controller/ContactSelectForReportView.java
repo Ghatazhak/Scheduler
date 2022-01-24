@@ -23,8 +23,6 @@ public class ContactSelectForReportView implements Initializable {
     public static Contact tempContact;
     private ObservableList<Contact> allContacts = FXCollections.observableArrayList();
     public ComboBox<Contact> contactCB;
-
-
     FXMLLoaderInterface loaderLambda = s -> FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
 
     @Override
@@ -32,10 +30,9 @@ public class ContactSelectForReportView implements Initializable {
         allContacts = ContactMYSQL.findAll();
         contactCB.setItems(allContacts);
     }
-
+    /** An event handler that creates the report view. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
     public void generateButtonClicked(ActionEvent actionEvent) throws IOException {
         tempContact = contactCB.getSelectionModel().getSelectedItem();
-
         Parent root = loaderLambda.getRoot("/view/ContactReportView.fxml");
         Stage stage = (Stage) contactCB.getScene().getWindow();
         Scene scene = new Scene(root, 782, 410);
@@ -43,7 +40,7 @@ public class ContactSelectForReportView implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
+    /** An event handler that returns the user to appointment view. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
     public void cancelButtonClicked(ActionEvent actionEvent) throws IOException {
         Parent root = loaderLambda.getRoot("/view/appointmentView.fxml");
         Stage stage = (Stage) contactCB.getScene().getWindow();

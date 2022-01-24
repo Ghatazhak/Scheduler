@@ -37,6 +37,6 @@ public class User {
 
     @Override
     public String toString(){
-        return username;
+        return String.valueOf(userId);
     }
 }
