@@ -188,17 +188,18 @@ public class appointmentView implements Initializable {
     }
     @FXML
     public void onWeeklyRadioButton(ActionEvent actionEvent) {
-//        filteredAppointments
-//        for(Appointment a: allAppointments){
-//
-//        }
-//
-//
+        filteredAppointments.clear();
+        for(Appointment a: allAppointments){
+            if((a.getStartDateTime().getDayOfYear()/7 == (LocalDateTime.now().getDayOfYear()/7))){
+                filteredAppointments.add(a);
+            }
 
-
+        }
+        allAppointmentsTableView.setItems(filteredAppointments);
     }
     @FXML
     public void onMonthRadioButton(ActionEvent actionEvent) {
+        filteredAppointments.clear();
         for(Appointment a: allAppointments){
             if(a.getStartDateTime().getMonth().equals(LocalDateTime.now().getMonth())){
                 filteredAppointments.add(a);
@@ -210,5 +211,4 @@ public class appointmentView implements Initializable {
     public void onAllRadioButton(ActionEvent actionEvent) {
         allAppointmentsTableView.setItems(allAppointments);
     }
-
 }
