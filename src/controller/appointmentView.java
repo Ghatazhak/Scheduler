@@ -176,7 +176,14 @@ public class appointmentView implements Initializable {
     }
     /** This is an event handler for custom report. */
     @FXML
-    public void customReportMenuClicked(ActionEvent actionEvent) {
+    public void customReportMenuClicked(ActionEvent actionEvent) throws IOException {
+        Parent root = loaderLambda.getRoot("/view/humanentitiesreportview.fxml");
+        Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
+        Scene scene = new Scene(root, 453, 342);
+        stage.setTitle("Human Entity Report");
+        stage.setScene(scene);
+        stage.show();
+
     }
     @FXML
     public void onWeeklyRadioButton(ActionEvent actionEvent) {
