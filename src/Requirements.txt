@@ -4,7 +4,6 @@ D.  Provide descriptive Javadoc comments for at least 70 percent of the classes 
 Note: The comments on the lambda need to be located in the comments describing the method where it is located for it to export properly.
 
 
-NEED TO REDO THE FILTER BY MONTH WEEK AND ALL METHODS. WASN'T WORKING AS INTENDED.
 
 
 
