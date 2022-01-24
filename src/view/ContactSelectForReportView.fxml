@@ -5,12 +5,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="287.0" prefWidth="427.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ContactSelectForReportView">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="175.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ContactSelectForReportView">
    <children>
-      <Label layoutX="173.0" layoutY="35.0" text="Contact Report" />
-      <ComboBox fx:id="contactCB" layoutX="139.0" layoutY="65.0" prefWidth="150.0" promptText="Choose a Contact" />
-      <Button layoutX="139.0" layoutY="119.0" mnemonicParsing="false" onAction="#generateButtonClicked" text="Generate" />
-      <Button layoutX="228.0" layoutY="119.0" mnemonicParsing="false" onAction="#cancelButtonClicked" text="Cancel" />
+      <Label layoutX="130.0" layoutY="30.0" text="Contact Report" />
+      <ComboBox fx:id="contactCB" layoutX="97.0" layoutY="56.0" prefWidth="150.0" promptText="Choose a Contact" />
+      <Button layoutX="98.0" layoutY="107.0" mnemonicParsing="false" onAction="#generateButtonClicked" text="Generate" />
+      <Button layoutX="195.0" layoutY="107.0" mnemonicParsing="false" onAction="#cancelButtonClicked" text="Cancel" />
    </children>
 </AnchorPane>

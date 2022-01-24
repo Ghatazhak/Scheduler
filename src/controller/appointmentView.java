@@ -98,16 +98,7 @@ public class appointmentView implements Initializable {
         stage.show();
     }
 
-    /** This is an event handler for default schedule view. */
-    public void defaultScheduleMenuClicked(ActionEvent actionEvent) {
-    }
-    /** This is an event handler for Weekly schedule view. */
-    public void byWeekScheduleMenuClicked(ActionEvent actionEvent) {
-    }
-    /** This is an event handler for Monthly schedule view. */
-    public void byMonthScheduleMenuClicked(ActionEvent actionEvent) {
-    }
-    /** This is an event handler for adding an appointment. */
+        /** This is an event handler for adding an appointment. */
     public void addAppointmentMenuClicked(ActionEvent actionEvent) throws IOException {
         Parent root = loaderLambda.getRoot("/view/addAppointmentView.fxml");
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
@@ -182,7 +173,13 @@ public class appointmentView implements Initializable {
     public void typeByMonthReportMenuClicked(ActionEvent actionEvent) {
     }
     /** This is an event handler for contact report. */
-    public void contactReportMenuClicked(ActionEvent actionEvent) {
+    public void contactReportMenuClicked(ActionEvent actionEvent) throws IOException {
+        Parent root = loaderLambda.getRoot("/view/ContactSelectForReportView.fxml");
+        Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
+        Scene scene = new Scene(root, 340, 175);
+        stage.setTitle("Add Appointment");
+        stage.setScene(scene);
+        stage.show();
     }
     /** This is an event handler for custom report. */
     public void customReportMenuClicked(ActionEvent actionEvent) {
