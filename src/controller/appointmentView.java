@@ -27,6 +27,7 @@ import java.util.ResourceBundle;
 public class appointmentView implements Initializable {
     public static Appointment tempAppointment;
     private ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
+    private ObservableList<Appointment> filteredAppointments = FXCollections.observableArrayList();
 
 
     FXMLLoaderInterface loaderLambda = s -> FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
@@ -187,16 +188,27 @@ public class appointmentView implements Initializable {
     }
     @FXML
     public void onWeeklyRadioButton(ActionEvent actionEvent) {
+//        filteredAppointments
+//        for(Appointment a: allAppointments){
+//
+//        }
+//
+//
+
 
     }
     @FXML
     public void onMonthRadioButton(ActionEvent actionEvent) {
-
-
+        for(Appointment a: allAppointments){
+            if(a.getStartDateTime().getMonth().equals(LocalDateTime.now().getMonth())){
+                filteredAppointments.add(a);
+            }
+        }
+        allAppointmentsTableView.setItems(filteredAppointments);
     }
     @FXML
     public void onAllRadioButton(ActionEvent actionEvent) {
-
+        allAppointmentsTableView.setItems(allAppointments);
     }
 
 }

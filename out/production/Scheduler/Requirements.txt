@@ -1,28 +1,10 @@
 
-
-
-•  the total number of customer appointments by type and month
-SELECT COUNT(*) AS Types,
-monthname(start) as ByMonth
-FROM appointments
-GROUP BY month(start);
-
-
-SELECT DATE_FORMAT(yourColumnName, '%m-%Y') from yourTableName
-GROUP BY MONTH(yourColumnName), YEAR(yourColumnName)DESC;
-
-
-
-
-
-•  an additional report of your choice that is different from the two other required reports in this prompt and from the user log-in date and time stamp that will be tracked in part C
-
 D.  Provide descriptive Javadoc comments for at least 70 percent of the classes and their members throughout the code, and create an index.html file of your comments to include with your submission based on Oracle’s guidelines for the Javadoc tool best practices. Your comments should include a justification for each lambda expression in the method where it is used.
 
 Note: The comments on the lambda need to be located in the comments describing the method where it is located for it to export properly.
 
-README.TXT
-•  a description of the additional report of your choice you ran in part A3f
+
+NEED TO REDO THE FILTER BY MONTH WEEK AND ALL METHODS. WASN'T WORKING AS INTENDED.
 
 
 
