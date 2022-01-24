@@ -3,15 +3,19 @@ package data_access;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Division;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
+/**
+ * Class for static members to access mysql database using DOA abstraction.
+ */
 public class DivisionMYSQL {
     public static ObservableList<Division> allDivisions = FXCollections.observableArrayList();
 
+    /** This method returns all Divisions. */
     public static ObservableList<Division> findAll()  {
         allDivisions.clear();
         try {
@@ -31,7 +35,9 @@ public class DivisionMYSQL {
         }
         return allDivisions;
     }
-
+    /** This method finds a Division by its name.
+     * @param name
+     * @return  id*/
     public static int findByName(String name){
         try{
             String sqlStatement = "SELECT * FROM first_level_divisions  WHERE Division =  (?)";
@@ -51,7 +57,9 @@ public class DivisionMYSQL {
         }
         return 0;
     }
-
+    /** This method finds a division by its id.
+     * @param id
+     * @return  Division*/
     public static Division findById(int id) {
         try{
             String sqlStatement = "SELECT * FROM first_level_divisions  WHERE Division_ID =  (?)";
@@ -69,21 +77,6 @@ public class DivisionMYSQL {
         } catch (SQLException e){
             e.printStackTrace();
         }
-        return null;
-    }
-
-
-    public static Boolean create() {
-        return null;
-    }
-
-
-    public static Boolean update() {
-        return null;
-    }
-
-
-    public static Boolean delete() {
         return null;
     }
 }

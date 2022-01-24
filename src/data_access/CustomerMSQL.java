@@ -4,20 +4,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Appointment;
 import model.Customer;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
+/**
+ * Class for static members to access mysql database using DOA abstraction.
+ */
 public class CustomerMSQL {
     private static ObservableList<Customer> allCustomerList = FXCollections.observableArrayList();
     private static ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
 
-
-
-
-
+    /** This method returns all Customers.*/
     public static ObservableList<Customer> findAll() {
         allCustomerList.clear();
 
@@ -39,7 +39,7 @@ public class CustomerMSQL {
         return allCustomerList;
     }
 
-
+    /** This method returns a customer by its id.*/
     public static Customer findById(int id) {
         ObservableList<Customer> customers;
         customers = CustomerMSQL.findAll();
@@ -51,7 +51,7 @@ public class CustomerMSQL {
 
         return null;
     }
-
+    /** This method creates a customer*/
     public static void create(Customer customer) {
 
         try{
@@ -70,6 +70,9 @@ public class CustomerMSQL {
         }
     }
 
+    /** This method updates a customer record.
+     * @param customer
+     * @return  true or false.*/
     public static Boolean update(Customer customer) {
 
         try{
@@ -91,7 +94,8 @@ public class CustomerMSQL {
         return true;
     }
 
-
+    /** This method deletes a customer.
+     * @return  true or false. */
     public static Boolean delete(Customer customer) {
         String sqlStatement = "DELETE FROM customers WHERE Customer_ID = (?) ;";
         Connection connection = JDBC.connection;

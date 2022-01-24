@@ -24,6 +24,9 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * The controller for customer view.
+ */
 public class customerView implements Initializable {
 
     ObservableList<Customer> allCustomers = FXCollections.observableArrayList();

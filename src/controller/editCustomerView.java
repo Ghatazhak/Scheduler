@@ -19,12 +19,14 @@ import model.Country;
 import model.Customer;
 import model.Division;
 import view.FXMLLoaderInterface;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/**
+ * The controller for edit customer view.
+ */
 public class editCustomerView implements Initializable {
     ObservableList<Country> allCountries = FXCollections.observableArrayList();
     ObservableList<Division> allDivisions = FXCollections.observableArrayList();

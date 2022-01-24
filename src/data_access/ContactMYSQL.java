@@ -3,15 +3,18 @@ package data_access;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Contact;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Class for static members to access mysql database using DOA abstraction.
+ */
 public class ContactMYSQL {
     private static ObservableList<Contact> allContacts = FXCollections.observableArrayList();
-
+/** This method returns all Contacts
+ * @return  Contact*/
     public static ObservableList<Contact> findAll()  {
         allContacts.clear();
         String selectStatement = "SELECT * FROM contacts";
@@ -33,7 +36,8 @@ public class ContactMYSQL {
         return null;
     }
 
-
+    /** This method finds a contact by its id and returns it.
+     * @return  Contact*/
     public static Contact findById(int id) {
         ObservableList<Contact> contacts;
         contacts = ContactMYSQL.findAll();
@@ -42,23 +46,6 @@ public class ContactMYSQL {
                 return c;
             }
         }
-
         return null;
     }
-
-
-    public static Boolean create() {
-        return null;
-    }
-
-
-    public static Boolean update() {
-        return null;
-    }
-
-
-    public static Boolean delete() {
-        return null;
-    }
-
 }

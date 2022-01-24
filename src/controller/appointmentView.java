@@ -23,6 +23,9 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * The controller for appointment view.
+ */
 public class appointmentView implements Initializable {
     public static Appointment tempAppointment;
     private ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
@@ -163,7 +166,7 @@ public class appointmentView implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    /** This is an event handler for contact report. This reports all appointments by contact. */
+    /** This is an event handler for creating the contact report view. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
     @FXML
     public void contactReportMenuClicked(ActionEvent actionEvent) throws IOException {
         Parent root = loaderLambda.getRoot("/view/ContactSelectForReportView.fxml");

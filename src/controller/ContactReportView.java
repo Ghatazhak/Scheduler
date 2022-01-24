@@ -21,8 +21,10 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/**
+ * The controller for contact report view.
+ */
 public class ContactReportView implements Initializable {
-
     ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
     ObservableList<Appointment> appointmentsByContact = FXCollections.observableArrayList();
 

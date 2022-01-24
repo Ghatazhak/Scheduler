@@ -30,9 +30,11 @@ import java.time.*;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/**
+ * The controller for edit appointment view.
+ */
+
 public class editAppointmentView implements Initializable {
-
-
     ObservableList<String> startHours = FXCollections.observableArrayList();
     ObservableList<String> startMinutes = FXCollections.observableArrayList();
     ObservableList<String> endHours = FXCollections.observableArrayList();

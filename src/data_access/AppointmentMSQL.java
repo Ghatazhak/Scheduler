@@ -10,8 +10,11 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 
-public class AppointmentMSQL {
 
+/**
+ * Class for static members to access mysql database using DOA abstraction.
+ */
+public class AppointmentMSQL {
         private static ObservableList<Appointment> appointmentsList = FXCollections.observableArrayList();
 
         public static ObservableList<Appointment> findAll()  {
@@ -47,7 +50,8 @@ public class AppointmentMSQL {
             return null;
         }
 
-
+    /** This method creates an appointment in the database.
+     * @param appointment*/
         public static void create(Appointment appointment)  {
 
             try{
@@ -81,7 +85,8 @@ public class AppointmentMSQL {
 
 
         }
-
+/** this method updates an appointment in the database.
+ * @param appointment */
         public static Boolean update(Appointment appointment) {
 
             try{
@@ -119,7 +124,8 @@ public class AppointmentMSQL {
             return true;
         }
 
-
+/** This method deletes an appointment from the database.
+ * @param appointment */
         public static String delete(Appointment appointment) {
             String sqlStatement = "DELETE FROM appointments WHERE Appointment_ID = (?) ;";
             Connection connection = JDBC.connection;

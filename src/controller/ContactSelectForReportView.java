@@ -19,6 +19,9 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/**
+ * The controller for contact select for report view.
+ */
 public class ContactSelectForReportView implements Initializable {
     public static Contact tempContact;
     private ObservableList<Contact> allContacts = FXCollections.observableArrayList();

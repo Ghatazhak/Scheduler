@@ -2,15 +2,18 @@ package data_access;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Class for static members to access mysql database using DOA abstraction.
+ */
 public class HumanEntitiesReportMYSQL {
     private static ObservableList<String> allUserNameStrings = FXCollections.observableArrayList();
 
+    /** This method returns all Users.*/
     public static ObservableList<String> getUsers()  {
         allUserNameStrings.clear();
         try {
@@ -29,7 +32,8 @@ public class HumanEntitiesReportMYSQL {
         }
         return allUserNameStrings;
     }
-
+    /** This method returns all Customers names as strings.
+     * @return  list of names*/
     public static ObservableList<String> getCustomers()  {
         allUserNameStrings.clear();
         try {
@@ -48,7 +52,8 @@ public class HumanEntitiesReportMYSQL {
         }
         return allUserNameStrings;
     }
-
+    /** This method returns all contact names as a string.
+     * @return  list of contacts. */
     public static ObservableList<String> getContacts()  {
         allUserNameStrings.clear();
         try {
@@ -67,9 +72,4 @@ public class HumanEntitiesReportMYSQL {
         }
         return allUserNameStrings;
     }
-
-
-
-
-
 }

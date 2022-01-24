@@ -10,29 +10,21 @@ public class User {
         this.username = username;
         this.password = password;
     }
-
+    /** This method gets user id.
+     * @return  user id*/
     public int getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
+    /** This method gets username.
+     * @return  username.*/
     public String getUsername() {
         return username;
     }
-
-    public void setUsername(String userName) {
-        this.username = userName;
-    }
-
+    /** This method gets password.
+     * @return  password.*/
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     @Override

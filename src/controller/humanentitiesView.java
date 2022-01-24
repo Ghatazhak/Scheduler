@@ -14,12 +14,15 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import main.Main;
 import view.FXMLLoaderInterface;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+
+/**
+ * The controller for human entities view.
+ */
 public class humanentitiesView implements Initializable {
     ObservableList<String> allEntityNames = FXCollections.observableArrayList();
     public TableView<String> humanEntitiesTableView;

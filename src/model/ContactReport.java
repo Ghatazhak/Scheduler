@@ -11,15 +11,10 @@ public class ContactReport {
         this.typeAmount = typeAmount;
     }
 
-    public String getMonth() {
-        return month;
-    }
-
+    /** This method gets type
+     * @return String.*/
     public String getType() {
         return type;
     }
 
-    public int getTypeAmount() {
-        return typeAmount;
-    }
 }

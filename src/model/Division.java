@@ -11,28 +11,22 @@ public class Division {
         this.countryId = countryId;
     }
 
+    /** This method gets division id.
+     * @return  division id.*/
     public int getDivisionId() {
         return divisionId;
     }
 
-    public void setDivisionId(int divisionId) {
-        this.divisionId = divisionId;
-    }
-
+    /** This method gets division.
+     * @return  division name.*/
     public String getDivision() {
         return division;
     }
 
-    public void setDivision(String division) {
-        this.division = division;
-    }
-
+    /** This method gets country id.
+     * @return  country id*/
     public int getCountryId() {
         return countryId;
-    }
-
-    public void setCountryId(int countryId) {
-        this.countryId = countryId;
     }
 
     @Override

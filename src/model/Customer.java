@@ -29,46 +29,35 @@ public class Customer {
         this.postalCode = postalCode;
         this.division = division;
     }
-
+    /** This method gets customer id
+     * @return  customer id.*/
     public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
+    /** This method gets customer name.
+     * @return  customer name.*/
     public String getCustomerName() {
         return customerName;
     }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
+    /** This method gets address.
+     * @return  address*/
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
+    /** This method gets postal code.
+     * @return  postal code*/
     public String getPostalCode() {
         return postalCode;
     }
 
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
+    /** This method gets diviison.
+     * @return  division name */
     public String getDivision() {
         return division;
     }
 
-    public void setDivision(int divisionId) {
-        this.divisionId = divisionId;
-    }
     @Override
     public String toString(){
         return String.valueOf(customerId);

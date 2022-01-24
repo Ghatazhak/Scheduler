@@ -9,21 +9,11 @@ public class Contact {
         this.contactName = contactName;
     }
 
-    public String getContactName() {
-        return contactName;
-    }
-
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
-    }
-
+    /** This method gets contact id.*/
     public int getContactId() {
         return contactId;
     }
 
-    public void setContactId(int contactId) {
-        this.contactId = contactId;
-    }
     @Override
     public String toString(){
         return contactName;

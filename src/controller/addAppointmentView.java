@@ -108,7 +108,7 @@ public class addAppointmentView implements Initializable {
        stage.show();
    }
 
-/** This is the event handler for the save button. */
+/** This is the event handler for the save button. It validates the data and saves it. */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException, SQLException {
         appointmentsConflicts.clear();
         if(titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactComboBox.getValue() == null || typeTextField.getText().isEmpty()|| startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || datePicker.getValue() == null || contactComboBox.getValue() == null || customerIdCB.getValue()== null || userIDComboBox.getValue() == null){
@@ -177,7 +177,6 @@ public class addAppointmentView implements Initializable {
                     }
                     }
                 }
-
                 Appointment newAppointment = new Appointment(1, titleTextField.getText(), descriptionTextField.getText(), locationTextField.getText(), typeTextField.getText(), startLocalDateTime, endLocalDateTime, customerIdCB.getValue().getCustomerId(), userIDComboBox.getValue().getUserId(), contactComboBox.getValue().getContactId());
                 AppointmentMSQL.create(newAppointment);
                 returnToHomeView();

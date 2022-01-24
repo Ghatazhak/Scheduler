@@ -76,6 +76,6 @@
       <ComboBox fx:id="startMinuteCB" layoutX="195.0" layoutY="263.0" prefHeight="25.0" prefWidth="57.0" />
       <ComboBox fx:id="endHourCB" layoutX="254.0" layoutY="263.0" prefHeight="25.0" prefWidth="57.0" />
       <ComboBox fx:id="endMinuteCB" layoutX="313.0" layoutY="263.0" prefHeight="25.0" prefWidth="57.0" />
-      <ComboBox fx:id="userIDComboBox" layoutX="137.0" layoutY="333.0" onAction="#userIDComboBoxClicked" prefHeight="25.0" prefWidth="232.0" />
+      <ComboBox fx:id="userIDComboBox" layoutX="137.0" layoutY="333.0"  prefHeight="25.0" prefWidth="232.0" />
    </children>
 </AnchorPane>

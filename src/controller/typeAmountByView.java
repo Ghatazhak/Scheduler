@@ -21,6 +21,10 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+
+/**
+ * The controller for type amount by view.
+ */
 public class typeAmountByView implements Initializable {
     public ObservableList<ContactReport> contactReport = FXCollections.observableArrayList();
     public TableView<ContactReport> typeAmountByMonthTableView;

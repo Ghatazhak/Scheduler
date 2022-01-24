@@ -3,16 +3,19 @@ package data_access;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.User;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
+/**
+ * Class for static members to access mysql database using DOA abstraction.
+ */
 public class UserMYSQL {
     private static ObservableList<User> allUsers = FXCollections.observableArrayList();
 
-
+    /** This method returns all Users.*/
     public static ObservableList<User> findAll() throws SQLException {
         allUsers.clear();
         String selectStatement = "SELECT * FROM users";
@@ -28,7 +31,7 @@ public class UserMYSQL {
         return allUsers;
     }
 
-
+    /** This method finds a user by his username. */
     public static User findByUsername(String username) throws SQLException {
 
         String selectStatement = "SELECT * FROM users WHERE User_Name = ?";
@@ -45,6 +48,10 @@ public class UserMYSQL {
         }
         return null;
     }
+
+    /** This method finds a user by his id.
+     * @param userId
+     * @return  user*/
     public static User findById(int userId) throws SQLException {
         allUsers.clear();
         String sqlStatement = "SELECT * FROM users";
@@ -64,20 +71,6 @@ public class UserMYSQL {
                 return u;
             }
         }
-        return null;
-    }
-
-    public static Boolean create() {
-        return null;
-    }
-
-
-    public static Boolean update() {
-        return null;
-    }
-
-
-    public static Boolean delete() {
         return null;
     }
 }

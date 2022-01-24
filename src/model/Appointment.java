@@ -26,85 +26,63 @@ public class Appointment {
         this.userId = userId;
         ContactId = contactId;
     }
-
+    /** This method gets appointmentID.*/
     public int getAppointmentId() {
         return appointmentId;
     }
-
-    public void setAppointmentId(int appointmentId) {
-        this.appointmentId = appointmentId;
-    }
-
+    /** This method gets title.*/
     public String getTitle() {
         return title;
     }
-
+    /** This method sets title.
+     * @param title */
     public void setTitle(String title) {
         this.title = title;
     }
-
+    /** This method gets description.*/
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
+    /** This method gets location.*/
     public String getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
+    /** This method gets type.*/
     public String getType() {
         return type;
     }
 
+    /** This method sets type. */
     public void setType(String type) {
         this.type = type;
     }
 
+    /** This method gets start date/time. */
     public LocalDateTime getStartDateTime() {
-
         return startDateTime;
     }
 
-    public void setStartDateTime(LocalDateTime startDateTime) {
-        this.startDateTime = startDateTime;
-    }
-
+    /** This method gets end date/time. */
     public LocalDateTime getEndDateTime() {
         return endDateTime;
     }
 
-    public void setEndDateTime(LocalDateTime endDateTime) {
-        this.endDateTime = endDateTime;
-    }
-
+    /** This method gets customer id.*/
     public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
 
+    /** This method gets user id.*/
     public int getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
+    /** This method gets contact id.*/
     public int getContactId() {
         return ContactId;
     }
 
-    public void setContactId(int contactId) {
-        ContactId = contactId;
-    }
 }

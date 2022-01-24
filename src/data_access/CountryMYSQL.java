@@ -9,9 +9,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Class for static members to access mysql database using DOA abstraction.
+ */
 public class CountryMYSQL {
     public static ObservableList<Country> allCountries = FXCollections.observableArrayList();
-
+    /** This method returns all Countries.
+     * @return  list of countries*/
     public static ObservableList<Country> findAll()  {
         allCountries.clear();
         try {
@@ -29,11 +33,12 @@ public class CountryMYSQL {
         }catch (SQLException e) {
             e.printStackTrace();
         }
-
         return allCountries;
     }
 
-
+    /** This method returns Countries by their id.
+     * @param id
+     * @return country*/
     public static Country findById(int id) throws SQLException {
         ObservableList<Country>  tempList = findAll();
         for (Country c:tempList) {
@@ -41,22 +46,6 @@ public class CountryMYSQL {
                 return c;
             }
         }
-        return null;
-    }
-
-
-    public static Boolean create() {
-
-        return null;
-    }
-
-
-    public static Boolean update() {
-        return null;
-    }
-
-
-    public static Boolean delete() {
         return null;
     }
 }
