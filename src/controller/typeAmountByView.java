@@ -7,12 +7,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import main.Main;
 import model.ContactReport;
 import view.FXMLLoaderInterface;
 
@@ -26,6 +24,7 @@ import java.util.ResourceBundle;
  * The controller for type amount by view.
  */
 public class typeAmountByView implements Initializable {
+
     public ObservableList<ContactReport> contactReport = FXCollections.observableArrayList();
     public TableView<ContactReport> typeAmountByMonthTableView;
     public TableColumn<ContactReport, String> monthCol;
@@ -44,16 +43,12 @@ public class typeAmountByView implements Initializable {
     }
 /** A event handler that returns the user to appointment view. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
     public void returnButtonClicked(ActionEvent actionEvent) {
-        Parent root = null;
         try {
-            root = loaderLambda.getRoot("/view/appointmentView.fxml");
+            Parent root = loaderLambda.getRoot("/view/appointmentView.fxml");
         } catch (IOException e) {
             e.printStackTrace();
         }
         Stage stage = (Stage) typeAmountByMonthTableView.getScene().getWindow();
-        Scene scene = new Scene(root, 1020, 475);
-        stage.setTitle("Scheduler v1.0 Appointments:   " + Main.currentUser.getUsername());
-        stage.setScene(scene);
-        stage.show();
+        stage.close();
     }
 }

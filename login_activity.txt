@@ -1,0 +1,13 @@
+
+User [admin] attempted to login at [01-25-2022 08:58] Result [ Successful]
+User [admin] attempted to login at [01-25-2022 09:01] Result [ Successful]
+User [admin] attempted to login at [01-25-2022 09:04] Result [ Successful]
+User [admin] attempted to login at [01-25-2022 09:05] Result [ Successful]
+User [admin] attempted to login at [01-25-2022 09:08] Result [ Successful]
+User [admin] attempted to login at [01-25-2022 09:08] Result [ Successful]
+User [admin] attempted to login at [01-25-2022 09:15] Result [ Successful]
+User [admin] attempted to login at [01-25-2022 09:16] Result [ Successful]
+User [admin] attempted to login at [01-25-2022 09:18] Result [ Successful]
+User [admin] attempted to login at [01-25-2022 09:21] Result [ Successful]
+User [admin] attempted to login at [01-25-2022 09:25] Result [ Successful]
+User [admin] attempted to login at [01-25-2022 09:29] Result [ Successful]

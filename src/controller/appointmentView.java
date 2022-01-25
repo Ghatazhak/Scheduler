@@ -161,7 +161,7 @@ public class appointmentView implements Initializable {
 
 
     /** This is an event handler for customer management. It takes you to a customer management screen (Modal). */
-    public void customerEditclicked(ActionEvent actionEvent)  {
+    public void customerEditClicked(ActionEvent actionEvent)  {
         Parent root = null;
         try {
             root = loaderLambda.getRoot("/view/customerView.fxml");
@@ -185,11 +185,19 @@ public class appointmentView implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
-        Scene scene = new Scene(root, 408, 400);
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        Scene scene = new Scene(root, 540, 400);
         stage.setTitle("Contact Select Screen");
         stage.setScene(scene);
         stage.show();
+
+//        Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
+//        Scene scene = new Scene(root, 408, 400);
+//        stage.setTitle("Contact Select Screen");
+//        stage.setScene(scene);
+//        stage.show();
     }
     /** This is an event handler for creating the contact report view. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
     @FXML
