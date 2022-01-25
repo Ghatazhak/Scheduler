@@ -119,8 +119,13 @@ public class editAppointmentView implements Initializable {
         }
     }
     /** A method that can be called to change the view to home. (loaderLambda) Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root. */
-    public void returnToHomeView() throws IOException {
-        Parent root = loaderLambda.getRoot("/view/appointmentView.fxml");
+    public void returnToHomeView()  {
+        Parent root = null;
+        try {
+            root = loaderLambda.getRoot("/view/appointmentView.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Stage stage = (Stage) appointmentIdTextField.getScene().getWindow();
         Scene scene = new Scene(root, 1020, 475);
         stage.setTitle("Scheduler v1.0");

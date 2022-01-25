@@ -56,8 +56,13 @@ public class addCustomerView implements Initializable {
 
     }
     /** A method that can return you to the Customer management view. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root. */
-    public void returnToCustomerManagementView() throws IOException {
-        Parent root = loaderLambda.getRoot("/view/customerView.fxml");
+    public void returnToCustomerManagementView()  {
+        Parent root = null;
+        try {
+            root = loaderLambda.getRoot("/view/customerView.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Stage stage = (Stage) customerIdTextField.getScene().getWindow();
         Scene scene = new Scene(root, 540, 400);
         stage.setTitle("Customer Management");

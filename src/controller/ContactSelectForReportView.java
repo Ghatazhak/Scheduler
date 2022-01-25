@@ -34,9 +34,14 @@ public class ContactSelectForReportView implements Initializable {
         contactCB.setItems(allContacts);
     }
     /** An event handler that creates the report view. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
-    public void generateButtonClicked(ActionEvent actionEvent) throws IOException {
+    public void generateButtonClicked(ActionEvent actionEvent)  {
         tempContact = contactCB.getSelectionModel().getSelectedItem();
-        Parent root = loaderLambda.getRoot("/view/ContactReportView.fxml");
+        Parent root = null;
+        try {
+            root = loaderLambda.getRoot("/view/ContactReportView.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Stage stage = (Stage) contactCB.getScene().getWindow();
         Scene scene = new Scene(root, 782, 410);
         stage.setTitle("Contact Report");

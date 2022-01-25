@@ -58,8 +58,13 @@ public class ContactReportView implements Initializable {
 
     }
     /** An event handler that returns the user to appointment view.(loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
-    public void returnButtonClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = loaderLambda.getRoot("/view/appointmentView.fxml");
+    public void returnButtonClicked(ActionEvent actionEvent)  {
+        Parent root = null;
+        try {
+            root = loaderLambda.getRoot("/view/appointmentView.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Stage stage = (Stage) contactReportTableView.getScene().getWindow();
         Scene scene = new Scene(root, 1020, 475);
         stage.setTitle("Scheduler v1.0 Appointments:   " + Main.currentUser.getUsername());

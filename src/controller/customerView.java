@@ -64,8 +64,13 @@ public class customerView implements Initializable {
 
     }
     /** An event handler for adding customers. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
-    public void addButtonClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = loaderLambda.getRoot("/view/addCustomerView.fxml");
+    public void addButtonClicked(ActionEvent actionEvent) {
+        Parent root = null;
+        try {
+            root = loaderLambda.getRoot("/view/addCustomerView.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Stage stage = (Stage) allCustomersTableView.getScene().getWindow();
         Scene scene = new Scene(root, 370, 390);
         stage.setTitle("Add New Customer");
@@ -73,7 +78,7 @@ public class customerView implements Initializable {
         stage.show();
     }
     /** An event handler for editing customers. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
-    public void editButtonClicked(ActionEvent actionEvent) throws IOException {
+    public void editButtonClicked(ActionEvent actionEvent)  {
         tempCustomer = allCustomersTableView.getSelectionModel().getSelectedItem();
 
         if (tempCustomer == null) {
@@ -85,7 +90,12 @@ public class customerView implements Initializable {
             alert.showAndWait();
             return;
         }
-        Parent root = loaderLambda.getRoot("/view/editCustomerView.fxml");
+        Parent root = null;
+        try {
+            root = loaderLambda.getRoot("/view/editCustomerView.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Stage stage = (Stage) allCustomersTableView.getScene().getWindow();
         Scene scene = new Scene(root, 370, 390);
         stage.setTitle("Edit Customer");
@@ -124,8 +134,12 @@ public class customerView implements Initializable {
         }
     }
     /** An event handler that returns the user to appointment view (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
-    public void cancelButtonClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = loaderLambda.getRoot("/view/appointmentView.fxml");
+    public void cancelButtonClicked(ActionEvent actionEvent)  {
+        try {
+            Parent root = loaderLambda.getRoot("/view/appointmentView.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Stage stage = (Stage) allCustomersTableView.getScene().getWindow();
         stage.close();
     }

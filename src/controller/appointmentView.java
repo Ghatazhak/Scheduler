@@ -76,8 +76,13 @@ public class appointmentView implements Initializable {
     }
 
 /** This is an event handler for log off. It take you back to the login screen. */
-    public void logOffMenuClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = loaderLambda.getRoot("/view/loginView.fxml");
+    public void logOffMenuClicked(ActionEvent actionEvent)  {
+        Parent root = null;
+        try {
+            root = loaderLambda.getRoot("/view/loginView.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
         Scene scene = new Scene(root, 500, 300);
         stage.setTitle("Scheduler v1.0");
@@ -86,8 +91,13 @@ public class appointmentView implements Initializable {
     }
 
     /** This is an event handler for adding an appointment. It takes you to a view for adding appointments. */
-    public void addAppointmentMenuClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = loaderLambda.getRoot("/view/addAppointmentView.fxml");
+    public void addAppointmentMenuClicked(ActionEvent actionEvent)  {
+        Parent root = null;
+        try {
+            root = loaderLambda.getRoot("/view/addAppointmentView.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
         Scene scene = new Scene(root, 380, 430);
         stage.setTitle("Add Appointment");
@@ -95,7 +105,7 @@ public class appointmentView implements Initializable {
         stage.show();
     }
     /** This is an event handler for editing appointments. It takes you to a view for editing appointments. */
-    public void editAppointmentMenuClicked(ActionEvent actionEvent) throws IOException {
+    public void editAppointmentMenuClicked(ActionEvent actionEvent)  {
 
         tempAppointment = allAppointmentsTableView.getSelectionModel().getSelectedItem();
 
@@ -109,7 +119,12 @@ public class appointmentView implements Initializable {
             return;
         }
 
-        Parent root = loaderLambda.getRoot("/view/editAppointmentView.fxml");
+        Parent root = null;
+        try {
+            root = loaderLambda.getRoot("/view/editAppointmentView.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
         Scene scene = new Scene(root, 380, 430);
         stage.setTitle("Edit Appointment");
@@ -146,8 +161,13 @@ public class appointmentView implements Initializable {
 
 
     /** This is an event handler for customer management. It takes you to a customer management screen (Modal). */
-    public void customerEditclicked(ActionEvent actionEvent) throws IOException {
-        Parent root = loaderLambda.getRoot("/view/customerView.fxml");
+    public void customerEditclicked(ActionEvent actionEvent)  {
+        Parent root = null;
+        try {
+            root = loaderLambda.getRoot("/view/customerView.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Stage stage = new Stage();
         stage.initStyle(StageStyle.UNDECORATED);
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -158,8 +178,13 @@ public class appointmentView implements Initializable {
     }
     /** This is an event handler for type by month report. This filters all the appointments that are not in the current month. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root. */
     @FXML
-    public void typeByMonthReportMenuClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = loaderLambda.getRoot("/view/typeAmountByMonthView.fxml");
+    public void typeByMonthReportMenuClicked(ActionEvent actionEvent)  {
+        Parent root = null;
+        try {
+            root = loaderLambda.getRoot("/view/typeAmountByMonthView.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
         Scene scene = new Scene(root, 408, 400);
         stage.setTitle("Contact Select Screen");
@@ -168,8 +193,13 @@ public class appointmentView implements Initializable {
     }
     /** This is an event handler for creating the contact report view. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
     @FXML
-    public void contactReportMenuClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = loaderLambda.getRoot("/view/ContactSelectForReportView.fxml");
+    public void contactReportMenuClicked(ActionEvent actionEvent)  {
+        Parent root = null;
+        try {
+            root = loaderLambda.getRoot("/view/ContactSelectForReportView.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
         Scene scene = new Scene(root, 340, 175);
         stage.setTitle("Contact Select Screen");
@@ -178,8 +208,13 @@ public class appointmentView implements Initializable {
     }
     /** This event handler is for the Entities Report. It reports all user names, contact names, and customer names. */
     @FXML
-    public void customReportMenuClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = loaderLambda.getRoot("/view/humanentitiesreportview.fxml");
+    public void customReportMenuClicked(ActionEvent actionEvent)  {
+        Parent root = null;
+        try {
+            root = loaderLambda.getRoot("/view/humanentitiesreportview.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
         Scene scene = new Scene(root, 453, 342);
         stage.setTitle("Human Entity Report");

@@ -25,7 +25,6 @@ import view.FXMLLoaderInterface;
 
 import java.io.*;
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -97,7 +96,7 @@ public class loginView implements Initializable {
         }
         }
     /** An event handler for the login button. It checks your username and password and logs the time and if the login was successful in a text file. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
-        public void loginButtonPressed (ActionEvent actionEvent) throws IOException, SQLException {
+        public void loginButtonPressed (ActionEvent actionEvent)  {
             userAttemptingLogin = usernameTextField.getText();
             try {
                 User user = UserMYSQL.findByUsername(usernameTextField.getText());
@@ -145,7 +144,12 @@ public class loginView implements Initializable {
                     alert.showAndWait();
                 }
 
-                Parent root = loaderLambda.getRoot("/view/appointmentView.fxml");
+                Parent root = null;
+                try {
+                    root = loaderLambda.getRoot("/view/appointmentView.fxml");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root, 1020, 475);
                 stage.setTitle("Scheduler v1.0 Appointments:   " + Main.currentUser.getUsername());
