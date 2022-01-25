@@ -8,12 +8,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
-import main.Main;
 import view.FXMLLoaderInterface;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -39,12 +38,14 @@ public class humanentitiesView implements Initializable {
         NameCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
     }
     /** Event handler for returning to appointment view. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
-    public void returnButtonClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = loaderLambda.getRoot("/view/appointmentView.fxml");
+    public void returnButtonClicked(ActionEvent actionEvent)  {
+        Parent root = null;
+        try {
+            root = loaderLambda.getRoot("/view/appointmentView.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Stage stage = (Stage) humanEntitiesTableView.getScene().getWindow();
-        Scene scene = new Scene(root, 1020, 475);
-        stage.setTitle("Scheduler v1.0 Appointments:   " + Main.currentUser.getUsername());
-        stage.setScene(scene);
-        stage.show();
+        stage.close();
     }
 }

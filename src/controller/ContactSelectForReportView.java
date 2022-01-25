@@ -42,9 +42,10 @@ public class ContactSelectForReportView implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         Stage stage = (Stage) contactCB.getScene().getWindow();
         Scene scene = new Scene(root, 782, 410);
-        stage.setTitle("Contact Report");
+        stage.setTitle("Scheduler v1.0");
         stage.setScene(scene);
         stage.show();
     }

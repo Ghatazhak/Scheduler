@@ -188,16 +188,10 @@ public class appointmentView implements Initializable {
         Stage stage = new Stage();
         stage.initStyle(StageStyle.UNDECORATED);
         stage.initModality(Modality.APPLICATION_MODAL);
-        Scene scene = new Scene(root, 540, 400);
-        stage.setTitle("Contact Select Screen");
+        Scene scene = new Scene(root, 408, 400);
+        stage.setTitle("Type Amount By Month Report");
         stage.setScene(scene);
         stage.show();
-
-//        Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
-//        Scene scene = new Scene(root, 408, 400);
-//        stage.setTitle("Contact Select Screen");
-//        stage.setScene(scene);
-//        stage.show();
     }
     /** This is an event handler for creating the contact report view. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
     @FXML
@@ -208,11 +202,14 @@ public class appointmentView implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
         Scene scene = new Scene(root, 340, 175);
         stage.setTitle("Contact Select Screen");
         stage.setScene(scene);
         stage.show();
+
     }
     /** This event handler is for the Entities Report. It reports all user names, contact names, and customer names. */
     @FXML
@@ -223,12 +220,14 @@ public class appointmentView implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
+
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
         Scene scene = new Scene(root, 453, 342);
         stage.setTitle("Human Entity Report");
         stage.setScene(scene);
         stage.show();
-
     }
     @FXML
     public void onWeeklyRadioButton(ActionEvent actionEvent) {
