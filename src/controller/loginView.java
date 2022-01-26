@@ -44,10 +44,7 @@ public class loginView implements Initializable {
     ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
     boolean isUpcomingAppointment = false;
 
-    FXMLLoaderInterface loaderLambda = s -> {
-        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
-        return root;
-    };
+    FXMLLoaderInterface loaderLambda = s -> FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
 
     UserLogI logLambda = (user, ldt, result) -> {
 
@@ -146,6 +143,7 @@ public class loginView implements Initializable {
 
                 Parent root = null;
                 try {
+                    //root = loaderLambda.getRoot(FXMLNameTranslator.APPLICATION_VIEW.);
                     root = loaderLambda.getRoot("/view/appointmentView.fxml");
                 } catch (IOException e) {
                     e.printStackTrace();
