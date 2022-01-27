@@ -104,7 +104,7 @@ public class addAppointmentView implements Initializable {
         userIDComboBox.setItems(allUsers);
     }
 
-    /** A method that can return you to the Appointment View. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root. */
+    /** A method that can return you to the Appointment View. Lambda #2 A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root. */
    public void returnToHomeView()  {
        Parent root = null;
        try {

@@ -95,6 +95,7 @@ public class customerView implements Initializable {
             root = loaderLambda.getRoot("/view/editCustomerView.fxml");
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Cannot find edit customer view.");
         }
         Stage stage = (Stage) allCustomersTableView.getScene().getWindow();
         Scene scene = new Scene(root, 370, 390);

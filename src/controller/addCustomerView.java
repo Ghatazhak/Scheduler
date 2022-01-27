@@ -54,7 +54,7 @@ public class addCustomerView implements Initializable {
             allCountries = CountryMYSQL.findAll();
             countryCB.setItems(allCountries);
     }
-    /** A method that can return you to the Customer management view. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root. */
+    /** A method that can return you to the Customer management view. Lambda #2 A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root. */
     public void returnToCustomerManagementView()  {
         Parent root = null;
         try {

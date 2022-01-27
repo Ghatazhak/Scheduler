@@ -78,10 +78,7 @@ public class loginView implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
-        /* Locale french = new Locale("fr","France");
-        Locale.setDefault(french); */
-        userLocation.setText((Locale.getDefault().getCountry()));
+        userLocation.setText(ZoneId.systemDefault().toString());
         ResourceBundle rb = ResourceBundle.getBundle("language_files/rb", Locale.getDefault());
         if (Locale.getDefault().getLanguage().equals("fr")) {
             userNameLabel.setText(rb.getString("Username"));
@@ -92,7 +89,7 @@ public class loginView implements Initializable {
             exitButtonText.setText(rb.getString("Exit"));
         }
         }
-    /** An event handler for the login button. It checks your username and password and logs the time and if the login was successful in a text file. (logLambda) A Lambda that writes the login log.*/
+    /** An event handler for the login button. It checks your username and password and logs the time and if the login was successful in a text file. Lambda #1 A Lambda that writes the login log. Simplifies the code.*/
         public void loginButtonPressed (ActionEvent actionEvent)  {
             userAttemptingLogin = usernameTextField.getText();
             try {
@@ -143,7 +140,6 @@ public class loginView implements Initializable {
 
                 Parent root = null;
                 try {
-                    //root = loaderLambda.getRoot(FXMLNameTranslator.APPLICATION_VIEW.);
                     root = loaderLambda.getRoot("/view/appointmentView.fxml");
                 } catch (IOException e) {
                     e.printStackTrace();

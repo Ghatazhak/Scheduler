@@ -19,6 +19,7 @@ import model.Country;
 import model.Customer;
 import model.Division;
 import view.FXMLLoaderInterface;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -63,24 +64,28 @@ public class editCustomerView implements Initializable {
 
         allCountries = CountryMYSQL.findAll();
         countryCB.setItems(allCountries);
-
         allDivisions = DivisionMYSQL.findAll();
-        divisionCB.setItems(allDivisions);
-        for(Division d: allDivisions){
-          if(Objects.equals(d.getDivision(), customer.getDivision()))
-              divisionCB.setValue(DivisionMYSQL.findById(DivisionMYSQL.findByName(d.getDivision())));
-        }
+
+        divisionCB.setValue(DivisionMYSQL.findById(DivisionMYSQL.findByName(customer.getDivision())));
 
         for(Country c :allCountries ){
             if(c.getCountryId() == divisionCB.getValue().getCountryId()){
 
                 countryCB.setValue(c);
+                country = c;
                 divisionCB.setDisable(false);
             }
         }
 
+        for(Division d: allDivisions){
+            if(d.getCountryId() == country.getCountryId())
+                filteredBySelectedCountryDivisions.add(d);
+        }
+        divisionCB.setItems(filteredBySelectedCountryDivisions);
+        divisionCB.setDisable(false);
+
     }
-    /** An event handler to return to customer management. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
+    /** An event handler to return to customer management. Lambda #2 A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.*/
     public void returnToCustomerManagementView()  {
         Parent root = null;
         try {
