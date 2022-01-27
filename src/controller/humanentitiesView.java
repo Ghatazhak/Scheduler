@@ -12,7 +12,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import view.FXMLLoaderInterface;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;

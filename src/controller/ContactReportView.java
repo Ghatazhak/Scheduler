@@ -13,7 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Appointment;
 import view.FXMLLoaderInterface;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
