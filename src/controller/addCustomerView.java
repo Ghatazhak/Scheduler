@@ -53,7 +53,6 @@ public class addCustomerView implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
             allCountries = CountryMYSQL.findAll();
             countryCB.setItems(allCountries);
-
     }
     /** A method that can return you to the Customer management view. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root. */
     public void returnToCustomerManagementView()  {

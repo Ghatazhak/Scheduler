@@ -11,10 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Appointment;
 import model.Contact;
@@ -26,10 +23,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class addAppointmentView implements Initializable {
+
     ObservableList<String> startHours = FXCollections.observableArrayList();
     ObservableList<String> startMinutes = FXCollections.observableArrayList();
     ObservableList<String> endHours = FXCollections.observableArrayList();
@@ -69,9 +68,18 @@ public class addAppointmentView implements Initializable {
     public ComboBox<String> endHourCB;
     @FXML
     public ComboBox<String> endMinuteCB;
+    @FXML
+    public Label eCurrentTime;
+    @FXML
+    public Label lCurrentTime;
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        lCurrentTime.setText(String.valueOf(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))));
+        eCurrentTime.setText(String.valueOf(LocalTime.now(ZoneId.of("US/Eastern")).format(DateTimeFormatter.ofPattern("HH:mm"))));
+
 
         startHours.addAll("00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11",
                 "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23");
@@ -93,11 +101,9 @@ public class addAppointmentView implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         userIDComboBox.setItems(allUsers);
-
-
     }
+
     /** A method that can return you to the Appointment View. (loaderLambda) A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root. */
    public void returnToHomeView()  {
        Parent root = null;
@@ -106,17 +112,8 @@ public class addAppointmentView implements Initializable {
        } catch (IOException e) {
            e.printStackTrace();
        }
-//       Stage stage = (Stage) appointmentIdTextField.getScene().getWindow();
-//       Scene scene = new Scene(root, 1020, 475);
-//       stage.setTitle("Scheduler v1.0");
-//       stage.setScene(scene);
-//       stage.show();
-
        Stage stage = (Stage) startHourCB.getScene().getWindow();
        stage.close();
-
-
-
    }
 
 /** This is the event handler for the save button. It validates the data and saves it. */

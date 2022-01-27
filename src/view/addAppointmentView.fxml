@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.addAppointmentView">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.addAppointmentView">
    <children>
       <Label layoutX="25.0" layoutY="20.0" text="Appointment ID">
          <font>
@@ -77,5 +77,9 @@
       <ComboBox fx:id="customerIdCB" layoutX="137.0" layoutY="297.0" prefHeight="25.0" prefWidth="233.0" />
       <TextField fx:id="typeTextField" layoutX="137.0" layoutY="193.0" prefHeight="25.0" prefWidth="233.0" />
       <ComboBox fx:id="userIDComboBox" layoutX="137.0" layoutY="333.0" prefHeight="25.0" prefWidth="233.0" />
+      <Label fx:id="eCurrentTime" layoutX="55.0" layoutY="376.0" text="EasternTime" />
+      <Label fx:id="lCurrentTime" layoutX="55.0" layoutY="396.0" text="Currenttime" />
+      <Label layoutX="4.0" layoutY="376.0" text="Eastern" />
+      <Label layoutX="4.0" layoutY="396.0" text="Local" />
    </children>
 </AnchorPane>
