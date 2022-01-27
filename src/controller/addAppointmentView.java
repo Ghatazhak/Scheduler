@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -22,6 +21,7 @@ import model.Contact;
 import model.Customer;
 import model.User;
 import view.FXMLLoaderInterface;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -106,11 +106,17 @@ public class addAppointmentView implements Initializable {
        } catch (IOException e) {
            e.printStackTrace();
        }
-       Stage stage = (Stage) appointmentIdTextField.getScene().getWindow();
-       Scene scene = new Scene(root, 1020, 475);
-       stage.setTitle("Scheduler v1.0");
-       stage.setScene(scene);
-       stage.show();
+//       Stage stage = (Stage) appointmentIdTextField.getScene().getWindow();
+//       Scene scene = new Scene(root, 1020, 475);
+//       stage.setTitle("Scheduler v1.0");
+//       stage.setScene(scene);
+//       stage.show();
+
+       Stage stage = (Stage) startHourCB.getScene().getWindow();
+       stage.close();
+
+
+
    }
 
 /** This is the event handler for the save button. It validates the data and saves it. */

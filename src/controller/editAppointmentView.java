@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -119,19 +118,17 @@ public class editAppointmentView implements Initializable {
         }
     }
     /** A method that can be called to change the view to home. (loaderLambda) Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root. */
-    public void returnToHomeView()  {
+    public void returnToHomeView() {
         Parent root = null;
         try {
             root = loaderLambda.getRoot("/view/appointmentView.fxml");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Stage stage = (Stage) appointmentIdTextField.getScene().getWindow();
-        Scene scene = new Scene(root, 1020, 475);
-        stage.setTitle("Scheduler v1.0");
-        stage.setScene(scene);
-        stage.show();
+        Stage stage = (Stage) contactCB.getScene().getWindow();
+        stage.close();
     }
+
 /** This is the event handler for the save button. */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException, SQLException {
         appointmentsConflicts.clear();

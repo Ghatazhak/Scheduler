@@ -98,7 +98,9 @@ public class appointmentView implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
         Scene scene = new Scene(root, 380, 430);
         stage.setTitle("Add Appointment");
         stage.setScene(scene);
@@ -125,7 +127,9 @@ public class appointmentView implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Stage stage = (Stage) allAppointmentsTableView.getScene().getWindow();
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
         Scene scene = new Scene(root, 380, 430);
         stage.setTitle("Edit Appointment");
         stage.setScene(scene);
