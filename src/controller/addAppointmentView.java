@@ -26,7 +26,7 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.ResourceBundle;
-
+/** A controller for adding appointments. */
 public class addAppointmentView implements Initializable {
 
     ObservableList<String> startHours = FXCollections.observableArrayList();
@@ -37,8 +37,8 @@ public class addAppointmentView implements Initializable {
     ObservableList<Contact> allContacts = FXCollections.observableArrayList();
     ObservableList<User> allUsers = FXCollections.observableArrayList();
     ObservableList<Appointment> appointmentsConflicts = FXCollections.observableArrayList();
-    LocalTime openingBusinessTime = LocalTime.of(8,0,0);
-    LocalTime closingBusinessTime = LocalTime.of(22,0,0);
+    LocalTime openingBusinessTime = LocalTime.of(8, 0, 0);
+    LocalTime closingBusinessTime = LocalTime.of(22, 0, 0);
 
     FXMLLoaderInterface loaderLambda = s -> FXMLLoader.load((Objects.requireNonNull(getClass().getResource(s))));
 
@@ -74,7 +74,6 @@ public class addAppointmentView implements Initializable {
     public Label lCurrentTime;
 
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         lCurrentTime.setText(String.valueOf(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))));
@@ -104,22 +103,26 @@ public class addAppointmentView implements Initializable {
         userIDComboBox.setItems(allUsers);
     }
 
-    /** A method that can return you to the Appointment View. Lambda #2 A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root. */
-   public void returnToHomeView()  {
-       Parent root = null;
-       try {
-           root = loaderLambda.getRoot("/view/appointmentView.fxml");
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
-       Stage stage = (Stage) startHourCB.getScene().getWindow();
-       stage.close();
-   }
+    /**
+     * A method that can return you to the Appointment View. Lambda #2 A Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.
+     */
+    public void returnToHomeView() {
+        Parent root = null;
+        try {
+            root = loaderLambda.getRoot("/view/appointmentView.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Stage stage = (Stage) startHourCB.getScene().getWindow();
+        stage.close();
+    }
 
-/** This is the event handler for the save button. It validates the data and saves it. */
+    /**
+     * This is the event handler for the save button. It validates the data and saves it.
+     */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException, SQLException {
         appointmentsConflicts.clear();
-        if(titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactComboBox.getValue() == null || typeTextField.getText().isEmpty()|| startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || datePicker.getValue() == null || contactComboBox.getValue() == null || customerIdCB.getValue()== null || userIDComboBox.getValue() == null){
+        if (titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactComboBox.getValue() == null || typeTextField.getText().isEmpty() || startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || datePicker.getValue() == null || contactComboBox.getValue() == null || customerIdCB.getValue() == null || userIDComboBox.getValue() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Missing Data!");
@@ -128,66 +131,74 @@ public class addAppointmentView implements Initializable {
             alert.showAndWait();
             return;
         }
-                LocalDate datePickerValue = datePicker.getValue();
-                String startHour = startHourCB.getValue();
-                String startMinute = startMinuteCB.getValue();
-                LocalDateTime startLocalDateTime = LocalDateTime.of(datePickerValue.getYear(), datePickerValue.getMonthValue(), datePickerValue.getDayOfMonth(), Integer.parseInt(startHour), Integer.parseInt(startMinute));
+        LocalDate datePickerValue = datePicker.getValue();
+        String startHour = startHourCB.getValue();
+        String startMinute = startMinuteCB.getValue();
+        LocalDateTime startLocalDateTime = LocalDateTime.of(datePickerValue.getYear(), datePickerValue.getMonthValue(), datePickerValue.getDayOfMonth(), Integer.parseInt(startHour), Integer.parseInt(startMinute));
 
-                String endHour = endHourCB.getValue();
-                String endMinute = endMinuteCB.getValue();
-                LocalDateTime endLocalDateTime = LocalDateTime.of(datePickerValue.getYear(), datePickerValue.getMonthValue(), datePickerValue.getDayOfMonth(), Integer.parseInt(endHour), Integer.parseInt(endMinute));
+        String endHour = endHourCB.getValue();
+        String endMinute = endMinuteCB.getValue();
+        LocalDateTime endLocalDateTime = LocalDateTime.of(datePickerValue.getYear(), datePickerValue.getMonthValue(), datePickerValue.getDayOfMonth(), Integer.parseInt(endHour), Integer.parseInt(endMinute));
 
-                ZonedDateTime startzdt = startLocalDateTime.atZone(ZoneId.systemDefault());
-                ZonedDateTime  startzdtE = startzdt.withZoneSameInstant(ZoneId.of("US/Eastern"));
-                LocalTime startEasternTime = startzdtE.toLocalTime();
+        ZonedDateTime startzdt = startLocalDateTime.atZone(ZoneId.systemDefault());
+        ZonedDateTime startzdtE = startzdt.withZoneSameInstant(ZoneId.of("US/Eastern"));
+        LocalTime startEasternTime = startzdtE.toLocalTime();
 
-                ZonedDateTime zdt = endLocalDateTime.atZone(ZoneId.systemDefault());
-                ZonedDateTime  zdtE = zdt.withZoneSameInstant(ZoneId.of("US/Eastern"));
-                LocalTime easternTime = zdtE.toLocalTime();
+        ZonedDateTime zdt = endLocalDateTime.atZone(ZoneId.systemDefault());
+        ZonedDateTime zdtE = zdt.withZoneSameInstant(ZoneId.of("US/Eastern"));
+        LocalTime easternTime = zdtE.toLocalTime();
 
 
+        if (startEasternTime.isBefore(openingBusinessTime) || startEasternTime.isAfter(closingBusinessTime) || (easternTime.isBefore(openingBusinessTime) || easternTime.isAfter(closingBusinessTime))) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Scheduling Error");
+            alert.setHeaderText("Business Hours");
+            alert.setContentText("Sorry our Business hours are 8 AM til 10 PM. Please change appointment");
+            alert.setGraphic(null);
+            alert.showAndWait();
+            return;
+        }
 
-                if(startEasternTime.isBefore(openingBusinessTime) || startEasternTime.isAfter(closingBusinessTime) || (easternTime.isBefore(openingBusinessTime) || easternTime.isAfter(closingBusinessTime))) {
+        if (startLocalDateTime.isAfter(endLocalDateTime) || startLocalDateTime.isEqual(endLocalDateTime)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Date Time Mismatch");
+            alert.setContentText("The start time cannot be greater than or equal to the end date/time.");
+            alert.setGraphic(null);
+            alert.showAndWait();
+            return;
+        }
+
+        for (Appointment a : AppointmentMSQL.findAll()) {
+            if (customerIdCB.getValue().getCustomerId() == a.getCustomerId()) {
+
+                if (startLocalDateTime.isAfter(a.getStartDateTime()) && startLocalDateTime.isBefore(a.getEndDateTime())) {
+                    appointmentsConflicts.add(a);
+
+                }
+
+                if (startLocalDateTime.isEqual(a.getStartDateTime())) {
+                    appointmentsConflicts.add(a);
+
+                }
+
+                if (!appointmentsConflicts.isEmpty()) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Scheduling Error");
-                    alert.setHeaderText("Business Hours");
-                    alert.setContentText("Sorry our Business hours are 8 AM til 10 PM. Please change appointment");
+                    alert.setTitle("Appointment Time Conflict");
+                    alert.setHeaderText("Sorry Unavailable Date/Time.");
+                    alert.setContentText("Those dates and times are not available.");
                     alert.setGraphic(null);
                     alert.showAndWait();
                     return;
                 }
+            }
+        }
 
-                if(startLocalDateTime.isAfter(endLocalDateTime) || startLocalDateTime.isEqual(endLocalDateTime)){
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("Date Time Mismatch");
-                    alert.setContentText("The start time cannot be greater than or equal to the end date/time.");
-                    alert.setGraphic(null);
-                    alert.showAndWait();
-                    return;
-                }
+            System.out.println(" app addded");
+            Appointment newAppointment = new Appointment(1, titleTextField.getText(), descriptionTextField.getText(), locationTextField.getText(), typeTextField.getText(), startLocalDateTime, endLocalDateTime, customerIdCB.getValue().getCustomerId(), userIDComboBox.getValue().getUserId(), contactComboBox.getValue().getContactId());
+            AppointmentMSQL.create(newAppointment);
+            returnToHomeView();
 
-                for(Appointment a: AppointmentMSQL.findAll()) {
-
-                    if(startLocalDateTime.isAfter(a.getStartDateTime()) && startLocalDateTime.isBefore(a.getEndDateTime())){
-                        appointmentsConflicts.add(a);
-                    } else if(startLocalDateTime.isEqual(a.getStartDateTime())) {
-                        appointmentsConflicts.add(a);
-                    } else {
-                        if (!appointmentsConflicts.isEmpty()) {
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setTitle("Appointment Time Conflict");
-                            alert.setHeaderText("Sorry Unavailable Date/Time.");
-                            alert.setContentText("Those dates and times are not available.");
-                            alert.setGraphic(null);
-                            alert.showAndWait();
-                            return;
-                    }
-                    }
-                }
-                Appointment newAppointment = new Appointment(1, titleTextField.getText(), descriptionTextField.getText(), locationTextField.getText(), typeTextField.getText(), startLocalDateTime, endLocalDateTime, customerIdCB.getValue().getCustomerId(), userIDComboBox.getValue().getUserId(), contactComboBox.getValue().getContactId());
-                AppointmentMSQL.create(newAppointment);
-                returnToHomeView();
         }
 
 /** This is the event handler for the cancel button. */

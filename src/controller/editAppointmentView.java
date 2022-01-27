@@ -117,7 +117,10 @@ public class editAppointmentView implements Initializable {
             e.printStackTrace();
         }
     }
-    /** A method that can be called to change the view to home. (loaderLambda) Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root. */
+
+    /**
+     * A method that can be called to change the view to home. (loaderLambda) Lambda that keeps the compiler from complaining about duplicate code. It Loads the fxml file into root.
+     */
     public void returnToHomeView() {
         Parent root = null;
         try {
@@ -129,10 +132,12 @@ public class editAppointmentView implements Initializable {
         stage.close();
     }
 
-/** This is the event handler for the save button. */
+    /**
+     * This is the event handler for the save button.
+     */
     public void saveButtonClicked(ActionEvent actionEvent) throws IOException, SQLException {
         appointmentsConflicts.clear();
-        if(titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactCB.getValue() == null || typeTextField.getText().isEmpty()|| startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || datePicker.getValue() == null || contactCB.getValue() == null || customerIdCB.getValue() == null || userIDComboBox.getValue() == null){
+        if (titleTextField.getText().isEmpty() || descriptionTextField.getText().isEmpty() || locationTextField.getText().isEmpty() || contactCB.getValue() == null || typeTextField.getText().isEmpty() || startHourCB.getValue() == null || startMinuteCB.getValue() == null || endHourCB.getValue() == null || endMinuteCB.getValue() == null || datePicker.getValue() == null || contactCB.getValue() == null || customerIdCB.getValue() == null || userIDComboBox.getValue() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Missing Data!");
@@ -153,7 +158,7 @@ public class editAppointmentView implements Initializable {
         LocalDateTime endLocalDateTime = LocalDateTime.of(datePickerValue.getYear(), datePickerValue.getMonthValue(), datePickerValue.getDayOfMonth(), Integer.parseInt(endHour), Integer.parseInt(endMinute));
         ZonedDateTime endLocalZonedDateTime = ZonedDateTime.of(endLocalDateTime, ZoneId.systemDefault());
 
-        if(startLocalDateTime.isAfter(endLocalDateTime) || startLocalDateTime.isEqual(endLocalDateTime)){
+        if (startLocalDateTime.isAfter(endLocalDateTime) || startLocalDateTime.isEqual(endLocalDateTime)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Date Time Mismatch");
@@ -164,17 +169,17 @@ public class editAppointmentView implements Initializable {
         }
 
         ZonedDateTime startzdt = startLocalDateTime.atZone(ZoneId.systemDefault());
-        ZonedDateTime  startzdtE = startzdt.withZoneSameInstant(ZoneId.of("US/Eastern"));
+        ZonedDateTime startzdtE = startzdt.withZoneSameInstant(ZoneId.of("US/Eastern"));
         LocalTime startEasternTime = startzdtE.toLocalTime();
 
         ZonedDateTime zdt = endLocalDateTime.atZone(ZoneId.systemDefault());
-        ZonedDateTime  zdtE = zdt.withZoneSameInstant(ZoneId.of("US/Eastern"));
+        ZonedDateTime zdtE = zdt.withZoneSameInstant(ZoneId.of("US/Eastern"));
         LocalTime easternTime = zdtE.toLocalTime();
 
-        LocalTime openingBusinessTime = LocalTime.of(8,0,0);
-        LocalTime closingBusinessTime = LocalTime.of(22,0,0);
+        LocalTime openingBusinessTime = LocalTime.of(8, 0, 0);
+        LocalTime closingBusinessTime = LocalTime.of(22, 0, 0);
 
-        if(startEasternTime.isBefore(openingBusinessTime) || startEasternTime.isAfter(closingBusinessTime) || (easternTime.isBefore(openingBusinessTime) || easternTime.isAfter(closingBusinessTime))) {
+        if (startEasternTime.isBefore(openingBusinessTime) || startEasternTime.isAfter(closingBusinessTime) || (easternTime.isBefore(openingBusinessTime) || easternTime.isAfter(closingBusinessTime))) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Scheduling Error");
             alert.setHeaderText("Business Hours");
@@ -184,30 +189,28 @@ public class editAppointmentView implements Initializable {
             return;
         }
 
-        for(Appointment a: AppointmentMSQL.findAll()) {
+        for (Appointment a : AppointmentMSQL.findAll()) {
+            if (customerIdCB.getValue().getCustomerId() == a.getCustomerId()) {
 
-            if(startLocalDateTime.isEqual(a.getStartDateTime()) && appointment.getAppointmentId() != a.getAppointmentId()) {
-                System.out.println("1");
-                appointmentsConflicts.add(a);
-            }
-            if(startLocalDateTime.isAfter(a.getStartDateTime()) && startLocalDateTime.isBefore(a.getEndDateTime()) && appointment.getAppointmentId() != a.getAppointmentId()){
-                System.out.println("2");
-                appointmentsConflicts.add(a);
-            }
+                if (startLocalDateTime.isAfter(a.getStartDateTime()) && startLocalDateTime.isBefore(a.getEndDateTime()) && appointment.getAppointmentId() != a.getAppointmentId()) {
+                    appointmentsConflicts.add(a);
 
-            if(startLocalDateTime.isBefore(a.getStartDateTime()) && endLocalDateTime.isAfter(a.getStartDateTime()) && appointment.getAppointmentId() != a.getAppointmentId()){
-                System.out.println("3");
-                appointmentsConflicts.add(a);
-            }
+                }
 
-            if (!appointmentsConflicts.isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Appointment Time Conflict");
-                alert.setHeaderText("Sorry Unavailable Date/Time.");
-                alert.setContentText("Those dates and times are not available.");
-                alert.setGraphic(null);
-                alert.showAndWait();
-                return;
+                if (startLocalDateTime.isEqual(a.getStartDateTime()) && appointment.getAppointmentId() != a.getAppointmentId()) {
+                    appointmentsConflicts.add(a);
+
+                }
+
+                if (!appointmentsConflicts.isEmpty()) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Appointment Time Conflict");
+                    alert.setHeaderText("Sorry Unavailable Date/Time.");
+                    alert.setContentText("Those dates and times are not available.");
+                    alert.setGraphic(null);
+                    alert.showAndWait();
+                    return;
+                }
             }
         }
 
@@ -230,6 +233,7 @@ public class editAppointmentView implements Initializable {
         }
         returnToHomeView();
     }
+
 /** This is the event handler for the cancel button. */
     public void cancelButtonClicked(ActionEvent actionEvent) throws IOException {
         returnToHomeView();
